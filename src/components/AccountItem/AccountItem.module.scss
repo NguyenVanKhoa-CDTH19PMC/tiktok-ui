@@ -1,0 +1,46 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  padding: 9px 16px;
+  height: 58px;
+  &:hover {
+    background-color: #16282308;
+  }
+  &:hover .action {
+    visibility: visible;
+  }
+}
+.avt {
+  margin-right: 12px;
+  width: 40px;
+  height: 40px;
+  img {
+    border-radius: 50%;
+  }
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.name {
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 21px;
+  color: #161823;
+}
+.check {
+  color: rgb(32, 213, 236);
+  margin-left: 4px;
+  font-size: 1.4rem;
+}
+
+.username {
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 18px;
+  color: #16182380;
+}
+.actions {
+}

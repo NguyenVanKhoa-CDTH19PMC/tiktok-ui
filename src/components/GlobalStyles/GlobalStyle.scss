@@ -1,17 +1,64 @@
 @import url('normalize.css');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@font-face {
+  font-family: TikTokFont;
+  src: url('/assets/fonts/TikTokFont-Regular.woff2');
+  font-weight: 400;
+}
+@font-face {
+  font-family: TikTokFont;
+  src: url('/assets/fonts/TikTokFont-Semibold.woff2');
+  font-weight: 600;
+}
+@font-face {
+  font-family: TikTokFont;
+  src: url('/assets/fonts/TikTokFont-Bold.woff2');
+  font-weight: 700;
+}
 :root {
-    --primary-color: red;
+  --primary-color: rgb(254, 44, 85);
+  --white: #ffff;
+  //   default Layout
+  --defaut-layout-header-height: 60px;
+  --height-search: 46px;
 }
 * {
-    box-sizing: border-box;
+  margin: 0;
+  box-sizing: border-box;
 }
 html {
-    font-size: 62, 5%;
+  font-size: 62.5%;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit; /* Kế thừa từ thẻ cha (html hoặc body) */
 }
 body {
-    font-family: 'Roboto', sans-serif;
+  font-family: 'TikTokFont', sans-serif;
+
+  font-size: 1.6rem;
+  line-height: 21px;
+  text-rendering: optimizeSpeed;
+}
+
+//Tippy
+body {
+  .tippy-box {
+    border-radius: 8px;
+    padding: 8px;
+    line-height: 21px;
     font-size: 1.6rem;
-    line-height: 1.5;
-    text-rendering: optimizeSpeed;
+    background-color: rgba(84, 84, 84, 0.92);
+  }
+  .tippy-content {
+    padding: 0;
+  }
+  .tippy-arrow {
+    color: rgba(84, 84, 84, 0.92);
+  }
+  .tippy-box[data-placement^='bottom'] > .tippy-arrow:before {
+    top: -8px;
+  }
 }
