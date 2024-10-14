@@ -6,27 +6,31 @@ import style from './AccountItem.module.scss';
 import { Wrapper as PopperWapper } from '../Popper';
 import AccountActions from './components/AccountActions';
 import { Image } from '../Images';
+import { Link } from 'react-router-dom';
 const cx = classNames.bind(style);
-function AccountItem() {
+function AccountItem({ data }) {
   return (
-    <div className={cx('wrapper')}>
+    <Link to={`/@${data.nickname}`} className={cx('wrapper')}>
       <div className={cx('avt')}>
-        <Image src="https://placehold.co/40x40/fe2c54/white" alt="" />
+        <Image fallback="https://placehold.co/40x40/fe2c54/white" src={data.avatar} alt="" />
       </div>
 
       <div className={cx('info')}>
         <h4 className={cx('name')}>
-          Cristiano Ronaldo{' '}
-          <span className={cx('check')}>
-            <FontAwesomeIcon icon={faCheckCircle} />
-          </span>
+          {data.full_name}
+          {data.tick && (
+            <span className={cx('check')}>
+              <FontAwesomeIcon icon={faCheckCircle} />
+            </span>
+          )}
         </h4>
-        <span className={cx('username')}>cristiano.ronaldo</span>
+        <span className={cx('username')}>{data.nickname}</span>
       </div>
       <Tippy
         placement="bottom-end"
         interactive
         // visible
+
         render={(attas) => (
           <PopperWapper>
             <AccountActions />
@@ -37,7 +41,7 @@ function AccountItem() {
           <FontAwesomeIcon icon={faEllipsis} />
         </span>
       </Tippy>
-    </div>
+    </Link>
   );
 }
 

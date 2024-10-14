@@ -3,6 +3,8 @@
   align-items: center;
   padding: 9px 16px;
   height: 58px;
+  text-decoration: none;
+
   &:hover {
     background-color: #16282308;
   }
@@ -15,6 +17,8 @@
   width: 40px;
   height: 40px;
   img {
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
   }
 }
@@ -25,6 +29,7 @@
 }
 
 .name {
+  display: inline-block;
   font-size: 1.6rem;
   font-weight: 500;
   line-height: 21px;
@@ -32,7 +37,7 @@
 }
 .check {
   color: rgb(32, 213, 236);
-  margin-left: 4px;
+  margin-left: 6px;
   font-size: 1.4rem;
 }
 
@@ -43,4 +48,5 @@
   color: #16182380;
 }
 .actions {
+  color: rgb(22, 24, 35);
 }

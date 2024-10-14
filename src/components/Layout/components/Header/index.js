@@ -1,50 +1,20 @@
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faA,
-  faArrowRightFromBracket,
-  faCircleXmark,
-  faEllipsisV,
-  faGear,
-  faPlus,
-} from '@fortawesome/free-solid-svg-icons';
+import { faA, faArrowRightFromBracket, faEllipsisV, faGear, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faMoon, faSquarePlus, faCircleQuestion, faUser, faCircleDot } from '@fortawesome/free-regular-svg-icons';
-import Headlessippy from '@tippyjs/react/headless';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import style from './Header.module.scss';
 import images from '~/assets/images';
-import { Wrapper as PopperWrapper } from '~/components/Popper';
-import AccountItem from '~/components/AccountItem';
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
-import { MessageIcon, InboxIcon, SearchIcon } from '~/components/Icons';
+import { MessageIcon, InboxIcon } from '~/components/Icons';
 import { Image } from '~/components/Images';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import Search from './Search';
 
 const cx = classNames.bind(style);
 function Header() {
-  const searchRef = useRef();
-  const [serchWidth, setserchWidth] = useState(0);
-  console.log(serchWidth);
-  useLayoutEffect(() => {
-    // Hàm để cập nhật chiều rộng của khung kết quả
-    const updateWidth = () => {
-      if (searchRef.current) {
-        const newWidth = searchRef.current.offsetWidth; // lấy chiều rộng của ô nhập
-        setserchWidth(newWidth);
-      }
-    };
-
-    // Gọi hàm updateWidth lần đầu tiên để thiết lập chiều rộng
-    updateWidth();
-    window.addEventListener('resize', updateWidth);
-    return () => {
-      window.removeEventListener('resize', updateWidth);
-    };
-  }, []);
   const currentUser = true;
-  const data = [1];
   const MENU_ITEMS = [
     {
       icon: <FontAwesomeIcon icon={faSquarePlus} />,
@@ -95,47 +65,19 @@ function Header() {
         <div className={cx('logo')}>
           <img src={images.logo} alt="logo" />
         </div>
-        <Headlessippy
-          appendTo={document.body}
-          interactive
-          visible
-          render={(attas) => (
-            <PopperWrapper>
-              <div tabIndex="-1" style={{ width: serchWidth }} className={cx('search-result')}>
-                <div className={cx('search-title')}>Account</div>
-                <ul className={cx('search-list')}>
-                  <li className={cx('search-item')}>
-                    {data.map((index) => (
-                      <AccountItem key={index} />
-                    ))}
-                  </li>
-                </ul>
-              </div>
-            </PopperWrapper>
-          )}
-        >
-          <div ref={searchRef} className={cx('search')}>
-            <input type="text" placeholder="Search" />
-            <div className={cx('clean')}>
-              <FontAwesomeIcon icon={faCircleXmark} />
-            </div>
-            <button className={cx('search-btn', 'action-btn')}>
-              <SearchIcon />
-            </button>
-          </div>
-        </Headlessippy>
+        <Search />
         <div className={cx('actions')}>
           {currentUser ? (
             <>
               <Button className={cx('upload-btn')} leftIcon={<FontAwesomeIcon icon={faPlus} />}>
                 Upload
               </Button>
-              <Tippy placement="bottom" interactive offset={[0, 10]} content="Messages">
+              <Tippy appendTo={document.body} placement="bottom" interactive offset={[0, 10]} content="Messages">
                 <button className={cx('message-btn', 'action-btn')}>
                   <MessageIcon />
                 </button>
               </Tippy>
-              <Tippy placement="bottom" interactive offset={[0, 10]} content="Inbox">
+              <Tippy appendTo={document.body} placement="bottom" interactive offset={[0, 10]} content="Inbox">
                 <button className={cx('inbox-bnt', 'action-btn')}>
                   <span className={cx('badge')}>2</span>
                   <InboxIcon />
