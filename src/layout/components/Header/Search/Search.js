@@ -2,14 +2,13 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Headlessippy from '@tippyjs/react/headless';
-import axios from 'axios';
 import style from './Search.module.scss';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
 import { SearchIcon } from '~/components/Icons';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useDebounce } from '~/hooks';
-import * as request from '~/utils/request';
+import { search } from '~/services/seacrhService';
 
 const cx = classNames.bind(style);
 function Search() {
@@ -20,7 +19,7 @@ function Search() {
   const [searchValue, setSearchValue] = useState('');
   const [loading, setLoading] = useState(false);
   const inputRef = useRef();
-  const debounced = useDebounce(searchValue, 500);
+  const debouncedValue = useDebounce(searchValue, 500);
   useLayoutEffect(() => {
     const updateWidth = () => {
       if (searchRef.current) {
@@ -35,27 +34,18 @@ function Search() {
     };
   }, []);
   useEffect(() => {
-    if (!debounced.trim()) {
+    if (!debouncedValue.trim()) {
       setSeacrhResult([]);
       return;
     }
     setLoading(true);
     const fetchApi = async () => {
-      try {
-        const result = await request.get('users/search', {
-          params: {
-            q: debounced,
-            type: 'less',
-          },
-        });
-        setLoading(false);
-        setSeacrhResult(result.data);
-      } catch {
-        setLoading(false);
-      }
+      const result = await search(debouncedValue);
+      setSeacrhResult(result.data);
+      setLoading(false);
     };
     fetchApi();
-  }, [debounced]);
+  }, [debouncedValue]);
   return (
     <Headlessippy
       onClickOutside={() => setShowResult(false)}

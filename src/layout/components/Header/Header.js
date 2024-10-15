@@ -12,8 +12,8 @@ import Menu from '~/components/Popper/Menu';
 import { MessageIcon, InboxIcon } from '~/components/Icons';
 import { Image } from '~/components/Images';
 import Search from './Search';
-import routesConfig from '~/config/routes';
 import { languages } from '~/data';
+import { config } from '~/config';
 const cx = classNames.bind(style);
 function Header() {
   const currentUser = true;
@@ -64,7 +64,7 @@ function Header() {
   return (
     <div className={cx('wrapper')}>
       <div className={cx('inner')}>
-        <Link to={routesConfig.home} className={cx('logo')}>
+        <Link to={config.routes.home} className={cx('logo')}>
           <img src={images.logo} alt="logo" />
         </Link>
         <Search />
@@ -93,7 +93,7 @@ function Header() {
               </Button>
             </>
           )}
-          <Menu data={currentUser ? LOGIN_MENU_ITEMS : MENU_ITEMS}>
+          <Menu className={cx('actions-menu')} data={currentUser ? LOGIN_MENU_ITEMS : MENU_ITEMS}>
             {currentUser ? (
               <Image alt="avatar" src="https://placehold.co/32x32/fe2c54/white" className={cx('current-account')} />
             ) : (

@@ -1,6 +1,8 @@
+import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import style from './Menu.module.scss';
 import { Link } from 'react-router-dom';
+
 // import Button from '~/components/Button';
 
 const cx = classNames.bind(style);
@@ -39,5 +41,13 @@ function MenuItem({ data, leverMenu, to, href, className, onClick, disabled, ...
     </li>
   );
 }
-
+MenuItem.prototype = {
+  data: PropTypes.object.isRequired,
+  leverMenu: PropTypes.string,
+  to: PropTypes.string,
+  href: PropTypes.string,
+  className: PropTypes.string,
+  onClick: PropTypes.func,
+  disabled: PropTypes.bool,
+};
 export default MenuItem;

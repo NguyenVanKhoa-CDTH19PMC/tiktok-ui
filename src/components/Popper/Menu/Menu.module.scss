@@ -9,6 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
 }
 .back-icon {
   position: absolute;
@@ -27,17 +28,18 @@
   font-weight: 600;
 }
 .menu-list {
-  max-height: 590px;
   overflow-y: auto;
   min-width: 223px;
   padding: 8px 0;
   list-style: none;
 }
 .menu-item {
+  width: 20px;
   color: rgb(22, 24, 35);
   gap: 8px;
   display: flex;
   align-items: center;
+  text-align: start;
   padding: 10px 8px 10px 16px;
   border: none;
   background-color: transparent;
@@ -64,5 +66,6 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 21px;
+    padding: 10px 24px;
   }
 }

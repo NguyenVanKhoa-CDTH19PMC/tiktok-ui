@@ -10,7 +10,7 @@
   font-weight: 600;
   color: #161823;
   line-height: 21px;
-  padding: 6px 8px;
+  // padding: 16px 18px;
   min-width: 100px;
   min-height: 36px;
   cursor: pointer;
@@ -36,6 +36,7 @@
   background-color: var(--white);
   color: var(--primary-color);
   border-color: var(--primary-color);
+  font-weight: 700;
   &:hover {
     background-color: rgba(254, 44, 85, 0.06);
   }
@@ -49,6 +50,7 @@
   color: rgba(22, 24, 35, 0.75);
   border-color: rgba(22, 24, 35, 0.12);
   box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 8px;
+  font-weight: 700;
   &:hover {
     border-color: rgba(22, 24, 35, 0.2);
   }

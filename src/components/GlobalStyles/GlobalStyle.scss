@@ -43,10 +43,7 @@ body {
   text-rendering: optimizeSpeed;
 }
 //scrollbar
-html ::-webkit-scrollbar {
-  border-radius: 0px;
-  width: 8px;
-}
+
 html *::-webkit-scrollbar {
   border-radius: 0;
   width: 8px;
