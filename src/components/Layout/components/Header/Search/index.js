@@ -36,6 +36,7 @@ function Search() {
   }, []);
   useEffect(() => {
     if (!debounced.trim()) {
+      setSeacrhResult([]);
       return;
     }
     setLoading(true);
@@ -81,7 +82,9 @@ function Search() {
           ref={inputRef}
           onFocus={() => setShowResult(true)}
           onChange={(e) => {
-            setSearchValue(e.target.value);
+            if (!e.target.value.startsWith(' ')) {
+              setSearchValue(e.target.value);
+            }
           }}
           type="text"
           placeholder="Search"

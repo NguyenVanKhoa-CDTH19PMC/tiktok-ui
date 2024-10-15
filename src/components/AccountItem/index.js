@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import Tippy from '@tippyjs/react';
+import Tippy from '@tippyjs/react/headless';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import style from './AccountItem.module.scss';
@@ -29,8 +29,6 @@ function AccountItem({ data }) {
       <Tippy
         placement="bottom-end"
         interactive
-        // visible
-
         render={(attas) => (
           <PopperWapper>
             <AccountActions />

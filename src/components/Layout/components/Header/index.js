@@ -4,6 +4,7 @@ import { faA, faArrowRightFromBracket, faEllipsisV, faGear, faPlus } from '@fort
 import { faMoon, faSquarePlus, faCircleQuestion, faUser, faCircleDot } from '@fortawesome/free-regular-svg-icons';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+import { Link } from 'react-router-dom';
 import style from './Header.module.scss';
 import images from '~/assets/images';
 import Button from '~/components/Button';
@@ -11,7 +12,8 @@ import Menu from '~/components/Popper/Menu';
 import { MessageIcon, InboxIcon } from '~/components/Icons';
 import { Image } from '~/components/Images';
 import Search from './Search';
-
+import routesConfig from '~/config/routes';
+import { languages } from '~/data';
 const cx = classNames.bind(style);
 function Header() {
   const currentUser = true;
@@ -26,7 +28,7 @@ function Header() {
       title: 'English',
       children: {
         title: 'Language',
-        data: [{ title: 'Vietnames' }],
+        data: languages,
       },
     },
     {
@@ -62,9 +64,9 @@ function Header() {
   return (
     <div className={cx('wrapper')}>
       <div className={cx('inner')}>
-        <div className={cx('logo')}>
+        <Link to={routesConfig.home} className={cx('logo')}>
           <img src={images.logo} alt="logo" />
-        </div>
+        </Link>
         <Search />
         <div className={cx('actions')}>
           {currentUser ? (

@@ -8,7 +8,7 @@
   &:hover {
     background-color: #16282308;
   }
-  &:hover .action {
+  &:hover .actions {
     visibility: visible;
   }
 }
@@ -48,5 +48,6 @@
   color: #16182380;
 }
 .actions {
+  visibility: hidden;
   color: rgb(22, 24, 35);
 }

@@ -19,21 +19,21 @@
   width: 48px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .menu-title {
   color: #161823;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
 }
 .menu-list {
+  max-height: 590px;
+  overflow-y: auto;
   min-width: 223px;
   padding: 8px 0;
   list-style: none;
 }
 .menu-item {
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 21px;
   color: rgb(22, 24, 35);
   gap: 8px;
   display: flex;
@@ -42,6 +42,7 @@
   border: none;
   background-color: transparent;
   width: 100%;
+  cursor: pointer;
   .icon {
     display: flex;
     justify-content: center;
@@ -50,5 +51,18 @@
   }
   &:hover {
     background: rgba(22, 24, 35, 0.03);
+  }
+}
+.lever_1 .menu-item {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 21px;
+}
+.lever_2,
+.lever_3 {
+  .menu-item {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
   }
 }

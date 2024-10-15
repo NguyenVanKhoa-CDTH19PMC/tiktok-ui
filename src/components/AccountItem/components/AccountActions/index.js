@@ -15,7 +15,7 @@ function AccountActions() {
           </span>
           <span className={cx('title')}>Report</span>
         </li>
-        <li className={cx('action-item')}>
+        <li className={cx('separate', 'action-item')}>
           <span className={cx('icon')}>
             <FontAwesomeIcon icon={faHeartBroken} />
           </span>

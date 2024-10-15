@@ -12,9 +12,7 @@ function DefaultLayout({ children }) {
       <Header />
       <div className={cx('container')}>
         <Sidebar />
-        <Button large leftIcon={<FontAwesomeIcon icon={faCake} />}>
-          Log in
-        </Button>
+
         <div className="content">{children}</div>
       </div>
     </div>

@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(style);
 
-function MenuItem({ data, to, href, className, onClick, disabled, ...passProps }) {
+function MenuItem({ data, leverMenu, to, href, className, onClick, disabled, ...passProps }) {
   let Comp = 'button';
+  const lever = `lever_${leverMenu}`;
   const props = {
     onClick,
     ...passProps,
@@ -26,7 +27,7 @@ function MenuItem({ data, to, href, className, onClick, disabled, ...passProps }
     props.href = href;
     Comp = 'a';
   }
-  const classes = cx('wrapper', {
+  const classes = cx('wrapper', lever, {
     separate: data.separate,
   });
   return (

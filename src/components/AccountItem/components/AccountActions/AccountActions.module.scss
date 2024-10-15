@@ -12,15 +12,8 @@
   padding: 12px 0;
   font-size: 14px;
   color: rgb(22, 24, 35);
-  &:not(:last-child)::after {
-    position: absolute;
-    content: '';
-    height: 0.4px;
-    width: 100%;
-    background-color: rgb(196, 196, 196);
-    // bottom: 0;
-
-    bottom: 0;
+  &.separate {
+    border-top: 0.4px solid rgb(196, 196, 196);
   }
   &:hover {
     .icon,

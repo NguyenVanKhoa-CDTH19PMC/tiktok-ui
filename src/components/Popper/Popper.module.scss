@@ -1,4 +1,5 @@
 .wrapper {
+  overflow-y: hidden;
   width: 100%;
   max-height: min(-156px + 100vh, 760px);
   min-height: 100px;

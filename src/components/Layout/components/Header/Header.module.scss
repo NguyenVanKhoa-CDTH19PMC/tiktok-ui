@@ -1,6 +1,10 @@
 .wrapper {
+  position: fixed;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 1px;
   height: var(--defaut-layout-header-height);
+  top: 0;
+  width: 100%;
+  background-color: var(--white);
 }
 .inner {
   padding: 0 24px 0 16px;
