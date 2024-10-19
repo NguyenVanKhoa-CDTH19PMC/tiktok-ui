@@ -11,21 +11,21 @@ import { Link } from 'react-router-dom';
 const cx = classNames.bind(style);
 function AccountItem({ data }) {
   return (
-    <Link to={`/@${data.nickname}`} className={cx('wrapper')}>
+    <Link to={`/${data.username}`} className={cx('wrapper')}>
       <div className={cx('avt')}>
-        <Image fallback="https://placehold.co/40x40/fe2c54/white" src={data.avatar} alt="" />
+        <Image fallback="https://placehold.co/40x40/fe2c54/white" src={data.image} alt="" />
       </div>
 
       <div className={cx('info')}>
         <h4 className={cx('name')}>
-          {data.full_name}
-          {data.tick && (
+          {`${data.firstName} ${data.maidenName} ${data.lastname}`}
+          {data.role && (
             <span className={cx('check')}>
               <FontAwesomeIcon icon={faCheckCircle} />
             </span>
           )}
         </h4>
-        <span className={cx('username')}>{data.nickname}</span>
+        <span className={cx('username')}>{data.username}</span>
       </div>
       <Tippy
         placement="bottom-end"

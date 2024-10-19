@@ -7,8 +7,8 @@
   border: 1px solid rgba(22, 24, 35, 0.12);
   border-radius: 4px;
   font-size: 1.6rem;
-  font-weight: 600;
-  color: #161823;
+  font-weight: 700;
+  color: var(--primary-color-2);
   line-height: 21px;
   // padding: 16px 18px;
   min-width: 100px;
@@ -36,7 +36,6 @@
   background-color: var(--white);
   color: var(--primary-color);
   border-color: var(--primary-color);
-  font-weight: 700;
   &:hover {
     background-color: rgba(254, 44, 85, 0.06);
   }
@@ -63,6 +62,7 @@
 }
 .large {
   font-size: 1.8rem;
+  font-weight: 600;
   padding: 6px 8px;
   line-height: 25px;
   min-width: 168px;

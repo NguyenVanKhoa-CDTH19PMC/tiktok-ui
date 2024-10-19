@@ -1,0 +1,51 @@
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  &:hover .roundbutton {
+    background-color: #16182329;
+  }
+  &:hover input:checked + .roundbutton {
+    background-color: #0cd193;
+  }
+}
+
+.toggle input {
+  display: none;
+}
+
+.roundbutton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  background-color: #1618231f;
+  display: block;
+  transition: all 0.3s;
+  border-radius: 3.4rem;
+  cursor: pointer;
+}
+
+.roundbutton:before {
+  position: absolute;
+  content: '';
+  height: calc(100% - 4px);
+  margin: 2px;
+  aspect-ratio: 1/1;
+  border-radius: 100%;
+  display: block;
+
+  background-color: white;
+  transition: all 0.3s;
+}
+
+input:checked + .roundbutton {
+  background-color: #0be09b;
+}
+
+input:checked + .roundbutton:before {
+  transform: translate(100%, 0);
+}

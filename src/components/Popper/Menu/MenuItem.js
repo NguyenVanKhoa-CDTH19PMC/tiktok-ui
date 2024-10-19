@@ -36,7 +36,8 @@ function MenuItem({ data, leverMenu, to, href, className, onClick, disabled, ...
     <li className={classes}>
       <Comp className={cx('menu-item')} {...props}>
         {data.icon && <i className={cx('icon')}>{data.icon}</i>}
-        <span>{data.title}</span>
+        <span className={cx('title')}>{data.title}</span>
+        {data.extraElement && <div className={cx('extra')}>{data.extraElement}</div>}
       </Comp>
     </li>
   );

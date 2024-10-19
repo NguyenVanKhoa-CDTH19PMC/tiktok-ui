@@ -23,13 +23,13 @@
   cursor: pointer;
 }
 .menu-title {
-  color: #161823;
+  color: var(--primary-color-2);
   font-size: 16px;
   font-weight: 600;
 }
 .menu-list {
   overflow-y: auto;
-  min-width: 223px;
+  min-width: 100px;
   padding: 8px 0;
   list-style: none;
 }
@@ -39,6 +39,7 @@
   gap: 8px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   text-align: start;
   padding: 10px 8px 10px 16px;
   border: none;
@@ -50,6 +51,9 @@
     justify-content: center;
     font-size: 20px;
     width: 20px;
+  }
+  .title {
+    flex: 1;
   }
   &:hover {
     background: rgba(22, 24, 35, 0.03);

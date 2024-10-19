@@ -1,0 +1,80 @@
+.wrapper {
+  position: relative;
+  height: 100%; /* Chiều cao cố định */
+  overflow: hidden;
+  width: 240px;
+  padding-right: 8px;
+  &:hover .custom-scrollbar {
+    visibility: visible;
+  }
+}
+.content {
+  height: 100%;
+  overflow-y: scroll;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  padding: 20px 0 26px 0;
+  padding-left: calc(var(--padding-side-web) / 2);
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+.separate {
+  &::before {
+    content: '';
+    position: absolute;
+    height: 1px;
+    left: 8px;
+    right: 8px;
+    background: rgba(22, 24, 35, 0.12);
+    transform: scaleY(0.5);
+    top: 0px;
+  }
+}
+.login-hint {
+  position: relative;
+  padding: 20px calc(var(--padding-side-web) / 2) 24px;
+  .login-tip {
+    color: var(--primary-color-3);
+  }
+  .login-btn {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+//scrollbar
+/* Thanh cuộn tùy chỉnh */
+.custom-scrollbar {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 14px;
+  padding: 0 4px;
+  height: 100%;
+  // background-color: rgba(255, 0, 0, 0.189);
+}
+
+/* Thumb kéo trên thanh cuộn */
+.thumb {
+  width: 100%;
+  height: 100px;
+  background-color: rgba(22, 24, 35, 0.06);
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+}
+
+@media (max-width: 1070px) {
+  .wrapper {
+    width: 72px;
+    padding: 0 8px;
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 8px;
+    border-right: 1px solid rgba(22, 24, 35, 0.12);
+  }
+  .content {
+    padding: 12px 0 26px 0;
+  }
+}

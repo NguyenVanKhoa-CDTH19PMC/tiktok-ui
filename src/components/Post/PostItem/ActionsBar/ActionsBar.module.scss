@@ -1,0 +1,94 @@
+.actions-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+.avatar-action {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 20px;
+  cursor: pointer;
+
+  img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+  }
+  .follow-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-12px);
+    height: 24px;
+    width: 24px;
+    border: none;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}
+.action-btn {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  .icon-btn {
+    margin: 8px 0 6px 0;
+    background-color: #1618230f;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+  }
+  .icon-btn:active {
+    background-color: #16182324;
+  }
+  .icon-btn i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .text-btn {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 700;
+    color: #161823bf;
+  }
+  .icon-active {
+    animation: beatInOut 1s forwards;
+  }
+  .favorite-icon {
+    color: #face15;
+  }
+  .like-icon {
+    color: var(--primary-color);
+  }
+}
+@keyframes beatInOut {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  15% {
+    opacity: 1;
+
+    transform: scale(1.2);
+  }
+  30% {
+    transform: scale(0.8);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

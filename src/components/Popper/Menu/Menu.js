@@ -10,7 +10,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 const cx = classNames.bind(style);
 
-function Menu({ children, data, hideOnClick = false, ...prop }) {
+function Menu({
+  children,
+  data,
+  hideOnClick = false,
+  offset = [12, 12],
+  delay = [0, 700],
+  placement = 'bottom-end',
+  ...prop
+}) {
   const [history, setHistory] = useState([{ data: data }]);
   const current = history[0];
   const leverMenu = history.length;
@@ -57,9 +65,9 @@ function Menu({ children, data, hideOnClick = false, ...prop }) {
   return (
     <Tippy
       interactive
-      offset={[12, 12]}
-      placement="bottom-end"
-      delay={[0, 700]}
+      offset={offset}
+      placement={placement}
+      delay={delay}
       hideOnClick={hideOnClick}
       render={renderResult}
       //back to lever 1 menu after menu hide
@@ -73,5 +81,8 @@ Menu.prototype = {
   children: PropTypes.node.isRequired,
   data: PropTypes.array.isRequired,
   hideOnClick: PropTypes.bool,
+  offset: PropTypes.array,
+  placement: PropTypes.string,
+  delay: PropTypes.array,
 };
 export default Menu;

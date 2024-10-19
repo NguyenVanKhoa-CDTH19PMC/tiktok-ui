@@ -16,11 +16,15 @@
 }
 :root {
   --primary-color: rgb(254, 44, 85);
+  --primary-color-2: #161823;
+  --primary-color-3: #16182380;
+
   --white: #ffff;
   //   default Layout
   --defaut-layout-header-height: 60px;
   --height-search: 46px;
   --font-family: 'TikTokFont', sans-serif;
+  --padding-side-web: 16px;
 }
 * {
   margin: 0;

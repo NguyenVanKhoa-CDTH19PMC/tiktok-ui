@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 const { default: request } = require('~/utils/httpRequest');
 
-export const search = async (q, type = 'less') => {
+export const search = async (q) => {
   try {
     const result = await request.get('users/search', {
       params: {
         q,
-        type: 'less',
+        limit: 5,
       },
     });
     return result.data;
@@ -16,5 +16,4 @@ export const search = async (q, type = 'less') => {
 };
 search.prototype = {
   q: PropTypes.string.isRequired,
-  type: PropTypes.string,
 };

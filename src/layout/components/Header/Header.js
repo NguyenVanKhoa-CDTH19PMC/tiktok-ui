@@ -12,11 +12,14 @@ import Menu from '~/components/Popper/Menu';
 import { MessageIcon, InboxIcon } from '~/components/Icons';
 import { Image } from '~/components/Images';
 import Search from './Search';
-import { languages } from '~/data';
+import { languages } from '~/assets/langugesJson';
 import { config } from '~/config';
 const cx = classNames.bind(style);
+
 function Header() {
-  const currentUser = true;
+  const currentUser = false;
+  // const currentUser = JSON.parse(process.env.REACT_APP_USER_CURENT);
+
   const MENU_ITEMS = [
     {
       icon: <FontAwesomeIcon icon={faSquarePlus} />,

@@ -1,0 +1,13 @@
+.wrapper {
+  height: 100%;
+}
+.post-list {
+  height: 100%;
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+}
+.post-item {
+  scroll-snap-align: start;
+  min-height: 100%; /* Mỗi bài viết chiếm toàn bộ chiều cao màn hình */
+  overflow: hidden;
+}

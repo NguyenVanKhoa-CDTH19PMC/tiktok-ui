@@ -1,0 +1,40 @@
+.wrapper {
+  position: relative;
+  padding: 16px 0;
+}
+.title {
+  padding: 0 calc(var(--padding-side-web) / 2);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--primary-color-3);
+  margin-bottom: 8px;
+  line-height: 18px;
+}
+.account-list {
+  padding: 0;
+}
+.account-item {
+  list-style-type: none;
+}
+.more-btn {
+  margin-top: 8px;
+  padding: 0 calc(var(--padding-side-web) / 2);
+  font-size: 14px;
+  color: var(--primary-color);
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  line-height: 18px;
+  cursor: pointer;
+}
+@media (max-width: 1070px) {
+  .wrapper {
+    padding: 8px 0;
+  }
+  .title {
+    display: none;
+  }
+  .more-btn {
+    display: none;
+  }
+}

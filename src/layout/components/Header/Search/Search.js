@@ -9,6 +9,8 @@ import { SearchIcon } from '~/components/Icons';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useDebounce } from '~/hooks';
 import { search } from '~/services/seacrhService';
+import { Link } from 'react-router-dom';
+import routes from '~/config/routes';
 
 const cx = classNames.bind(style);
 function Search() {
@@ -41,7 +43,7 @@ function Search() {
     setLoading(true);
     const fetchApi = async () => {
       const result = await search(debouncedValue);
-      setSeacrhResult(result.data);
+      setSeacrhResult(result.users);
       setLoading(false);
     };
     fetchApi();
@@ -57,10 +59,15 @@ function Search() {
           <div tabIndex="-1" style={{ width: serchWidth }} className={cx('search-result')}>
             <div className={cx('search-title')}>Accounts</div>
             <ul className={cx('search-list')}>
-              <li className={cx('search-item')}>
-                {seacrhResult.map((data) => (
+              {seacrhResult.map((data) => (
+                <li className={cx('search-item')}>
                   <AccountItem data={data} key={data.id} />
-                ))}
+                </li>
+              ))}
+              <li className={cx('more-results', 'search-item')}>
+                <Link to={routes.search}>
+                  <button className={cx('more-btn')}>View all results for "{searchValue}"</button>
+                </Link>
               </li>
             </ul>
           </div>
