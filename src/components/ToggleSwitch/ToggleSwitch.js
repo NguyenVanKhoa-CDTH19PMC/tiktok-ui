@@ -3,9 +3,9 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(style);
 function ToggleSwitch() {
   return (
-    <label class={cx('toggle')}>
+    <label className={cx('toggle')}>
       <input className={cx('toggleswitch')} type="checkbox" />
-      <span class={cx('roundbutton')}></span>
+      <span className={cx('roundbutton')}></span>
     </label>
   );
 }

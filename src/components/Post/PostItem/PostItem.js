@@ -184,7 +184,7 @@ function PostItem({ data, onSetVolume, onMute, volume }) {
                   </div>
                 </div>
 
-                <Menu className={cx('actions-menu')} delay={[0, 100]} placement="right-start" data={ACTION_MORE}>
+                <Menu className={cx('actions-menu')} data={ACTION_MORE}>
                   <button className={cx('more-btn')}>
                     <ThreeDotVIcon />
                   </button>

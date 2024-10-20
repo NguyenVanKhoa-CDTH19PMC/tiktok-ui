@@ -1,0 +1,52 @@
+.wrapper {
+  padding: 20px;
+  width: 320px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.avatar {
+  height: 44px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+}
+.follow-btn {
+}
+.name {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  text-decoration: none;
+  color: var(--primary-color-2);
+}
+.username {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  color: var(--primary-color-2);
+}
+.user-stat {
+  margin-top: 8px;
+  display: flex;
+}
+.stat-item {
+  line-height: 20px;
+  margin-right: 12px;
+  font-size: 17px;
+  color: #161823bf;
+  strong {
+    color: var(--primary-color-2);
+    font-weight: 700;
+    margin-right: 6px;
+  }
+}
+.bio {
+  padding-top: 16px;
+  margin-top: 16px;
+  border-top: 1px solid #1618231f;
+  font-size: 14px;
+  line-height: 18px;
+}

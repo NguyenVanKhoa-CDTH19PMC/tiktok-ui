@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import Headlessippy from '@tippyjs/react/headless';
+import HeadlessTippy from '@tippyjs/react/headless';
 import style from './Search.module.scss';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
@@ -49,7 +49,7 @@ function Search() {
     fetchApi();
   }, [debouncedValue]);
   return (
-    <Headlessippy
+    <HeadlessTippy
       onClickOutside={() => setShowResult(false)}
       appendTo={document.body}
       interactive
@@ -108,7 +108,7 @@ function Search() {
           <SearchIcon />
         </button>
       </div>
-    </Headlessippy>
+    </HeadlessTippy>
   );
 }
 

@@ -6,6 +6,7 @@ import { BookMarkIcon, CommentIcon, HeartIcon, PlusIcon, ShareIcon } from '~/com
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { getCommentByPost } from '~/services/commentServices';
 import { numberDisplay } from '~/utils/numberDisplay';
+import ReviewProfile from '~/components/ReviewProfile';
 const cx = classNames.bind(style);
 const ActionsBar = ({ post, author }) => {
   const [comments, setComments] = useState({});
@@ -27,12 +28,14 @@ const ActionsBar = ({ post, author }) => {
     <>
       {post && (
         <section className={cx('actions-bar')}>
-          <div className={cx('avatar-action')}>
-            {author.image && <Image fallback="https://placehold.co/48x48/fe2c54/white" src={author.image} alt="" />}
-            <button className={cx('follow-btn')}>
-              <PlusIcon />
-            </button>
-          </div>
+          <ReviewProfile data={author}>
+            <div className={cx('avatar-action')}>
+              {author.image && <Image fallback="https://placehold.co/48x48/fe2c54/white" src={author.image} alt="" />}
+              <button className={cx('follow-btn')}>
+                <PlusIcon />
+              </button>
+            </div>
+          </ReviewProfile>
           <button onClick={() => setLike((pre) => !pre)} className={cx('action-btn')}>
             <span className={cx('icon-btn')}>
               {like ? (
