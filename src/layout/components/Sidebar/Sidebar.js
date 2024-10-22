@@ -21,9 +21,11 @@ import Fooder from './Fooder';
 import FollowingAccounts from './FollowingAccounts';
 import { useLayoutEffect, useRef, useState } from 'react';
 import LoginModal from '~/components/Modals/LoginModal';
+import { useAuth } from '~/hooks/AuthContext';
 const cx = classNames.bind(style);
 function Sidebar() {
-  const currentUser = false;
+  const { isLoggedIn, authUser } = useAuth();
+
   const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
   // const currentUser = JSON.parse(process.env.REACT_APP_USER_CURENT);
   const MENU_ITEMS = [
@@ -76,7 +78,7 @@ function Sidebar() {
       to: routes.profile,
     },
   ];
-  const menuItem = currentUser ? LOGIN_MENU_ITEMS : MENU_ITEMS;
+  const menuItem = isLoggedIn ? LOGIN_MENU_ITEMS : MENU_ITEMS;
   //////////////
   const contentRef = useRef();
   const thubRef = useRef();
@@ -136,7 +138,7 @@ function Sidebar() {
             <MenuItem key={index} to={item.to} title={item.title} icon={item.icon} activeIcon={item.activeIcon} />
           ))}
         </Menu>
-        {currentUser ? (
+        {isLoggedIn ? (
           <>
             <FollowingAccounts className={cx('separate')} />
           </>

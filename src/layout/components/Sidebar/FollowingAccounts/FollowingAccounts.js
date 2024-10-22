@@ -12,7 +12,6 @@ function FollowingAccout({ ...props }) {
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  console.log(users);
   const fetchApi = async () => {
     setLoading(true);
     const usersData = await getFollowingAccounts({ limit: limmit, skip: (page - 1) * limmit });

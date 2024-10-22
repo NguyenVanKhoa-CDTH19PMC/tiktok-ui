@@ -14,12 +14,12 @@ import { Image } from '~/components/Images';
 import Search from '../../../components/SearchForm';
 import { languages } from '~/assets/langugesJson';
 import { config } from '~/config';
+import { useAuth } from '~/hooks/AuthContext';
 const cx = classNames.bind(style);
 
 function Header() {
-  const currentUser = false;
-  // const currentUser = JSON.parse(process.env.REACT_APP_USER_CURENT);
-
+  const { isLoggedIn, authUser } = useAuth();
+  console.log(authUser);
   const MENU_ITEMS = [
     {
       icon: <FontAwesomeIcon icon={faSquarePlus} />,
@@ -72,7 +72,7 @@ function Header() {
         </Link>
         <Search />
         <div className={cx('actions')}>
-          {currentUser ? (
+          {isLoggedIn ? (
             <>
               <Button className={cx('upload-btn')} leftIcon={<FontAwesomeIcon icon={faPlus} />}>
                 Upload
@@ -96,9 +96,10 @@ function Header() {
               </Button>
             </>
           )}
-          <Menu className={cx('actions-menu')} data={currentUser ? LOGIN_MENU_ITEMS : MENU_ITEMS}>
-            {currentUser ? (
-              <Image alt="avatar" src="https://placehold.co/32x32/fe2c54/white" className={cx('current-account')} />
+
+          <Menu className={cx('actions-menu')} data={isLoggedIn && isLoggedIn ? LOGIN_MENU_ITEMS : MENU_ITEMS}>
+            {isLoggedIn ? (
+              <Image alt="avatar" src={authUser && authUser.image} className={cx('current-account')} />
             ) : (
               <i className={cx('more-action')}>
                 <FontAwesomeIcon icon={faEllipsisV} />

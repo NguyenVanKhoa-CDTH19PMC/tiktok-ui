@@ -3,7 +3,6 @@ const { default: request } = require('~/utils/httpRequest');
 
 export const getFollowingAccounts = async (p = { limit: 10, skip: 0 }) => {
   try {
-    console.log(p.skip);
     const result = await request.get('users', {
       params: {
         q: 'a',

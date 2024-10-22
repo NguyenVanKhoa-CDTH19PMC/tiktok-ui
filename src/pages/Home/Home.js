@@ -55,7 +55,11 @@ function Home() {
       if (observerRef.current) observer.unobserve(observerRef.current); // Dọn dẹp
     };
   }, [loading]);
+  useEffect(() => {
+    const preTitle = document.title;
 
+    document.title = 'Tiktok - Make your day';
+  }, []);
   return (
     <div className={cx('wrapper')}>
       <div className={cx('post-list')}>
