@@ -19,11 +19,12 @@ import { Image } from '~/components/Images';
 import Button from '~/components/Button';
 import Fooder from './Fooder';
 import FollowingAccounts from './FollowingAccounts';
-import { useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
+import LoginModal from '~/components/Modals/LoginModal';
 const cx = classNames.bind(style);
 function Sidebar() {
-  const currentUser = true;
-
+  const currentUser = false;
+  const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
   // const currentUser = JSON.parse(process.env.REACT_APP_USER_CURENT);
   const MENU_ITEMS = [
     {
@@ -98,7 +99,7 @@ function Sidebar() {
       thumb.style.top = `${scrollRatio * (scrollbar.clientHeight - thumb.offsetHeight)}px`;
     });
 
-    // // Kéo thả thumb để cuộn nội dung
+    //
     // let isDragging = false;
     // let startY, startScrollTop;
 
@@ -106,7 +107,7 @@ function Sidebar() {
     //   isDragging = true;
     //   startY = e.clientY;
     //   startScrollTop = content.scrollTop;
-    //   document.body.style.userSelect = 'none'; // Vô hiệu hóa chọn văn bản khi kéo
+    //   document.body.style.userSelect = 'none'; // disible select text
     // });
 
     // document.addEventListener('mousemove', (e) => {
@@ -118,7 +119,7 @@ function Sidebar() {
 
     // document.addEventListener('mouseup', () => {
     //   isDragging = false;
-    //   document.body.style.userSelect = ''; // Khôi phục chọn văn bản
+    //   document.body.style.userSelect = ''; //  undisible select text
     // });
 
     // resize thumb when reload web
@@ -142,9 +143,10 @@ function Sidebar() {
         ) : (
           <div className={cx('login-hint', 'separate')}>
             <p className={cx('login-tip')}>Log in to follow creators, like videos, and view comments.</p>
-            <Button className={cx('login-btn')} outline large>
+            <Button onClick={() => setLoginModalIsOpen(true)} className={cx('login-btn')} outline large>
               Log In
             </Button>
+            <LoginModal modalIsOpen={loginModalIsOpen} closeModal={() => setLoginModalIsOpen(false)} />
           </div>
         )}
         <Fooder className={cx('separate')} />

@@ -4,6 +4,7 @@ import Home from '~/pages/Home';
 import Search from '~/pages/Search';
 import Upload from '~/pages/Upload';
 import { config } from '~/config';
+import PostDetail from '~/pages/PostDetail';
 const publicRoutes = [
   { path: config.routes.home, component: Home },
   { path: config.routes.explore, component: Home },
@@ -13,6 +14,7 @@ const publicRoutes = [
   { path: config.routes.profile, component: Home },
   { path: config.routes.upload, component: Upload, layout: HeaderOnly },
   { path: config.routes.search, component: Search, layout: null },
+  { path: config.routes.post(':username', ':postId'), component: PostDetail, layout: null },
 ];
 const privateRoutes = [];
 export { publicRoutes, privateRoutes };

@@ -4,17 +4,15 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import style from './PostItem.module.scss';
 import videos from '~/assets/videos';
-import { FloatIcon, HeartIcon, MusicIcon, MuteIcon, ThreeDotVIcon, UnMuteIcon } from '~/components/Icons';
-import RangeInput from '../RangeInput';
+import { FloatIcon, MusicIcon, MuteIcon, ThreeDotVIcon, UnMuteIcon } from '~/components/Icons';
+import RangeInput from '../../RangeInput';
 import ActionsBar from './ActionsBar';
 import { getUser } from '~/services/userService';
 import Playhead from '~/components/PlayHead';
 import Tippy from '@tippyjs/react';
-import Menu from '~/components/Popper/Menu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAnglesUp, faHeart, faHeartBroken, faPause, faPlay, faUser } from '@fortawesome/free-solid-svg-icons';
-import { faFlag } from '@fortawesome/free-regular-svg-icons';
-import ToggleSwitch from '~/components/ToggleSwitch';
+import { faHeart, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
+import PostMoreActionsMenu from '../PostMoreActionsMenu';
 const cx = classNames.bind(style);
 
 function PostItem({ data, onSetVolume, onMute, volume }) {
@@ -25,21 +23,7 @@ function PostItem({ data, onSetVolume, onMute, volume }) {
   const notiLikeRef = useRef();
   const [moreText, setMoreText] = useState(false);
   const [showNotiLiked, setShowNotiLiked] = useState(false);
-  const ACTION_MORE = [
-    {
-      icon: <FontAwesomeIcon icon={faAnglesUp} />,
-      title: 'Auto srcoll',
-      extraElement: <ToggleSwitch />,
-    },
-    {
-      icon: <FontAwesomeIcon icon={faFlag} />,
-      title: 'Not interested',
-    },
-    {
-      icon: <FontAwesomeIcon icon={faHeartBroken} />,
-      title: 'Report',
-    },
-  ];
+
   const [author, setAuthor] = useState({});
   useEffect(() => {
     const fetchApi = async () => {
@@ -94,7 +78,7 @@ function PostItem({ data, onSetVolume, onMute, volume }) {
             if (entry.isIntersecting) {
               videoRef.current.play(); // Phát video khi vào khung nhìn
             } else {
-              videoRef.current.pause(); // Dừng video khi ra khỏi khung nhìn
+              videoRef.current && videoRef.current.pause(); // Dừng video khi ra khỏi khung nhìn
             }
           });
         },
@@ -184,11 +168,11 @@ function PostItem({ data, onSetVolume, onMute, volume }) {
                   </div>
                 </div>
 
-                <Menu className={cx('actions-menu')} data={ACTION_MORE}>
+                <PostMoreActionsMenu>
                   <button className={cx('more-btn')}>
                     <ThreeDotVIcon />
                   </button>
-                </Menu>
+                </PostMoreActionsMenu>
               </div>
               <div className={cx('card-botton')}>
                 <div className={cx('author-container')}>
@@ -249,5 +233,10 @@ function PostItem({ data, onSetVolume, onMute, volume }) {
     </>
   );
 }
-
+PostItem.prototype = {
+  data: PropTypes.object,
+  onSetVolume: PropTypes.func,
+  onMute: PropTypes.func,
+  volume: PropTypes.number,
+};
 export default PostItem;

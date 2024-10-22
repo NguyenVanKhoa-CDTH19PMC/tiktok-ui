@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types';
 const { default: request } = require('~/utils/httpRequest');
 
-export const getFollowingAccounts = async () => {
+export const getFollowingAccounts = async (p = { limit: 10, skip: 0 }) => {
   try {
-    const result = await request.get('users/search', {
+    console.log(p.skip);
+    const result = await request.get('users', {
       params: {
-        p: 'a',
-        limit: 10,
+        q: 'a',
+        limit: p.limit,
+        skip: p.skip,
       },
     });
     return result.data;

@@ -7,6 +7,8 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 import { getCommentByPost } from '~/services/commentServices';
 import { numberDisplay } from '~/utils/numberDisplay';
 import ReviewProfile from '~/components/ReviewProfile';
+import { Link } from 'react-router-dom';
+import { config } from '~/config';
 const cx = classNames.bind(style);
 const ActionsBar = ({ post, author }) => {
   const [comments, setComments] = useState({});
@@ -50,13 +52,15 @@ const ActionsBar = ({ post, author }) => {
             </span>
             <span className={cx('text-btn')}>{numberDisplay((post.reactions && post.reactions.likes) || '00')}</span>
           </button>
-          <button className={cx('action-btn')}>
-            <span className={cx('icon-btn')}>
-              <i className={cx('icon')}></i>
-              <CommentIcon />
-            </span>
-            <span className={cx('text-btn')}>{numberDisplay(commentTotal)}</span>
-          </button>
+          <Link to={config.routes.post(`@${author.username}`, post.id)}>
+            <button className={cx('action-btn')}>
+              <span className={cx('icon-btn')}>
+                <i className={cx('icon')}></i>
+                <CommentIcon />
+              </span>
+              <span className={cx('text-btn')}>{numberDisplay(commentTotal)}</span>
+            </button>
+          </Link>
           <button onClick={() => setFavorite((pre) => !pre)} className={cx('action-btn')}>
             <span className={cx('icon-btn')}>
               {favorite ? (

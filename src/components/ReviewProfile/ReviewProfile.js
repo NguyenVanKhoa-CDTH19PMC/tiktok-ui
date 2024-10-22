@@ -10,7 +10,6 @@ import Avatar from '../Avatar';
 import { numberDisplay } from '~/utils/numberDisplay';
 const cx = classNames.bind(style);
 function ReviewProfile({ children, data }) {
-  console.log(data);
   return (
     <HeadlessTippy
       appendTo={document.body}
@@ -27,10 +26,10 @@ function ReviewProfile({ children, data }) {
                 Follow
               </Button>
             </div>
-            <Link className={cx('name')}>
-              <p>{`${data.firstName} ${data.maidenName} ${data.lastname}`}</p>
+            <Link className={cx('username')}>
+              <p> {data.username}</p>
             </Link>
-            <p className={cx('username')}>{data.username}</p>
+            <p className={cx('name')}>{`${data.firstName || ''} ${data.maidenName || ''} ${data.lastName || ''}`}</p>
             <p className={cx('user-stat')}>
               <span className={cx('stat-item')}>
                 <strong>{numberDisplay(data.id)}</strong>Followers

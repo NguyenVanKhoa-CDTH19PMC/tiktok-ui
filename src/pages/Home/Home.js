@@ -3,9 +3,11 @@ import style from './Home.module.scss';
 import classNames from 'classnames/bind';
 import { useEffect, useRef, useState } from 'react';
 import { getPosts } from '~/services/postSevices';
+import Loading from '~/components/Loading';
 
 const cx = classNames.bind(style);
 function Home() {
+  const limit = 1;
   const [post, setPosts] = useState([]);
   const [page, setPage] = useState(1);
   const observerRef = useRef();
@@ -23,7 +25,7 @@ function Home() {
     setLoading(true);
     try {
       const fetchApi = async () => {
-        const result = await getPosts({ limit: 2, skip: (page - 1) * 2 });
+        const result = await getPosts({ limit: limit, skip: (page - 1) * limit });
         setPosts((pre) => [...pre, ...result.posts]);
       };
       fetchApi();
@@ -64,8 +66,11 @@ function Home() {
             </div>
           );
         })}
-        <div ref={observerRef} style={{ backgroundColor: 'blue', height: '20px' }} />
-        {loading && 'Đang tải...'}
+        <div className={cx('loading-container')} ref={observerRef}>
+          <div className={cx('loading')}>
+            <Loading size={20} />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(style);
 
-function MenuItem({ data, leverMenu, to, href, className, onClick, disabled, ...passProps }) {
+function MenuItem({ data, leverMenu, to, href, className, onClick, disabled, dark, ...passProps }) {
   let Comp = 'button';
   const lever = `lever_${leverMenu}`;
   const props = {
@@ -31,6 +31,7 @@ function MenuItem({ data, leverMenu, to, href, className, onClick, disabled, ...
   }
   const classes = cx('wrapper', lever, {
     separate: data.separate,
+    dark: dark,
   });
   return (
     <li className={classes}>
@@ -50,5 +51,6 @@ MenuItem.prototype = {
   className: PropTypes.string,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
+  dark: PropTypes.bool,
 };
 export default MenuItem;

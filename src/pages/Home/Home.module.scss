@@ -11,3 +11,10 @@
   min-height: 100%; /* Mỗi bài viết chiếm toàn bộ chiều cao màn hình */
   overflow: hidden;
 }
+
+.loading-container {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

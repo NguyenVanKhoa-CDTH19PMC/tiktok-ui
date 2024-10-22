@@ -1,0 +1,17 @@
+.wrapper {
+  pointer-events: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  font-size: 25px;
+  border: none;
+  background-color: #16182308;
+  color: var(--primary-color-2);
+  cursor: pointer;
+  &:hover {
+    background-color: #1618231f;
+  }
+}

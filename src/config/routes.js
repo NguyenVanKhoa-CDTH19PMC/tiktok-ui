@@ -7,5 +7,8 @@ const routes = {
   profile: '/:profile',
   upload: '/upload',
   search: '/search',
+  post: (username, postId) => {
+    return `/${username}/video/${postId}`;
+  },
 };
 export default routes;

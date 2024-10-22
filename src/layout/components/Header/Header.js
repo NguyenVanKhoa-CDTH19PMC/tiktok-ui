@@ -11,7 +11,7 @@ import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
 import { MessageIcon, InboxIcon } from '~/components/Icons';
 import { Image } from '~/components/Images';
-import Search from './Search';
+import Search from '../../../components/SearchForm';
 import { languages } from '~/assets/langugesJson';
 import { config } from '~/config';
 const cx = classNames.bind(style);

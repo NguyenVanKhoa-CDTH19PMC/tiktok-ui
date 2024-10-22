@@ -17,6 +17,7 @@ function Menu({
   offset = [12, 12],
   delay = [0, 700],
   placement = 'bottom-end',
+  dark,
   ...prop
 }) {
   const [history, setHistory] = useState([{ data: data }]);
@@ -27,6 +28,7 @@ function Menu({
       const isParent = !!item.children;
       return (
         <MenuItem
+          dark={dark}
           key={index}
           data={item}
           leverMenu={leverMenu}
@@ -41,8 +43,8 @@ function Menu({
   };
   const renderResult = (attas) => (
     // Using a wrapper <div> or <span> tag around the reference element solves this by creating a new parentNode context.
-    <div {...prop}>
-      <PopperWrapper>
+    <div className={cx({ dark: dark })} {...prop}>
+      <PopperWrapper dark={dark}>
         {current.title && (
           <div className={cx('menu-header')}>
             <i className={cx('back-icon')} onClick={handleBack}>
@@ -84,5 +86,6 @@ Menu.prototype = {
   offset: PropTypes.array,
   placement: PropTypes.string,
   delay: PropTypes.array,
+  dark: PropTypes.bool,
 };
 export default Menu;
