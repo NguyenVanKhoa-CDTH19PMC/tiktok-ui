@@ -1,0 +1,24 @@
+.wrapper {
+  padding: 32px;
+  width: 400px;
+}
+.title {
+  padding: 0 32px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 30px;
+  color: var(--primary-color-2);
+  text-align: center;
+}
+.button-wrapper {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+.cancel-button,
+.logout-button {
+  min-width: 10px;
+  flex: 1;
+}
+//164

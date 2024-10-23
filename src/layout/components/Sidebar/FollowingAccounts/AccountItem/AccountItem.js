@@ -17,14 +17,16 @@ function AccountItem({ data }) {
 
         <div className={cx('info')}>
           <div className={cx('name-container')}>
-            <h4 className={cx('name')}>{`${data.firstName || ''} ${data.maidenName || ''} ${data.lastName || ''}`}</h4>
+            <h4 className={cx('username')}>{data.username}</h4>
             {data.role && (
               <span className={cx('check')}>
                 <FontAwesomeIcon icon={faCheckCircle} />
               </span>
             )}
           </div>
-          <span className={cx('username')}>{data.username}</span>
+          <span className={cx('name')}>{`${data.firstName || ''} ${data.maidenName || ''} ${
+            data.lastName || ''
+          }`}</span>
         </div>
       </Link>
     </div>

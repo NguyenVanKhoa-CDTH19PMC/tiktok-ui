@@ -17,10 +17,9 @@ function CommentsTab({ postId }) {
   }, []);
   return (
     <div className={cx('wrapper')}>
-      {comments &&
-        comments.map((comment) => {
-          return <CommentItem key={comment.id} data={comment} />;
-        })}
+      {comments?.map((comment) => {
+        return <CommentItem key={comment.id} data={comment} />;
+      })}
     </div>
   );
 }

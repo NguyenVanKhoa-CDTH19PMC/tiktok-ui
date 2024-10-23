@@ -148,7 +148,7 @@ function Sidebar() {
             <Button onClick={() => setLoginModalIsOpen(true)} className={cx('login-btn')} outline large>
               Log In
             </Button>
-            <LoginModal modalIsOpen={loginModalIsOpen} closeModal={() => setLoginModalIsOpen(false)} />
+            <LoginModal modalIsOpen={loginModalIsOpen} handleCloseModal={() => setLoginModalIsOpen(false)} />
           </div>
         )}
         <Fooder className={cx('separate')} />

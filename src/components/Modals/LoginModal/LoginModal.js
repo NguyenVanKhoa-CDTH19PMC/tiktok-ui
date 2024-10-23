@@ -13,7 +13,7 @@ import IconButton from '~/components/IconButton';
 import { computeHeadingLevel } from '@testing-library/react';
 const cx = classNames.bind(style);
 Modal.setAppElement('#root');
-function LoginModal({ modalIsOpen, closeModal }) {
+function LoginModal({ modalIsOpen, handleCloseModal }) {
   const [viewId, setViewId] = useState([]);
   const presTitle = document.title;
   const usernameInputRef = useRef();
@@ -79,7 +79,7 @@ function LoginModal({ modalIsOpen, closeModal }) {
     },
   };
   useEffect(() => {
-    usernameInputRef.current && usernameInputRef.current.focus();
+    usernameInputRef.current?.focus();
   }, []);
   useEffect(() => {
     // setViewId([]);
@@ -89,8 +89,9 @@ function LoginModal({ modalIsOpen, closeModal }) {
     }
     return () => (document.title = presTitle);
   }, [modalIsOpen]);
-  const loginAPI = async () => {
+  const fetchLogin = async () => {
     const result = await login({ username: usernameInput, password: passwordInput });
+    window.location.reload();
   };
 
   const renderView = () => {
@@ -126,7 +127,7 @@ function LoginModal({ modalIsOpen, closeModal }) {
                 </div>
                 <Link className={cx('forget-password-link')}>Forgot password?</Link>
                 <Button
-                  onClick={() => loginAPI()}
+                  onClick={() => fetchLogin()}
                   type="submit"
                   large
                   primary
@@ -155,7 +156,7 @@ function LoginModal({ modalIsOpen, closeModal }) {
               </div>
             </div>
 
-            <div onClick={closeModal} className={cx('agreement')}>
+            <div onClick={handleCloseModal} className={cx('agreement')}>
               By continuing with an account located in Vietnam, you agree to our Terms of Service and acknowledge that
               you have read our Privacy Policy.
             </div>
@@ -163,6 +164,7 @@ function LoginModal({ modalIsOpen, closeModal }) {
         );
     }
   };
+  if (!modalIsOpen) return null; // only render when isOpen
   return (
     <Modal
       isOpen={modalIsOpen}
@@ -175,7 +177,7 @@ function LoginModal({ modalIsOpen, closeModal }) {
     >
       <div className={cx('wrapper')}>
         <div className={cx('close-modal')}>
-          <IconButton icon={<FontAwesomeIcon icon={faClose} onClick={closeModal} />} />
+          <IconButton icon={<FontAwesomeIcon icon={faClose} onClick={handleCloseModal} />} />
         </div>
 
         {viewId[viewId.length - 1] && (
@@ -187,7 +189,7 @@ function LoginModal({ modalIsOpen, closeModal }) {
         )}
         {renderView()}
         <div className={cx('signup-link')}>
-          Don’t have an account? <Link className={cx('signup-link-button')}>Sign up</Link>
+          Don’t have an account? <a className={cx('signup-link-button')}>Sign up</a>
         </div>
       </div>
     </Modal>

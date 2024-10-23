@@ -28,63 +28,61 @@ const ActionsBar = ({ post, author }) => {
   }, [post]);
   return (
     <>
-      {post && (
-        <section className={cx('actions-bar')}>
-          <ReviewProfile data={author}>
-            <div className={cx('avatar-action')}>
-              {author.image && <Image fallback="https://placehold.co/48x48/fe2c54/white" src={author.image} alt="" />}
-              <button className={cx('follow-btn')}>
-                <PlusIcon />
-              </button>
-            </div>
-          </ReviewProfile>
-          <button onClick={() => setLike((pre) => !pre)} className={cx('action-btn')}>
-            <span className={cx('icon-btn')}>
-              {like ? (
-                <i className={cx('icon-active', 'like-icon')}>
-                  <HeartIcon />
-                </i>
-              ) : (
-                <i className={cx('icon')}>
-                  <HeartIcon />
-                </i>
-              )}
-            </span>
-            <span className={cx('text-btn')}>{numberDisplay((post.reactions && post.reactions.likes) || '00')}</span>
-          </button>
-          <Link to={config.routes.post(`@${author.username}`, post.id)}>
-            <button className={cx('action-btn')}>
-              <span className={cx('icon-btn')}>
-                <i className={cx('icon')}></i>
-                <CommentIcon />
-              </span>
-              <span className={cx('text-btn')}>{numberDisplay(commentTotal)}</span>
+      <section className={cx('actions-bar')}>
+        <ReviewProfile data={author}>
+          <div className={cx('avatar-action')}>
+            {author.image && <Image fallback="https://placehold.co/48x48/fe2c54/white" src={author.image} alt="" />}
+            <button className={cx('follow-btn')}>
+              <PlusIcon />
             </button>
-          </Link>
-          <button onClick={() => setFavorite((pre) => !pre)} className={cx('action-btn')}>
-            <span className={cx('icon-btn')}>
-              {favorite ? (
-                <i className={cx('icon-active', 'favorite-icon')}>
-                  <BookMarkIcon />
-                </i>
-              ) : (
-                <i className={cx('icon')}>
-                  <BookMarkIcon />
-                </i>
-              )}
-            </span>
-            <span className={cx('text-btn')}>{numberDisplay((post.reactions && post.reactions.dislikes) || '00')}</span>
-          </button>
+          </div>
+        </ReviewProfile>
+        <button onClick={() => setLike((pre) => !pre)} className={cx('action-btn')}>
+          <span className={cx('icon-btn')}>
+            {like ? (
+              <i className={cx('icon-active', 'like-icon')}>
+                <HeartIcon />
+              </i>
+            ) : (
+              <i className={cx('icon')}>
+                <HeartIcon />
+              </i>
+            )}
+          </span>
+          <span className={cx('text-btn')}>{numberDisplay(post.reactions?.likes || '00')}</span>
+        </button>
+        <Link to={config.routes.post(`@${author.username}`, post.id)}>
           <button className={cx('action-btn')}>
             <span className={cx('icon-btn')}>
-              <i className={cx('icon')}>
-                <ShareIcon />
-              </i>
+              <i className={cx('icon')}></i>
+              <CommentIcon />
             </span>
-            <span className={cx('text-btn')}>{numberDisplay((post.reactions && post.reactions.dislikes) || '00')}</span>
+            <span className={cx('text-btn')}>{numberDisplay(commentTotal)}</span>
           </button>
-        </section>
-      )}
+        </Link>
+        <button onClick={() => setFavorite((pre) => !pre)} className={cx('action-btn')}>
+          <span className={cx('icon-btn')}>
+            {favorite ? (
+              <i className={cx('icon-active', 'favorite-icon')}>
+                <BookMarkIcon />
+              </i>
+            ) : (
+              <i className={cx('icon')}>
+                <BookMarkIcon />
+              </i>
+            )}
+          </span>
+          <span className={cx('text-btn')}>{numberDisplay(post.reactions?.dislikes || '00')}</span>
+        </button>
+        <button className={cx('action-btn')}>
+          <span className={cx('icon-btn')}>
+            <i className={cx('icon')}>
+              <ShareIcon />
+            </i>
+          </span>
+          <span className={cx('text-btn')}>{numberDisplay(post.reactions?.dislikes || '00')}</span>
+        </button>
+      </section>
     </>
   );
 };

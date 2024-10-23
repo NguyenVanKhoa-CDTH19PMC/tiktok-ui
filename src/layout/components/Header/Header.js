@@ -15,11 +15,15 @@ import Search from '../../../components/SearchForm';
 import { languages } from '~/assets/langugesJson';
 import { config } from '~/config';
 import { useAuth } from '~/hooks/AuthContext';
+import LogoutModal from '~/components/Modals/LogoutModal';
+import { useEffect, useState } from 'react';
+import LoginModal from '~/components/Modals/LoginModal';
+import { useModals } from '~/hooks/ModalsContext';
 const cx = classNames.bind(style);
 
 function Header() {
   const { isLoggedIn, authUser } = useAuth();
-  console.log(authUser);
+  const { handleOpenLoginModal, handleOpenLogoutModal } = useModals();
   const MENU_ITEMS = [
     {
       icon: <FontAwesomeIcon icon={faSquarePlus} />,
@@ -62,8 +66,10 @@ function Header() {
       icon: <FontAwesomeIcon icon={faArrowRightFromBracket} />,
       title: 'Log out',
       separate: true,
+      onclick: handleOpenLogoutModal,
     },
   ];
+
   return (
     <div className={cx('wrapper')}>
       <div className={cx('inner')}>
@@ -91,21 +97,29 @@ function Header() {
             </>
           ) : (
             <>
-              <Button className={cx('login-btn')} primary>
+              <Button onClick={handleOpenLoginModal} className={cx('login-btn')} primary>
                 Log in
               </Button>
             </>
           )}
 
-          <Menu className={cx('actions-menu')} data={isLoggedIn && isLoggedIn ? LOGIN_MENU_ITEMS : MENU_ITEMS}>
-            {isLoggedIn ? (
-              <Image alt="avatar" src={authUser && authUser.image} className={cx('current-account')} />
-            ) : (
+          {isLoggedIn && (
+            <Menu className={cx('actions-menu')} data={LOGIN_MENU_ITEMS}>
+              <Image
+                alt="avatar"
+                // fallback="https://placehold.co/40x40/fe2c54/white"
+                src={authUser?.image || ''}
+                className={cx('current-account')}
+              />
+            </Menu>
+          )}
+          {!isLoggedIn && (
+            <Menu className={cx('actions-menu')} data={MENU_ITEMS}>
               <i className={cx('more-action')}>
                 <FontAwesomeIcon icon={faEllipsisV} />
               </i>
-            )}
-          </Menu>
+            </Menu>
+          )}
         </div>
       </div>
     </div>

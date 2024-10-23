@@ -22,26 +22,24 @@ function ReviewProfile({ children, data }) {
         <PopperWrapper>
           <div className={cx('wrapper')}>
             <div className={cx('header')}>
-              <Avatar size={44} src={data && data.image} class={cx('avatar')} />
+              <Avatar size={44} src={data?.image} class={cx('avatar')} />
               <Button className={cx('follow-btn')} outline>
                 Follow
               </Button>
             </div>
             <Link className={cx('username')}>
-              <p> {data && data.username}</p>
+              <p> {data?.username}</p>
             </Link>
-            <p className={cx('name')}>{`${(data && data.firstName) || ''} ${(data && data.maidenName) || ''} ${
-              (data && data.lastName) || ''
-            }`}</p>
+            <p className={cx('name')}>{`${data?.firstName || ''} ${data?.maidenName || ''} ${data?.lastName || ''}`}</p>
             <p className={cx('user-stat')}>
               <span className={cx('stat-item')}>
-                <strong>{numberDisplay(data && data.id)}</strong>Followers
+                <strong>{numberDisplay(data?.id)}</strong>Followers
               </span>
               <span className={cx('stat-item')}>
-                <strong> {numberDisplay(data && data.id)}</strong>Likes
+                <strong> {numberDisplay(data?.id)}</strong>Likes
               </span>
             </p>
-            <p className={cx('bio')}> {data && data.email}</p>
+            <p className={cx('bio')}> {data?.email}</p>
           </div>
         </PopperWrapper>
       )}

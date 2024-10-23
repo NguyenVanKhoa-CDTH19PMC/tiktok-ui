@@ -35,6 +35,8 @@ function Menu({
           onClick={() => {
             if (isParent) {
               setHistory((pre) => [item.children, ...pre]);
+            } else {
+              item.onclick();
             }
           }}
         ></MenuItem>

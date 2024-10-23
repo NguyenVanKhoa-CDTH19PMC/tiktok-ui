@@ -173,19 +173,19 @@ function PostDetail() {
                     <span className={cx('icon-button')}>
                       <HeartIcon />
                     </span>
-                    {numberDisplay(post.reactions && post.reactions.likes)}
+                    {numberDisplay(post.reactions?.likes)}
                   </button>
                   <button className={cx('action-item-button')}>
                     <span className={cx('icon-button')}>
                       <CommentIcon />
                     </span>
-                    {numberDisplay(post.reactions && post.reactions.likes)}
+                    {numberDisplay(post.reactions?.likes)}
                   </button>
                   <button className={cx('action-item-button')}>
                     <span className={cx('icon-button')}>
                       <BookMarkIcon />
                     </span>
-                    {post.reactions && post.reactions.dislikes}
+                    {post.reactions?.dislikes}
                   </button>
                 </div>
                 <div className={cx('share-action')}>
@@ -233,7 +233,7 @@ function PostDetail() {
               <div
                 onClick={() => setTabActive('commentsTab')}
                 className={cx('tab-item', { active: tabActive === 'commentsTab' })}
-              >{`Comments (${post.reactions && post.reactions.likes})`}</div>
+              >{`Comments (${post.reactions?.likes})`}</div>
               <div
                 onClick={() => setTabActive('createrVideosTab')}
                 className={cx('tab-item', { active: tabActive === 'createrVideosTab' })}

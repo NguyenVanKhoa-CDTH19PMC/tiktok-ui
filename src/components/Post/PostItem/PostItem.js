@@ -17,7 +17,7 @@ const cx = classNames.bind(style);
 
 function PostItem({ data, onSetVolume, onMute, volume }) {
   const videoRef = useRef();
-  const [play, setPlay] = useState(true);
+  const [play, setPlay] = useState(false);
   // const [volume, setVolume] = useState({ preValue: 0, value: 0 });
   const volumeRef = useRef();
   const notiLikeRef = useRef();
@@ -44,12 +44,12 @@ function PostItem({ data, onSetVolume, onMute, volume }) {
     return () => {
       window.removeEventListener('resize', updateWidth);
     };
-  }, [videoRef.current && videoRef.current.offsetWidth]);
+  }, [videoRef.current?.offsetWidth]);
   //event play/pause video when in/out side current web tab
   // useEffect(() => {
   //   console.log(play);
   //   const handleVisibilityChange = document.addEventListener('visibilitychange', () => {
-  //     if ((document.visibilityState === 'visible') & play) {
+  //     if ((document.visibilityState === 'visible') && play) {
   //       // when in side
   //       handlePlay();
   //     } else {
@@ -78,7 +78,7 @@ function PostItem({ data, onSetVolume, onMute, volume }) {
             if (entry.isIntersecting) {
               videoRef.current.play(); // Phát video khi vào khung nhìn
             } else {
-              videoRef.current && videoRef.current.pause(); // Dừng video khi ra khỏi khung nhìn
+              videoRef.current?.pause(); // Dừng video khi ra khỏi khung nhìn
             }
           });
         },
@@ -98,13 +98,13 @@ function PostItem({ data, onSetVolume, onMute, volume }) {
   }, []);
 
   const handlePlay = () => {
-    videoRef.current && videoRef.current.play();
+    videoRef.current?.play();
   };
   const handlePause = () => {
-    videoRef.current && videoRef.current.pause();
+    videoRef.current?.pause();
   };
   const handleClick = async () => {
-    if (videoRef.current && videoRef.current.paused) {
+    if (videoRef.current?.paused) {
       handlePlay();
       setPlay(true);
     } else {

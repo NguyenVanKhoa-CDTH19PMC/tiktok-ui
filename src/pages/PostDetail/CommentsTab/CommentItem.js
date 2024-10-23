@@ -26,7 +26,7 @@ function CommentItem({ data }) {
       <div className={cx('comment-item')}>
         <ReviewProfile data={user}>
           <div className={cx('avatar-container')}>
-            <Avatar size={40} className={cx('avatar')} src={user && user.image}></Avatar>
+            <Avatar size={40} className={cx('avatar')} src={user?.image}></Avatar>
           </div>
         </ReviewProfile>
 

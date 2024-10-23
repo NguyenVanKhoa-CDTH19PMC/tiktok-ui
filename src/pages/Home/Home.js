@@ -7,7 +7,7 @@ import Loading from '~/components/Loading';
 
 const cx = classNames.bind(style);
 function Home() {
-  const limit = 1;
+  const limit = 10;
   const [post, setPosts] = useState([]);
   const [page, setPage] = useState(1);
   const observerRef = useRef();
@@ -21,19 +21,16 @@ function Home() {
   const handleMute = () => {
     setVolume((pre) => ({ value: pre.value == 0 ? pre.preValue : 0, preValue: pre.value == 0 ? 0 : pre.value }));
   };
-  const fetchApi = () => {
+  const fetchApi = async () => {
     setLoading(true);
     try {
-      const fetchApi = async () => {
-        const result = await getPosts({ limit: limit, skip: (page - 1) * limit });
-        setPosts((pre) => [...pre, ...result.posts]);
-      };
-      fetchApi();
+      const result = await getPosts({ limit: limit, skip: (page - 1) * limit });
+      setPosts((pre) => [...pre, ...result.posts]);
     } catch (error) {
       console.log(error);
     }
-    setLoading(false);
   };
+
   useEffect(() => {
     fetchApi();
   }, [page]);
@@ -63,9 +60,9 @@ function Home() {
   return (
     <div className={cx('wrapper')}>
       <div className={cx('post-list')}>
-        {post.map((post) => {
+        {post.map((post, index) => {
           return (
-            <div key={post.id} className={cx('post-item')}>
+            <div key={index} className={cx('post-item')}>
               <PostItem volume={volume} onSetVolume={handleVolume} onMute={handleMute} data={post} />
             </div>
           );
