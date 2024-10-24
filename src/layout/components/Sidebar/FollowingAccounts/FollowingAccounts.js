@@ -22,7 +22,7 @@ function FollowingAccout({ ...props }) {
     fetchApi();
   }, [page]);
   const moreUser = () => {
-    setPage((pre) => pre + 1);
+    if (!loading) setPage((pre) => pre + 1);
   };
   return (
     <div className={cx('wrapper', props.className)}>

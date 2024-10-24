@@ -92,3 +92,19 @@
     display: block;
   }
 }
+.no-more-noti {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 300;
+  color: #16182380;
+  height: 70px;
+}
+.loading-container {
+  height: 70px;
+}
+.observer {
+  height: 20px;
+  margin-bottom: 20px;
+}

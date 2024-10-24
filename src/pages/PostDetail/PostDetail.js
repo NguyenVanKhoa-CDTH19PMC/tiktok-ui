@@ -248,7 +248,7 @@ function PostDetail() {
               </Link>
             </div>
           </div>
-          <div className={cx('comments-container')}>{renderTabContent()}</div>
+          <div className={cx('tab-content-container')}>{renderTabContent()}</div>
         </div>
 
         <div className={cx('footer-container')}>

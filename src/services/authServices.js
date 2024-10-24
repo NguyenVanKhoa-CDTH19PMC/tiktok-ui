@@ -18,7 +18,6 @@ export const login = async (body) => {
 };
 export const getAuthUser = async (accessToken) => {
   try {
-    console.log(accessToken);
     const result = await request.get('auth/me', {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -51,9 +50,3 @@ login.prototype = {
   credentials: PropTypes.object.isRequired,
 };
 getAuthUser.prototype = { accessToken: PropTypes.string.isRequired };
-// credentials = {
-//      username: 'emilys',
-//      password: 'emilyspass',
-//       expiresInMins: 30 };
-
-/* providing accessToken in bearer */

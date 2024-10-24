@@ -2,8 +2,7 @@ import Modal from 'react-modal';
 import style from './LogoutModal.module.scss';
 import classNames from 'classnames/bind';
 import Button from '~/components/Button';
-import { useNavigate } from 'react-router-dom';
-import routes from '~/config/routes';
+
 const cx = classNames.bind(style);
 Modal.setAppElement('#root');
 

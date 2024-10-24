@@ -8,11 +8,12 @@ import Loading from '~/components/Loading';
 const cx = classNames.bind(style);
 function Home() {
   const limit = 10;
-  const [post, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
   const observerRef = useRef();
   const [volume, setVolume] = useState({ preValue: 0, value: 0 });
   const [loading, setLoading] = useState(false);
+  const [isOver, setIsOver] = useState(false);
 
   const handleVolume = (v = volume) => {
     setVolume((pre) => ({ value: v.value, preValue: pre.value }));
@@ -24,18 +25,23 @@ function Home() {
   const fetchApi = async () => {
     setLoading(true);
     try {
-      const result = await getPosts({ limit: limit, skip: (page - 1) * limit });
-      setPosts((pre) => [...pre, ...result.posts]);
+      const postResult = await getPosts({ limit: limit, skip: (page - 1) * limit });
+      if ((page - 1) * limit + limit >= postResult.total) {
+        setIsOver(true);
+      }
+      setPosts((pre) => [...pre, ...postResult.posts]);
     } catch (error) {
       console.log(error);
     }
+
+    setLoading(false);
   };
 
   useEffect(() => {
     fetchApi();
   }, [page]);
   useEffect(() => {}, []);
-  // Sử dụng IntersectionObserver để tải thêm khi phần tử vào viewport
+  // use IntersectionObserver để tải thêm khi phần tử vào viewport
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -53,25 +59,26 @@ function Home() {
     };
   }, [loading]);
   useEffect(() => {
-    const preTitle = document.title;
-
     document.title = 'Tiktok - Make your day';
   }, []);
   return (
     <div className={cx('wrapper')}>
       <div className={cx('post-list')}>
-        {post.map((post, index) => {
+        {posts.map((post, index) => {
           return (
-            <div key={index} className={cx('post-item')}>
+            <div key={post.id} className={cx('post-item')}>
               <PostItem volume={volume} onSetVolume={handleVolume} onMute={handleMute} data={post} />
             </div>
           );
         })}
-        <div className={cx('loading-container')} ref={observerRef}>
-          <div className={cx('loading')}>
+
+        {loading && (
+          <div className={cx('loading-container')}>
             <Loading size={20} />
           </div>
-        </div>
+        )}
+        {!loading && !isOver && <div ref={observerRef} className={cx('observer')}></div>}
+        {isOver && <div className={cx('no-more-noti')}>No more comments</div>}
       </div>
     </div>
   );

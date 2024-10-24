@@ -29,7 +29,7 @@ request.interceptors.response.use(
 
       try {
         const response = await getReFreshToken(refreshToken);
-        console.log(response.accessToken);
+        console.log('refreshed Token');
 
         const newAccessToken = response.accessToken;
         localStorage.setItem('accessToken', newAccessToken);
