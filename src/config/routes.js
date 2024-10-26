@@ -5,7 +5,7 @@ const routes = {
   friends: '/friends',
   live: '/live',
   profile: (userId) => {
-    return `/${userId}`;
+    return `/user/${userId}`;
   },
   upload: '/upload',
   search: '/search',

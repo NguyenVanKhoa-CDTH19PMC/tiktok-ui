@@ -2,8 +2,13 @@
   border-radius: 50%;
   aspect-ratio: 1/1;
   background-color: rgb(255, 231, 154);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   img {
-    border-radius: 50%;
+    width: 100%;
+    object-fit: cover;
     height: 100%;
   }
 }

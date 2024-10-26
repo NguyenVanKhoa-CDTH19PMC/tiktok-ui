@@ -2,17 +2,13 @@ import React, { createContext, useContext, useState } from 'react';
 import LoginModal from '~/components/Modals/LoginModal';
 import LogoutModal from '~/components/Modals/LogoutModal';
 
-const ModalsContext = createContext({
-  handleOpenLoginModal: () => {},
-  handleOpenLogoutModal: () => {},
-});
+const ModalsContext = createContext();
 
 export const ModalsProvider = ({ children }) => {
   const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
   const [logoutModalIsOpen, setLogoutModalIsOpen] = useState(false);
 
   const handleOpenLoginModal = () => setLoginModalIsOpen(true);
-
   const handleOpenLogoutModal = () => setLogoutModalIsOpen(true);
 
   return (

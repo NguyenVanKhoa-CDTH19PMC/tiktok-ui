@@ -10,9 +10,10 @@
   font-weight: 600;
   color: var(--primary-color-2);
   line-height: 21px;
-  // padding: 16px 18px;
+
   min-width: 100px;
   min-height: 36px;
+
   cursor: pointer;
   &:hover {
     background-color: rgb(248, 248, 248);
@@ -27,15 +28,24 @@
   background-color: var(--primary-color);
   border: none;
   cursor: pointer;
-  min-height: 36px;
-  font-weight: 700;
-  font-size: 1.6rem;
+
   &:hover {
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), rgb(254, 44, 85);
   }
   &:active {
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.12)), rgb(254, 44, 85);
   }
+}
+.secondary {
+  background-color: #0000000d;
+  border: none;
+  &:hover {
+    background-color: #0000001f;
+  }
+}
+.icon {
+  min-width: 0;
+  aspect-ratio: 1/1;
 }
 .outline {
   background-color: var(--white);
@@ -66,7 +76,12 @@
   min-width: 90px;
 }
 .medium {
-  min-height: 44px;
+  padding: 0px 16px;
+
+  height: 44px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  font-size: 1.6rem;
 }
 .large {
   font-size: 1.6rem;

@@ -16,7 +16,6 @@ import style from './Sidebar.module.scss';
 import classNames from 'classnames/bind';
 import Menu, { MenuItem } from './Menu';
 import routes from '~/config/routes';
-import { Image } from '~/components/Images';
 import Button from '~/components/Button';
 import Fooder from './Fooder';
 import FollowingAccounts from './FollowingAccounts';
@@ -24,6 +23,7 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import LoginModal from '~/components/Modals/LoginModal';
 import { useAuth } from '~/hooks/AuthContext';
 import Tippy from '@tippyjs/react';
+import Avatar from '~/components/Avatar';
 const cx = classNames.bind(style);
 function Sidebar() {
   const { isLoggedIn, authUser } = useAuth();
@@ -81,8 +81,8 @@ function Sidebar() {
 
     {
       title: 'Profile',
-      icon: <Image fallback="https://placehold.co/40x40/fe2c54/white" src="" alt="" />,
-      activeIcon: <Image fallback="https://placehold.co/40x40/fe2c54/white" src="" alt="" />,
+      icon: <Avatar size={32} src={authUser?.image} alt="" />,
+      activeIcon: <Avatar size={32} src={authUser?.image} alt="" />,
       to: routes.profile,
     },
   ];

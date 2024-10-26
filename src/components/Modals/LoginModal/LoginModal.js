@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import { useEffect, useRef, useState } from 'react';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { getAuthUser, login } from '~/services/authServices';
+import { login } from '~/services/authServices';
 import Button from '~/components/Button';
 import style from './Login.module.scss';
 import IconButton from '~/components/IconButton';
-import { computeHeadingLevel } from '@testing-library/react';
+
 const cx = classNames.bind(style);
 Modal.setAppElement('#root');
 function LoginModal({ modalIsOpen, handleCloseModal }) {
@@ -56,28 +56,7 @@ function LoginModal({ modalIsOpen, handleCloseModal }) {
     //   icon: <FontAwesomeIcon icon={faUser} />,
     // },
   ];
-  const customStyles = {
-    overlay: {
-      backgroundColor: '#00000080',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    content: {
-      position: 'relative',
-      padding: '0',
-      // border: 'none',
-      height: 'fit-content',
-      width: 'fit-content',
-      borderRadius: '8px',
-      border: 'none',
-      backgroundColor: 'white',
-      right: 0,
-      left: 0,
-      bottom: 0,
-      top: 0,
-    },
-  };
+
   useEffect(() => {
     usernameInputRef.current?.focus();
   }, []);
@@ -170,9 +149,8 @@ function LoginModal({ modalIsOpen, handleCloseModal }) {
       isOpen={modalIsOpen}
       //   onAfterOpen={afterOpenModal}
       // onRequestClose={closeModal}
-      style={customStyles}
-      // className="modal-content"
-      // overlayClassName="modal-overlay"
+      className="modal-content"
+      overlayClassName="modal-overlay"
       contentLabel="Example Modal"
     >
       <div className={cx('wrapper')}>

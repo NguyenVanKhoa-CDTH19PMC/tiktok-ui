@@ -89,28 +89,24 @@ body {
   }
 }
 
-.ReactModal__Overlay {
-  height: 100%;
-  width: 100%;
+.modal-overlay {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: #00000080;
   display: flex;
   justify-content: center;
-  align-items: center;
+  // align-items: center;
   position: absolute;
-  opacity: 1;
-  display: block;
+
+  overflow: auto;
 }
 .modal-content {
-  background-color: white;
   position: relative;
-  padding: 0;
   height: fit-content;
   width: fit-content;
   border-radius: 8px;
   border: none;
   background-color: white;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  top: 0;
 }

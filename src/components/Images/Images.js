@@ -4,17 +4,21 @@ import { forwardRef, useState } from 'react';
 import images from '~/assets/images';
 import styles from './Images.module.scss';
 const cx = classNames.bind(styles);
-export const Image = forwardRef(
-  ({ src = '', alt, className, fallback: customFallback = images.noImage, ...props }, ref) => {
-    const [fallback, setFallback] = useState('');
-    const handleError = () => {
-      setFallback('https://placehold.co/40x40/fe2c54/white');
-    };
+export const Image = forwardRef(({ src = '', alt, className, size = 30, ...props }, ref) => {
+  const style = { width: size + 'px', height: size + 'px' };
 
-    const classes = cx('wrapper', className);
-    return <img className={classes} ref={ref} src={fallback || src} alt={alt} {...props} onError={handleError} />;
-  },
-);
+  const classes = cx('wrapper', className);
+  return (
+    <img
+      style={style}
+      className={classes}
+      ref={ref}
+      src={src || `https://placehold.co/${size}x${size}/fe2c54/white`}
+      alt={alt}
+      {...props}
+    />
+  );
+});
 Image.propTypes = {
   src: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,

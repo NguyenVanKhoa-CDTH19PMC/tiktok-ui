@@ -9,16 +9,15 @@ import style from './Header.module.scss';
 import images from '~/assets/images';
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
-import { MessageIcon, InboxIcon } from '~/components/Icons';
-import { Image } from '~/components/Images';
+import { InboxIcon } from '~/components/Icons';
 import Search from '../../../components/SearchForm';
 import { languages } from '~/assets/langugesJson';
 import { config } from '~/config';
 import { useAuth } from '~/hooks/AuthContext';
-import LogoutModal from '~/components/Modals/LogoutModal';
-import { useEffect, useState } from 'react';
-import LoginModal from '~/components/Modals/LoginModal';
+
 import { useModals } from '~/hooks/ModalsContext';
+import routes from '~/config/routes';
+import Avatar from '~/components/Avatar';
 const cx = classNames.bind(style);
 
 function Header() {
@@ -51,6 +50,7 @@ function Header() {
     {
       icon: <FontAwesomeIcon icon={faUser} />,
       title: 'View profile',
+      to: routes.profile(authUser?.id),
     },
     {
       icon: <FontAwesomeIcon icon={faCircleDot} />,
@@ -101,12 +101,9 @@ function Header() {
 
           {isLoggedIn && (
             <Menu className={cx('actions-menu')} data={LOGIN_MENU_ITEMS}>
-              <Image
-                alt="avatar"
-                // fallback="https://placehold.co/40x40/fe2c54/white"
-                src={authUser?.image || ''}
-                className={cx('current-account')}
-              />
+              <div className={cx('current-account')}>
+                <Avatar size={32} alt="avatar" src={authUser?.image} />
+              </div>
             </Menu>
           )}
           {!isLoggedIn && (

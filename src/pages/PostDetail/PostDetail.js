@@ -36,7 +36,7 @@ import Menu from '~/components/Popper/Menu';
 import CommentsTab from './Tab/CommentsTab';
 import { createPortal } from 'react-dom';
 import ReviewProfile from '~/components/ReviewProfile';
-import EmoijTable from '~/components/EmoijTabla';
+import EmoijTable from '~/components/EmoijTable';
 import { postComment } from '~/services/commentServices';
 
 const cx = classNames.bind(style);

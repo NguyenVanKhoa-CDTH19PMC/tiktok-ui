@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import style from './AccountItem.module.scss';
 import { Link } from 'react-router-dom';
-import { Image } from '~/components/Images';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import Avatar from '~/components/Avatar';
 const cx = classNames.bind(style);
 
 function AccountItem({ data }) {
@@ -12,7 +12,7 @@ function AccountItem({ data }) {
     <div className={cx('wrapper')}>
       <Link to={`/${data.username}`} className={cx('account-item')}>
         <div className={cx('avt')}>
-          <Image fallback="https://placehold.co/40x40/fe2c54/white" src={data.image} alt="" />
+          <Avatar size={32} src={data.image} alt="" />
         </div>
 
         <div className={cx('info')}>

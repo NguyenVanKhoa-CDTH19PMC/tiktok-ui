@@ -56,7 +56,7 @@ function VideosTab({ userId }) {
           {[1, 2, 3, 4, 5, 6].map((playlist) => (
             <div key={playlist} className={cx('playlist-item')}>
               <div className={cx('image-cover')}>
-                <Image src="" alt="" />
+                <Image size={72} src="" alt="" />
               </div>
               <div className={cx('playlist-infor')}>
                 <p className={cx('playlist-name')}>Name</p>

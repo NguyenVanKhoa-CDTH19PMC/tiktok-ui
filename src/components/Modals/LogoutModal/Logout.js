@@ -42,8 +42,7 @@ function LogoutModal({ modalIsOpen, handleCloseModal }) {
       onRequestClose={handleCloseModal}
       // style={customStyles}
       className="modal-content"
-      // overlayClassName="modal-overlay"
-      contentLabel="Example Modal"
+      overlayClassName="modal-overlay"
     >
       <div className={cx('wrapper')}>
         <div className={cx('title')}>Are you sure you want to log out?</div>

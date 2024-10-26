@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
 import style from './ActionsBar.module.scss';
 import classNames from 'classnames/bind';
-import { Image } from '~/components/Images';
 import { BookMarkIcon, CommentIcon, HeartIcon, PlusIcon, ShareIcon } from '~/components/Icons';
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getCommentByPost } from '~/services/commentServices';
 import { numberDisplay } from '~/utils/numberDisplay';
 import ReviewProfile from '~/components/ReviewProfile';
 import { Link } from 'react-router-dom';
 import { config } from '~/config';
 import routes from '~/config/routes';
+import Avatar from '~/components/Avatar';
 const cx = classNames.bind(style);
 const ActionsBar = ({ post, author }) => {
   const [comments, setComments] = useState({});
@@ -32,11 +32,10 @@ const ActionsBar = ({ post, author }) => {
       <section className={cx('actions-bar')}>
         <ReviewProfile data={author}>
           <div className={cx('avatar-action')}>
-            {author.image && (
-              <Link to={routes.profile(author.id)}>
-                <Image fallback="https://placehold.co/48x48/fe2c54/white" src={author.image} alt="" />
-              </Link>
-            )}
+            <Link to={routes.profile(author.id)}>
+              <Avatar size={48} src={author.image} alt="avatr" />
+            </Link>
+
             <button className={cx('follow-btn')}>
               <PlusIcon />
             </button>

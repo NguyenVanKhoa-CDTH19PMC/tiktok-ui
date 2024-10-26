@@ -32,11 +32,12 @@ function Menu({
           key={index}
           data={item}
           leverMenu={leverMenu}
+          to={item.to}
           onClick={() => {
             if (isParent) {
               setHistory((pre) => [item.children, ...pre]);
             } else {
-              item.onclick();
+              item.onclick() && item.onclick();
             }
           }}
         ></MenuItem>

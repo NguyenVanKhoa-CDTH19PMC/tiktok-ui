@@ -7,12 +7,13 @@ import style from './AccountItem.module.scss';
 import AccountActions from './components/AccountActions';
 import { Image } from '../Images';
 import { Link } from 'react-router-dom';
+import Avatar from '../Avatar';
 const cx = classNames.bind(style);
 function AccountItem({ data, dark }) {
   return (
     <Link to={`/${data.username}`} className={cx('wrapper', { dark })}>
       <div className={cx('avt')}>
-        <Image fallback="https://placehold.co/40x40/fe2c54/white" src={data.image} alt="" />
+        <Avatar size={40} src={data.image} alt="" />
       </div>
 
       <div className={cx('info')}>
