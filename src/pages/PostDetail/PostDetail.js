@@ -33,9 +33,10 @@ import { getUser } from '~/services/userService';
 import Button from '~/components/Button';
 import { numberDisplay } from '~/utils/numberDisplay';
 import Menu from '~/components/Popper/Menu';
-import CommentsTab from './Tab/CommentsTab/CommentsTab';
+import CommentsTab from './Tab/CommentsTab';
 import { createPortal } from 'react-dom';
 import ReviewProfile from '~/components/ReviewProfile';
+import EmoijTable from '~/components/EmoijTabla';
 
 const cx = classNames.bind(style);
 function PostDetail() {
@@ -43,6 +44,7 @@ function PostDetail() {
   const videoRef = useRef();
   const location = useLocation();
   const searchInputRef = useRef();
+  const [searchInputValue, setSearchInputValue] = useState();
   const navigate = useNavigate();
   const [post, setPost] = useState({});
   const [author, setAuthor] = useState({});
@@ -107,7 +109,35 @@ function PostDetail() {
         return <div>None</div>;
     }
   };
+  // useEffect(() => {
+  //   console.log(searchInputRef.current.selectionStart);
+  // }, [searchInputValue]);
+  const addTag = () => {
+    //identify mouse position
+    const start = searchInputRef.current.selectionStart;
+    const end = searchInputRef.current.selectionEnd;
 
+    // insert "@" in mouse position
+    const before = searchInputRef.current.value.substring(0, start);
+    const after = searchInputRef.current.value.substring(end);
+    searchInputRef.current.value = before + ` @ ` + after;
+    // tranlate present mouse
+    searchInputRef.current.setSelectionRange(start + 2, start + 2);
+    searchInputRef.current.focus();
+  };
+  const addEmoij = (emoij) => {
+    //identify mouse position
+    const start = searchInputRef.current.selectionStart;
+    const end = searchInputRef.current.selectionEnd;
+
+    // insert "@" in mouse position
+    const before = searchInputRef.current.value.substring(0, start);
+    const after = searchInputRef.current.value.substring(end);
+    searchInputRef.current.value = before + emoij.character + after;
+    // tranlate present mouse
+    searchInputRef.current.setSelectionRange(start + 2, start + 2);
+    searchInputRef.current.focus();
+  };
   return (
     <div className={cx('wrapper')}>
       <div className={cx('video-container')}>
@@ -328,18 +358,29 @@ function PostDetail() {
         </div>
 
         <div className={cx('footer-container')}>
-          <form className={cx('comment-form')}>
+          <div className={cx('comment-form')}>
             <div className={cx('comment-input-container')}>
               <input ref={searchInputRef} placeholder="Add comment..." className={cx('comment-input')} />
-              <button className={cx('mention-button')}>
-                <FontAwesomeIcon icon={faAt} />
-              </button>
-              <button className={cx('emoji-button')}>
-                <FontAwesomeIcon icon={faFaceSmile} />
-              </button>
+              <Tippy content={`“@” a user to tag them in your comments`}>
+                <button
+                  onClick={() => {
+                    addTag();
+                  }}
+                  className={cx('mention-button')}
+                >
+                  <FontAwesomeIcon icon={faAt} />
+                </button>
+              </Tippy>
+              <EmoijTable pushEmoijSelected={(emoij) => addEmoij(emoij)}>
+                <Tippy content="Click to add emojis">
+                  <button className={cx('emoji-button')}>
+                    <FontAwesomeIcon icon={faFaceSmile} />
+                  </button>
+                </Tippy>
+              </EmoijTable>
             </div>
             <button className={cx('submit-comment-button')}>Post</button>
-          </form>
+          </div>
         </div>
       </div>
     </div>

@@ -123,3 +123,16 @@
   background-color: white;
   color: var(--primary-color-2);
 }
+
+@media (max-width: 770px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
+  .identi,
+  .count-infor,
+  .bio {
+    text-align: center;
+    justify-content: center;
+  }
+}

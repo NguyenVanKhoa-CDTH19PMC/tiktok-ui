@@ -13,6 +13,7 @@ import Tippy from '@tippyjs/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 import PostMoreActionsMenu from '../PostMoreActionsMenu';
+import routes from '~/config/routes';
 const cx = classNames.bind(style);
 
 function PostItem({ data, onSetVolume, onMute, volume }) {
@@ -184,7 +185,7 @@ function PostItem({ data, onSetVolume, onMute, volume }) {
             </div>
             <div className={cx('card-botton')}>
               <div className={cx('author-container')}>
-                <Link to={'/@'} className={cx('author-title')}>
+                <Link to={routes.profile(author.id)} className={cx('author-title')}>
                   <h3>{author.username}</h3>
                 </Link>
               </div>

@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList, faRepeat } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import VideosTab from './Tabs/VideosTab';
+import LikedTab from './Tabs/LikedTab';
 const cx = classNames.bind(style);
 function Profile() {
   const { userId } = useParams();
@@ -58,6 +59,8 @@ function Profile() {
     switch (tabActive) {
       case 0:
         return <VideosTab userId={userId} />;
+      case 2:
+        return <LikedTab user={user} />;
       default:
         return <div>Not found</div>;
     }
@@ -133,19 +136,21 @@ function Profile() {
             </div>
             <div ref={tagTabRef} className={cx('tab-active-tag')}></div>
           </div>
-          <div className={cx('filter-container')}>
-            <div className={cx('select')}>
-              <div onClick={() => setSelectedFillter(0)} className={cx('option', { selected: selectedFillter == 0 })}>
-                Latest
-              </div>
-              <div onClick={() => setSelectedFillter(1)} className={cx('option', { selected: selectedFillter == 1 })}>
-                Popular
-              </div>
-              <div onClick={() => setSelectedFillter(2)} className={cx('option', { selected: selectedFillter == 2 })}>
-                Oldest
+          {tabActive == 0 && (
+            <div className={cx('filter-container')}>
+              <div className={cx('select')}>
+                <div onClick={() => setSelectedFillter(0)} className={cx('option', { selected: selectedFillter == 0 })}>
+                  Latest
+                </div>
+                <div onClick={() => setSelectedFillter(1)} className={cx('option', { selected: selectedFillter == 1 })}>
+                  Popular
+                </div>
+                <div onClick={() => setSelectedFillter(2)} className={cx('option', { selected: selectedFillter == 2 })}>
+                  Oldest
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
       <div className={cx('tab-content')}>{renderTabContent()}</div>

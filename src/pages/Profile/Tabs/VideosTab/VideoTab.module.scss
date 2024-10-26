@@ -64,7 +64,7 @@
 }
 .post-list {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 24px 16px;
 }
 
@@ -84,4 +84,15 @@
   background-color: red;
   height: 20px;
   margin-bottom: 20px;
+}
+
+@media (max-width: 1070px) {
+  .post-list {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+@media (max-width: 895px) {
+  .post-list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
