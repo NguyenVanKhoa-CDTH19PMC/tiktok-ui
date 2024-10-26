@@ -7,7 +7,7 @@ import CommentItem from './CommentItem';
 import Loading from '~/components/Loading';
 
 const cx = classNames.bind(style);
-function CommentsTab({ postId }) {
+function CommentsTab({ postId, newComment }) {
   const limit = 10;
   const observerRef = useRef();
   const [comments, setComments] = useState([]);
@@ -25,13 +25,17 @@ function CommentsTab({ postId }) {
     setComments((pre) => [...pre, ...commentsResult.comments]);
     setLoading(false);
   };
-  // console.log('page', page);
-  // console.log('loading', loading);
-  // console.log('isOver', isOver);
+
+  //simulator post new comment
+  useEffect(() => {
+    if (newComment === undefined) return;
+    setComments((pre) => [newComment, ...pre]);
+  }, [newComment]);
 
   useEffect(() => {
     if (page > 0) fecthApi();
   }, [page]);
+
   // use IntersectionObserver để tải thêm khi phần tử vào viewport
   useEffect(() => {
     const observer = new IntersectionObserver(

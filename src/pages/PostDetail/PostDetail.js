@@ -37,6 +37,7 @@ import CommentsTab from './Tab/CommentsTab';
 import { createPortal } from 'react-dom';
 import ReviewProfile from '~/components/ReviewProfile';
 import EmoijTable from '~/components/EmoijTabla';
+import { postComment } from '~/services/commentServices';
 
 const cx = classNames.bind(style);
 function PostDetail() {
@@ -55,7 +56,7 @@ function PostDetail() {
   const [volume, setVolume] = useState({ preValue: 0, value: 0 });
   const [like, setLike] = useState(false);
   const [favorite, setFavorite] = useState(false);
-
+  const [newComment, setNewComment] = useState();
   const MORE_SHARE_MENU = [{ title: 'Share to Twitter', icon: <FontAwesomeIcon icon={faTwitter} /> }];
   const handlePlay = () => {
     videoRef.current?.play();
@@ -102,16 +103,13 @@ function PostDetail() {
   const renderTabContent = () => {
     switch (tabActive) {
       case 'commentsTab':
-        return <CommentsTab postId={postId} />;
+        return <CommentsTab postId={postId} newComment={newComment} />;
       case 'createrVideosTab':
         return <div>Developing...</div>;
       default:
         return <div>None</div>;
     }
   };
-  // useEffect(() => {
-  //   console.log(searchInputRef.current.selectionStart);
-  // }, [searchInputValue]);
   const addTag = () => {
     //identify mouse position
     const start = searchInputRef.current.selectionStart;
@@ -130,13 +128,21 @@ function PostDetail() {
     const start = searchInputRef.current.selectionStart;
     const end = searchInputRef.current.selectionEnd;
 
-    // insert "@" in mouse position
+    // insert emoij in mouse position
     const before = searchInputRef.current.value.substring(0, start);
     const after = searchInputRef.current.value.substring(end);
     searchInputRef.current.value = before + emoij.character + after;
     // tranlate present mouse
-    searchInputRef.current.setSelectionRange(start + 2, start + 2);
+    searchInputRef.current.setSelectionRange(start + emoij.character.length, start + emoij.character.length);
     searchInputRef.current.focus();
+  };
+  const submitComment = async () => {
+    if (searchInputRef.current.value) {
+      const result = await postComment(postId, searchInputRef.current.value);
+      setNewComment(result.data);
+      searchInputRef.current.value = '';
+      searchInputRef.current.focus();
+    } else console.log('hay nhap comment');
   };
   return (
     <div className={cx('wrapper')}>
@@ -379,7 +385,9 @@ function PostDetail() {
                 </Tippy>
               </EmoijTable>
             </div>
-            <button className={cx('submit-comment-button')}>Post</button>
+            <button onClick={() => submitComment()} className={cx('submit-comment-button')}>
+              Post
+            </button>
           </div>
         </div>
       </div>

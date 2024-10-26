@@ -15,7 +15,7 @@ const cx = classNames.bind(style);
 function CommentItem({ data }) {
   const [user, setUser] = useState();
   const fecthApi = async () => {
-    const userData = await getUser(data.user.id);
+    const userData = await getUser(data.user?.id);
     setUser(userData);
   };
   useEffect(() => {
@@ -32,7 +32,7 @@ function CommentItem({ data }) {
 
         <div className={cx('content')}>
           <ReviewProfile data={user}>
-            <Link className={cx('fullname')}>{data.user.fullName}</Link>
+            <Link className={cx('fullname')}>{data.user?.fullName}</Link>
           </ReviewProfile>
 
           <p className={cx('body')}>{data.body}</p>
