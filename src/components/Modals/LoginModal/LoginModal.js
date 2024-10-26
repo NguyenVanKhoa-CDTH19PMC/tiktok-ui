@@ -148,7 +148,7 @@ function LoginModal({ modalIsOpen, handleCloseModal }) {
               <div className={cx('login-options-container')}>
                 {LOGIN_OPTIONS.map((option, index) => (
                   <div key={index}>
-                    <Button onClick={option.onClick} leftIcon={option.icon} className={cx('option-button')}>
+                    <Button medium onClick={option.onClick} leftIcon={option.icon} className={cx('option-button')}>
                       {option.title}
                     </Button>
                   </div>

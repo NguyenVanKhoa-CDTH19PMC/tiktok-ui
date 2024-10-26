@@ -1,0 +1,87 @@
+.wrapper {
+}
+.playlists-container {
+}
+.playlists-container .title,
+.videos-container .title {
+  margin: 24px 0 16px;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--primary-color-2);
+}
+.playlist-list {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+.playlist-item {
+  display: flex;
+  gap: 16px;
+  min-width: 235px;
+  overflow: hidden;
+  margin-right: 16px;
+  padding: 12px;
+  background-color: #16182308;
+  border-radius: 4px;
+}
+.image-cover {
+  height: 72px;
+  width: 72px;
+  border-radius: 2px;
+  overflow: hidden;
+  img {
+    aspect-ratio: 1/1;
+    height: 72px;
+    width: 72px;
+  }
+}
+.playlist-infor {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+.playlist-name {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  color: var(--primary-color-2);
+}
+.post-count {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #16182399;
+}
+.videos-container {
+}
+.videos-container .title {
+}
+.post-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px 16px;
+}
+
+.no-more-noti {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 300;
+  color: #16182380;
+  height: 70px;
+}
+.loading-container {
+  height: 70px;
+}
+.observer {
+  background-color: red;
+  height: 20px;
+  margin-bottom: 20px;
+}

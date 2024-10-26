@@ -83,11 +83,7 @@ function Header() {
               <Button className={cx('upload-btn')} leftIcon={<FontAwesomeIcon icon={faPlus} />}>
                 Upload
               </Button>
-              <Tippy appendTo={document.body} placement="bottom" interactive offset={[0, 10]} content="Messages">
-                <button className={cx('message-btn', 'action-btn')}>
-                  <MessageIcon />
-                </button>
-              </Tippy>
+
               <Tippy appendTo={document.body} placement="bottom" interactive offset={[0, 10]} content="Inbox">
                 <button className={cx('inbox-bnt', 'action-btn')}>
                   <span className={cx('badge')}>2</span>

@@ -29,7 +29,7 @@ function MenuItem({ data, leverMenu, to, href, className, onClick, disabled, dar
     props.href = href;
     Comp = 'a';
   }
-  const classes = cx('wrapper', lever, {
+  const classes = cx('wrapper-item', lever, {
     separate: data.separate,
     dark: dark,
   });

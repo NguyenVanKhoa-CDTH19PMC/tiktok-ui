@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import style from './PostItem.module.scss';
-import videos from '~/assets/videos';
+import { videosDemo } from '~/assets/videos';
 import { FloatIcon, MusicIcon, MuteIcon, ThreeDotVIcon, UnMuteIcon } from '~/components/Icons';
 import RangeInput from '../../RangeInput';
 import ActionsBar from './ActionsBar';
@@ -23,8 +23,8 @@ function PostItem({ data, onSetVolume, onMute, volume }) {
   const notiLikeRef = useRef();
   const [moreText, setMoreText] = useState(false);
   const [showNotiLiked, setShowNotiLiked] = useState(false);
-
   const [author, setAuthor] = useState({});
+  const videoDemo = useRef(videosDemo[Math.floor(Math.random() * 4)]);
   useEffect(() => {
     const fetchApi = async () => {
       const authorData = await getUser(data.userId);
@@ -34,9 +34,17 @@ function PostItem({ data, onSetVolume, onMute, volume }) {
   }, [data.userId]);
 
   useEffect(() => {
+    // console.log(videoRef.current.parentElement.parentElement.style);
+    // console.log(videoRef.current?.videoWidth);
+
+    // console.log(videoRef.current?.videoHeight);
+
+    // videoRef.current.parentElement.style.aspectRatio = `${videoRef.current.offsetWidth}/${videoRef.current.offsetHeight}`;
     const updateWidth = () => {
       if (videoRef.current) {
-        videoRef.current.parentElement.style.width = `${videoRef.current.offsetWidth}px`;
+        // if (true) {
+        //   videoRef.current.parentElement.parentElement.style.height = `100%`;
+        // }
       }
     };
     updateWidth();
@@ -44,7 +52,7 @@ function PostItem({ data, onSetVolume, onMute, volume }) {
     return () => {
       window.removeEventListener('resize', updateWidth);
     };
-  }, [videoRef.current?.offsetWidth]);
+  }, [videoRef.current]);
   //event play/pause video when in/out side current web tab
   // useEffect(() => {
   //   console.log(play);
@@ -137,95 +145,90 @@ function PostItem({ data, onSetVolume, onMute, volume }) {
       <article className={cx('article-item')}>
         <div className={cx('acrticle-grid')}>
           <div className={cx('spacer')}></div>
-          <section className={cx('media-container')}>
-            <div className={cx('media-card')}>
-              <div className={cx('video-container')}>
-                <video
-                  muted={volume.value == 0}
-                  onClick={() => handleClick()}
-                  onDoubleClickCapture={(e) => handleDoubleClick(e)}
-                  ref={videoRef}
-                  loop
-                  //autoplay only works when user interrects or video is muted
-                  // autoPlay
-                  className={cx('video')}
-                  src={videos.videoDemo}
-                />
-              </div>
-              <div className={cx('background-mark')}></div>
-              <div className={cx('card-top')}>
-                <div className={cx('volume-change')}>
-                  <button
-                    //show icon mute when video mute
-                    style={{ visibility: volume.value == 0 && 'visible' }}
-                    onClick={() => handleMute()}
-                    className={cx('volume-btn')}
-                  >
-                    {volume.value == 0 ? <MuteIcon /> : <UnMuteIcon />}
-                  </button>
-                  <div className={cx('volume-range')}>
-                    <RangeInput value={volume.value} onChange={() => handleChangeValue()} ref={volumeRef} />
-                  </div>
-                </div>
+          <div className={cx('media-card')}>
+            {/* <div className={cx('video-container')}> */}
+            <video
+              muted={volume.value == 0}
+              onClick={() => handleClick()}
+              onDoubleClickCapture={(e) => handleDoubleClick(e)}
+              ref={videoRef}
+              loop
+              //autoplay only works when user interrects or video is muted
+              // autoPlay
+              className={cx('video')}
+              src={videoDemo.current}
+            />
+            {/* </div> */}
 
-                <PostMoreActionsMenu>
-                  <button className={cx('more-btn')}>
-                    <ThreeDotVIcon />
-                  </button>
-                </PostMoreActionsMenu>
-              </div>
-              <div className={cx('card-botton')}>
-                <div className={cx('author-container')}>
-                  <Link to={'/@'} className={cx('author-title')}>
-                    <h3>{author.username}</h3>
-                  </Link>
-                </div>
-                <div
-                  className={cx('multiline-text-container', {
-                    'is-more': moreText,
-                  })}
+            <div className={cx('background-mark')}></div>
+            <div className={cx('card-top')}>
+              <div className={cx('volume-change')}>
+                <button
+                  //show icon mute when video mute
+                  style={{ visibility: volume.value == 0 && 'visible' }}
+                  onClick={() => handleMute()}
+                  className={cx('volume-btn')}
                 >
-                  <div className={cx('multiline-text')}>{data.body}</div>
-                  <button onClick={() => setMoreText((pre) => !pre)} className={cx('more-btn')}>
-                    {moreText ? 'less' : 'more'}
-                  </button>
-                </div>
-                <div className={cx('cart-botton-fooder')}>
-                  <Link to={'/@'} className={cx('music-container')}>
-                    <i className={cx('music-icon')}>
-                      <MusicIcon />
-                    </i>
-                    <p className={cx('music-text')}>{data.title}</p>
-                  </Link>
-                  <Tippy
-                    appendTo={document.body}
-                    placement="top"
-                    interactive
-                    offset={[0, 10]}
-                    content="Floating Player"
-                  >
-                    <div className={cx('mini-player-btn')}>
-                      <FloatIcon />
-                    </div>
-                  </Tippy>
+                  {volume.value == 0 ? <MuteIcon /> : <UnMuteIcon />}
+                </button>
+                <div className={cx('volume-range')}>
+                  <RangeInput value={volume.value} onChange={() => handleChangeValue()} ref={volumeRef} />
                 </div>
               </div>
-              <div className={cx('noti-video-state', { 'play-state': play, 'pause-state': !play })}>
-                <div className={cx('noti-play')}>
-                  <FontAwesomeIcon className={cx('icon')} icon={faPlay} />
-                </div>
-                <div className={cx('noti-pause')}>
-                  <FontAwesomeIcon className={cx('icon')} icon={faPause} />
-                </div>
-              </div>
-              <div ref={notiLikeRef} className={cx('noti-liked', { show: showNotiLiked })}>
-                <div className={cx('icon')}>
-                  <FontAwesomeIcon icon={faHeart} />
-                </div>
-              </div>
-              <div className={cx('playhead-container')}>{/* <Playhead /> */}</div>
+
+              <PostMoreActionsMenu>
+                <button className={cx('more-btn')}>
+                  <ThreeDotVIcon />
+                </button>
+              </PostMoreActionsMenu>
             </div>
-          </section>
+            <div className={cx('card-botton')}>
+              <div className={cx('author-container')}>
+                <Link to={'/@'} className={cx('author-title')}>
+                  <h3>{author.username}</h3>
+                </Link>
+              </div>
+              <div
+                className={cx('multiline-text-container', {
+                  'is-more': moreText,
+                })}
+              >
+                <div className={cx('multiline-text')}>{data.body}</div>
+                <button onClick={() => setMoreText((pre) => !pre)} className={cx('more-btn')}>
+                  {moreText ? 'less' : 'more'}
+                </button>
+              </div>
+              <div className={cx('cart-botton-fooder')}>
+                <Link to={'/@'} className={cx('music-container')}>
+                  <i className={cx('music-icon')}>
+                    <MusicIcon />
+                  </i>
+                  <p className={cx('music-text')}>{data.title}</p>
+                </Link>
+                <Tippy appendTo={document.body} placement="top" interactive offset={[0, 10]} content="Floating Player">
+                  <div className={cx('mini-player-btn')}>
+                    <FloatIcon />
+                  </div>
+                </Tippy>
+              </div>
+            </div>
+            <div className={cx('noti-video-state', { 'play-state': play, 'pause-state': !play })}>
+              <div className={cx('noti-play')}>
+                <FontAwesomeIcon className={cx('icon')} icon={faPlay} />
+              </div>
+              <div className={cx('noti-pause')}>
+                <FontAwesomeIcon className={cx('icon')} icon={faPause} />
+              </div>
+            </div>
+            <div ref={notiLikeRef} className={cx('noti-liked', { show: showNotiLiked })}>
+              <div className={cx('icon')}>
+                <FontAwesomeIcon icon={faHeart} />
+              </div>
+            </div>
+            {/* <div className={cx('playhead-container')}>
+              <Playhead />
+            </div> */}
+          </div>
           <div className={cx('spacer')}></div>
           <ActionsBar post={data} author={author} />
         </div>

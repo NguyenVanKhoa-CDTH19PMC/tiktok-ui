@@ -64,16 +64,16 @@
     color: #161823bf;
   }
   .icon-active {
-    animation: beatInOut 1s forwards;
+    animation: beatIn 1s forwards;
   }
-  .favorite-icon {
+  .icon-active.favorite-icon {
     color: #face15;
   }
-  .like-icon {
+  .icon-active.like-icon {
     color: var(--primary-color);
   }
 }
-@keyframes beatInOut {
+@keyframes beatIn {
   0% {
     opacity: 0;
     transform: scale(0.5);

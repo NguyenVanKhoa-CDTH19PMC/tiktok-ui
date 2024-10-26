@@ -29,17 +29,15 @@
 .video-container .video {
   display: flex;
   justify-content: center;
+  align-items: center;
   height: 100%;
   width: 100%;
   position: absolute;
-  video {
-    height: 100%;
-  }
+  cursor: pointer;
 }
 .video-container .video-control {
   .control-header {
     pointer-events: none;
-
     display: flex;
     justify-content: space-between;
     position: absolute;
@@ -49,6 +47,7 @@
 
     padding: 20px;
     .search-bar {
+      width: 276px;
       pointer-events: auto;
     }
     .more-actions-container {
@@ -71,6 +70,24 @@
     .capption-button {
       font-size: 17px;
     }
+  }
+  .volume-change {
+    pointer-events: auto;
+    position: relative;
+  }
+  .volume-change .volume-btn {
+    margin-right: 0;
+  }
+  .volume-change:hover > .volume-range {
+    display: block;
+  }
+  .volume-range {
+    position: absolute;
+
+    display: none;
+    top: -60%;
+    left: 50%;
+    transform: translateX(-50%);
   }
   .control-right {
     pointer-events: none;
@@ -207,6 +224,15 @@
         margin-right: 6px;
         background-color: #1618230f;
         color: var(--primary-color-2);
+      }
+      .icon-active {
+        animation: beatIn 1s forwards;
+      }
+      .icon-active.favorite-icon {
+        color: #face15;
+      }
+      .icon-active.like-icon {
+        color: var(--primary-color);
       }
     }
   }
@@ -382,6 +408,75 @@
   .submit-comment-button.disible {
     cursor: none;
     color: #16182357;
+  }
+}
+//noti video state
+.noti-video-state {
+  pointer-events: none;
+
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+.noti-play,
+.noti-pause {
+  display: none;
+  height: 30px;
+  border-radius: 50%;
+  background-color: black;
+  aspect-ratio: 1/1;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.5s forwards;
+  .icon {
+    color: var(--white);
+    height: 50%;
+    width: 50%;
+  }
+}
+.noti-play .icon {
+  transform: translateX(7%);
+}
+.noti-video-state.play-state .noti-play {
+  display: flex;
+}
+.noti-video-state.pause-state .noti-pause {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    height: 120px;
+  }
+}
+@keyframes beatIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  15% {
+    opacity: 1;
+
+    transform: scale(1.2);
+  }
+  30% {
+    transform: scale(0.8);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 //icon-button

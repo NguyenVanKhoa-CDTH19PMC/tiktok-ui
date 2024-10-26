@@ -4,11 +4,14 @@ const routes = {
   following: '/following',
   friends: '/friends',
   live: '/live',
-  profile: '/:profile',
+  profile: (userId) => {
+    return `/${userId}`;
+  },
   upload: '/upload',
   search: '/search',
-  post: (username, postId) => {
-    return `/${username}/video/${postId}`;
+  messages: '/messages',
+  post: (postId) => {
+    return `/video/${postId}`;
   },
 };
 export default routes;

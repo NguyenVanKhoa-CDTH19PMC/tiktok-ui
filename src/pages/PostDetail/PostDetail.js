@@ -13,15 +13,17 @@ import {
   faCode,
   faEllipsis,
   faPaperPlane,
+  faPause,
+  faPlay,
   faRepeat,
   faSearch,
   faShare,
 } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
-import videos from '~/assets/videos';
+import videos, { videosDemo } from '~/assets/videos';
 import style from './PostDetail.module.scss';
 import images from '~/assets/images';
-import { BookMarkIcon, CommentIcon, FloatIcon, HeartIcon, MusicIcon, MuteIcon } from '~/components/Icons';
+import { BookMarkIcon, CommentIcon, FloatIcon, HeartIcon, MusicIcon, MuteIcon, UnMuteIcon } from '~/components/Icons';
 import Search from '~/components/SearchForm';
 import PostMoreActionsMenu from '~/components/Post/PostMoreActionsMenu';
 import RangeInput from '~/components/RangeInput';
@@ -31,21 +33,43 @@ import { getUser } from '~/services/userService';
 import Button from '~/components/Button';
 import { numberDisplay } from '~/utils/numberDisplay';
 import Menu from '~/components/Popper/Menu';
-import CommentsTab from './CommentsTab/CommentsTab';
+import CommentsTab from './Tab/CommentsTab/CommentsTab';
 import { createPortal } from 'react-dom';
 import ReviewProfile from '~/components/ReviewProfile';
 
 const cx = classNames.bind(style);
 function PostDetail() {
+  const { username, postId } = useParams();
+  const videoRef = useRef();
   const location = useLocation();
   const searchInputRef = useRef();
   const navigate = useNavigate();
   const [post, setPost] = useState({});
   const [author, setAuthor] = useState({});
-  const [comments, setcomments] = useState({});
   const [tabActive, setTabActive] = useState('commentsTab');
-  const { username, postId } = useParams();
+  const videoDemo = useRef(videosDemo[Math.floor(Math.random() * 4)]);
+  const [play, setPlay] = useState(false);
+  const volumeRef = useRef();
+  const [volume, setVolume] = useState({ preValue: 0, value: 0 });
+  const [like, setLike] = useState(false);
+  const [favorite, setFavorite] = useState(false);
+
   const MORE_SHARE_MENU = [{ title: 'Share to Twitter', icon: <FontAwesomeIcon icon={faTwitter} /> }];
+  const handlePlay = () => {
+    videoRef.current?.play();
+  };
+  const handlePause = () => {
+    videoRef.current?.pause();
+  };
+  const handleClick = async () => {
+    if (videoRef.current?.paused) {
+      handlePlay();
+      setPlay(true);
+    } else {
+      handlePause();
+      setPlay(false);
+    }
+  };
   const handleBack = () => {
     navigate(-1); //back to pre page
   };
@@ -55,11 +79,24 @@ function PostDetail() {
     const authorData = await getUser(postData.userId);
     setAuthor(authorData);
   };
+  const handleMute = () => {
+    setVolume((pre) => ({ value: pre.value == 0 ? pre.preValue : 0, preValue: pre.value == 0 ? 0 : pre.value }));
+  };
+  const handleChangeValue = () => {
+    setVolume((pre) => ({ value: volumeRef.current.value, preValue: pre.value }));
+  };
   useEffect(() => {
     searchInputRef.current.focus();
 
     fecthApi();
   }, []);
+  // set video volume
+  useEffect(() => {
+    if (videoRef.current) {
+      //volume only 0 to 1
+      videoRef.current.volume = volume.value / 100;
+    }
+  }, [volume.value]);
   const renderTabContent = () => {
     switch (tabActive) {
       case 'commentsTab':
@@ -77,9 +114,21 @@ function PostDetail() {
         <div className={cx('background')}>
           <img src={images.thumbnail} alt="background" />
         </div>
-
-        <div className={cx('video')}>
-          <video src={videos.videoDemo} />
+        <video
+          className={cx('video')}
+          volume={volume.value}
+          onClick={() => handleClick()}
+          loop
+          ref={videoRef}
+          src={videoDemo.current}
+        />
+        <div className={cx('noti-video-state', { 'play-state': play, 'pause-state': !play })}>
+          <div className={cx('noti-play')}>
+            <FontAwesomeIcon className={cx('icon')} icon={faPlay} />
+          </div>
+          <div className={cx('noti-pause')}>
+            <FontAwesomeIcon className={cx('icon')} icon={faPause} />
+          </div>
         </div>
         <div className={cx('video-control')}>
           <div className={cx('control-header')}>
@@ -114,9 +163,24 @@ function PostDetail() {
               </button>
             </Tippy>
             <div>
-              <button className={cx('icon-button')}>
-                <MuteIcon />
-              </button>
+              <div className={cx('volume-change')}>
+                <button
+                  //show icon mute when video mute
+                  onClick={() => handleMute()}
+                  className={cx('icon-button', 'volume-btn')}
+                >
+                  {volume.value == 0 ? <MuteIcon /> : <UnMuteIcon />}
+                </button>
+                <div className={cx('volume-range')}>
+                  <RangeInput
+                    large
+                    vertical
+                    value={volume.value}
+                    onChange={() => handleChangeValue()}
+                    ref={volumeRef}
+                  />
+                </div>
+              </div>
             </div>
           </div>
           <div className={cx('control-right')}>
@@ -169,10 +233,16 @@ function PostDetail() {
             <div className={cx('actions-bar-container')}>
               <div className={cx('actions-bar')}>
                 <div className={cx('main-action')}>
-                  <button className={cx('action-item-button')}>
-                    <span className={cx('icon-button')}>
-                      <HeartIcon />
-                    </span>
+                  <button onClick={() => setLike((pre) => !pre)} className={cx('action-item-button')}>
+                    {like ? (
+                      <span className={cx('icon-button', 'icon-active', 'like-icon')}>
+                        <HeartIcon />
+                      </span>
+                    ) : (
+                      <span className={cx('icon-button', 'like-icon')}>
+                        <HeartIcon />
+                      </span>
+                    )}
                     {numberDisplay(post.reactions?.likes)}
                   </button>
                   <button className={cx('action-item-button')}>
@@ -181,11 +251,17 @@ function PostDetail() {
                     </span>
                     {numberDisplay(post.reactions?.likes)}
                   </button>
-                  <button className={cx('action-item-button')}>
-                    <span className={cx('icon-button')}>
-                      <BookMarkIcon />
-                    </span>
-                    {post.reactions?.dislikes}
+                  <button onClick={() => setFavorite((pre) => !pre)} className={cx('action-item-button')}>
+                    {favorite ? (
+                      <span className={cx('icon-button', 'icon-active', 'favorite-icon')}>
+                        <BookMarkIcon />
+                      </span>
+                    ) : (
+                      <span className={cx('icon-button', 'favorite-icon')}>
+                        <BookMarkIcon />
+                      </span>
+                    )}
+                    {numberDisplay(post.reactions?.dislikes)}
                   </button>
                 </div>
                 <div className={cx('share-action')}>

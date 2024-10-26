@@ -5,6 +5,7 @@ import {
   HomeIcon,
   LiveActiveIcon,
   LiveIcon,
+  MessageIcon,
   UserArowActiveIcon,
   UserArowIcon,
   UserGroupActiveIcon,
@@ -22,6 +23,7 @@ import FollowingAccounts from './FollowingAccounts';
 import { useLayoutEffect, useRef, useState } from 'react';
 import LoginModal from '~/components/Modals/LoginModal';
 import { useAuth } from '~/hooks/AuthContext';
+import Tippy from '@tippyjs/react';
 const cx = classNames.bind(style);
 function Sidebar() {
   const { isLoggedIn, authUser } = useAuth();
@@ -70,6 +72,12 @@ function Sidebar() {
       to: routes.friends,
     },
     ...MENU_ITEMS.slice(3, 4),
+    {
+      title: 'Messages',
+      icon: <MessageIcon />,
+      activeIcon: <MessageIcon />,
+      to: routes.messages,
+    },
 
     {
       title: 'Profile',
@@ -135,7 +143,11 @@ function Sidebar() {
       <div ref={contentRef} className={cx('content')}>
         <Menu>
           {menuItem.map((item, index) => (
-            <MenuItem key={index} to={item.to} title={item.title} icon={item.icon} activeIcon={item.activeIcon} />
+            <Tippy key={index} placement="right" content={item.title}>
+              <div>
+                <MenuItem to={item.to} title={item.title} icon={item.icon} activeIcon={item.activeIcon} />
+              </div>
+            </Tippy>
           ))}
         </Menu>
         {isLoggedIn ? (

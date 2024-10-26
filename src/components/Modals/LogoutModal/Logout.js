@@ -17,7 +17,6 @@ function LogoutModal({ modalIsOpen, handleCloseModal }) {
     content: {
       position: 'relative',
       padding: '0',
-      // border: 'none',
       height: 'fit-content',
       width: 'fit-content',
       borderRadius: '8px',
@@ -41,8 +40,8 @@ function LogoutModal({ modalIsOpen, handleCloseModal }) {
       isOpen={modalIsOpen}
       //   onAfterOpen={afterOpenModal}
       onRequestClose={handleCloseModal}
-      style={customStyles}
-      // className="modal-content"
+      // style={customStyles}
+      className="modal-content"
       // overlayClassName="modal-overlay"
       contentLabel="Example Modal"
     >

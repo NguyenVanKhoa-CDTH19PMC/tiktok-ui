@@ -68,6 +68,8 @@ function Menu({
   };
   return (
     <Tippy
+      // show top view
+      appendTo={document.body}
       interactive
       offset={offset}
       placement={placement}

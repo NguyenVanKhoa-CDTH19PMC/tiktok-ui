@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 import { config } from '~/config';
 
 const cx = classNames.bind(style);
-function Search({ transparent, dark, placeholder = 'search' }) {
+function Search({ transparent, dark, placeholder = 'Search' }) {
   const [seacrhResult, setSeacrhResult] = useState([]);
   const [showResult, setShowResult] = useState(true);
   const searchRef = useRef();

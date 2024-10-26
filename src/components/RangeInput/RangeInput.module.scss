@@ -25,3 +25,19 @@
     //   transition: background 0.3s;
   }
 }
+.volume-range.vertical {
+  height: 28px;
+  transform: rotate(-90deg) translateX(50%);
+  // transform: rotate(-90deg) translateY(-50%);
+
+  transform-origin: right left;
+}
+.volume-range.large {
+  input[type='range'] {
+    width: 96px;
+  }
+  input[type='range']::-webkit-slider-thumb {
+    width: 16px;
+    height: 16px;
+  }
+}

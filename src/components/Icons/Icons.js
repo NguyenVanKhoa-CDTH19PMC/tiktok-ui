@@ -1,9 +1,10 @@
 export const MessageIcon = () => (
   <svg
     className="css-y48l9g-StyledIcon e1nx07zo1"
-    width="1em"
+    width="25"
     data-e2e=""
-    height="1em"
+    height="25"
+    fontSize="25"
     viewBox="0 0 48 48"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"

@@ -9,6 +9,7 @@ import { numberDisplay } from '~/utils/numberDisplay';
 import ReviewProfile from '~/components/ReviewProfile';
 import { Link } from 'react-router-dom';
 import { config } from '~/config';
+import routes from '~/config/routes';
 const cx = classNames.bind(style);
 const ActionsBar = ({ post, author }) => {
   const [comments, setComments] = useState({});
@@ -31,7 +32,11 @@ const ActionsBar = ({ post, author }) => {
       <section className={cx('actions-bar')}>
         <ReviewProfile data={author}>
           <div className={cx('avatar-action')}>
-            {author.image && <Image fallback="https://placehold.co/48x48/fe2c54/white" src={author.image} alt="" />}
+            {author.image && (
+              <Link to={routes.profile(author.id)}>
+                <Image fallback="https://placehold.co/48x48/fe2c54/white" src={author.image} alt="" />
+              </Link>
+            )}
             <button className={cx('follow-btn')}>
               <PlusIcon />
             </button>
@@ -51,7 +56,7 @@ const ActionsBar = ({ post, author }) => {
           </span>
           <span className={cx('text-btn')}>{numberDisplay(post.reactions?.likes || '00')}</span>
         </button>
-        <Link to={config.routes.post(`@${author.username}`, post.id)}>
+        <Link to={config.routes.post(post.id)}>
           <button className={cx('action-btn')}>
             <span className={cx('icon-btn')}>
               <i className={cx('icon')}></i>

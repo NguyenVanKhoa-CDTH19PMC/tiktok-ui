@@ -9,6 +9,7 @@ function Button({
   outline = false,
   rounded = false,
   small = false,
+  medium = false,
   large = false,
   to,
   href,
@@ -28,6 +29,7 @@ function Button({
     disabled,
     rounded,
     small,
+    medium,
     large,
   });
   let Comp = 'button';

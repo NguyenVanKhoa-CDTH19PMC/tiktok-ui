@@ -25,10 +25,28 @@ export const getPosts = async (
     console.log(error);
   }
 };
+export const getPostsByUserId = async (
+  userId,
+  p = {
+    limit: 10,
+    skip: 0,
+  },
+) => {
+  try {
+    const result = await request.get(`https://dummyjson.com/posts/user/${userId}`, { params: p });
+    return result.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 getPost.prototype = {
   id: PropTypes.string.isRequired,
 };
 getPosts.prototype = {
   p: PropTypes.object,
+};
+getPostsByUserId.prototype = {
+  userId: PropTypes.string.isRequired,
+  p: PropTypes.object.isRequired,
 };
