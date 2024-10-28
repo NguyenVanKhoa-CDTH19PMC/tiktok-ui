@@ -105,6 +105,8 @@ body {
 .modal-content {
   position: relative;
   height: fit-content;
+  overflow: auto;
+  max-height: 90vh;
   width: fit-content;
   border-radius: 8px;
   border: none;

@@ -40,6 +40,9 @@
 .avatar {
   position: relative;
 }
+.avatar-image {
+  cursor: pointer;
+}
 .edit-avatar-button {
   position: absolute;
   font-size: 14px;
@@ -82,9 +85,21 @@ textarea {
   line-height: 24px;
   color: var(--primary-color-2);
   caret-color: var(--primary-color);
+  outline: transparent solid 1.5px;
+
   &:focus {
     outline: rgba(22, 24, 35, 0.2) solid 1.5px;
   }
+}
+input.error-input,
+textarea.error-input {
+  outline: #ff4c3a solid 1.5px;
+}
+.error-noti {
+  font-size: 12px;
+  line-height: 18px;
+  color: #ff4c3a;
+  margin-top: 6px;
 }
 .username-review,
 .notif {
@@ -107,6 +122,9 @@ textarea {
   font-size: 12px;
   line-height: 18px;
   color: #161823bf;
+}
+.error-limit-bio {
+  color: #ff4c3a;
 }
 .footer {
   height: 86px;

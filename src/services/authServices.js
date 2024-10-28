@@ -19,9 +19,6 @@ export const login = async (body) => {
 export const getAuthUser = async (accessToken) => {
   try {
     const result = await request.get('auth/me', {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
       credentials: 'include',
     });
     return result.data;
@@ -46,7 +43,22 @@ export const getReFreshToken = async (refreshToken) => {
     console.error(error);
   }
 };
+export const updateProfile = async (id, body) => {
+  try {
+    const result = await request.put(`users/${id}`, body, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+    return result.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
 login.prototype = {
   credentials: PropTypes.object.isRequired,
 };
 getAuthUser.prototype = { accessToken: PropTypes.string.isRequired };
+getReFreshToken.prototype = { refreshToken: PropTypes.string.isRequired };
+updateProfile.prototype = { id: PropTypes.string.isRequired };
