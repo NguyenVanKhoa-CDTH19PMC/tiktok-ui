@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleLeft, faClose, faQrcode } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faClose, faQrcode, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { faEye, faEyeSlash, faUser } from '@fortawesome/free-regular-svg-icons';
 import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
@@ -10,16 +10,27 @@ import { login } from '~/services/authServices';
 import Button from '~/components/Button';
 import style from './Login.module.scss';
 import IconButton from '~/components/IconButton';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 const cx = classNames.bind(style);
 Modal.setAppElement('#root');
 function LoginModal({ modalIsOpen, handleCloseModal }) {
   const [viewId, setViewId] = useState([]);
   const presTitle = document.title;
-  const usernameInputRef = useRef();
   const [showPassword, setShowPassword] = useState(false);
-  const [usernameInput, setUsernameInput] = useState('');
-  const [passwordInput, setPasswordInput] = useState('');
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isValid, isSubmitting },
+  } = useForm({
+    mode: 'onChange',
+    defaultValues: {
+      username: '',
+      password: '',
+    },
+  });
   const LOGIN_OPTIONS = [
     {
       id: 1,
@@ -35,43 +46,25 @@ function LoginModal({ modalIsOpen, handleCloseModal }) {
       },
     },
     { id: 3, title: 'Continute with Facebook', icon: <FontAwesomeIcon icon={faFacebook} /> },
-    // {
-    //   title: 'Use phone / email / username',
-    //   icon: <FontAwesomeIcon icon={faUser} />,
-    // },
-    // {
-    //   title: 'Use QR code',
-    //   icon: <FontAwesomeIcon icon={faQrcode} />,
-    // },
-    // {
-    //   title: 'Use phone / email / username',
-    //   icon: <FontAwesomeIcon icon={faUser} />,
-    // },
-    // {
-    //   title: 'Use QR code',
-    //   icon: <FontAwesomeIcon icon={faQrcode} />,
-    // },
-    // {
-    //   title: 'Use phone / email / username',
-    //   icon: <FontAwesomeIcon icon={faUser} />,
-    // },
   ];
 
   useEffect(() => {
-    usernameInputRef.current?.focus();
-  }, []);
-  useEffect(() => {
-    // setViewId([]);
-
+    setViewId([]);
     if (modalIsOpen) {
       document.title = 'Log in | Tiktok';
     }
     return () => (document.title = presTitle);
   }, [modalIsOpen]);
-  const fetchLogin = async () => {
-    const result = await login({ username: usernameInput, password: passwordInput });
-    window.location.reload();
+
+  const onSubmit = async (data) => {
+    const result = await login({ username: data.username, password: data.password });
+    if (result) window.location.reload();
+    else {
+      setError('password', { type: 'manual', message: "Username or password doesn't match our records. Try again." });
+      toast.error('Log in fail!', { position: 'top-center', autoClose: 1500 });
+    }
   };
+  console.log(errors);
 
   const renderView = () => {
     switch (viewId[viewId.length - 1]) {
@@ -80,42 +73,41 @@ function LoginModal({ modalIsOpen, handleCloseModal }) {
           <>
             <div className={cx('login-container')}>
               <h2 className={cx('title')}>Log in</h2>
-              <div className={cx('login-form')}>
+              <form onSubmit={handleSubmit((data) => onSubmit(data))} className={cx('login-form')}>
                 <label className={cx('lable-option')}>
                   Email or username <Link className={cx('other-login-options')}>Log in with phone</Link>
                 </label>
                 <div className={cx('input-container')}>
                   <input
-                    name="username"
-                    ref={usernameInputRef}
-                    onChange={(e) => setUsernameInput(e.target.value)}
                     className={cx('email-or-username-input')}
                     placeholder="Email or username"
+                    {...register('username', { required: true })}
                   />
                 </div>
-                <div className={cx('input-container')}>
+                <div className={cx('input-container', 'last')}>
                   <input
-                    onChange={(e) => setPasswordInput(e.target.value)}
                     className={cx('password-input')}
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Password"
+                    {...register('password', { required: true })}
                   />
-                  <button onClick={() => setShowPassword((pre) => !pre)} className={cx('show-password')}>
+                  <div onClick={() => setShowPassword((pre) => !pre)} className={cx('show-password')}>
                     {showPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
-                  </button>
+                  </div>
                 </div>
+                {errors.password && <p className={cx('error-noti')}> {errors.password.message}</p>}
+
                 <Link className={cx('forget-password-link')}>Forgot password?</Link>
-                <Button
-                  onClick={() => fetchLogin()}
-                  type="submit"
-                  large
-                  primary
-                  disabled={!passwordInput | !usernameInput}
-                  className={cx('submit-login')}
-                >
-                  Login
+                <Button type="submit" large primary disabled={!isValid} className={cx('submit-login')}>
+                  {isSubmitting ? (
+                    <div className={cx('loading')}>
+                      <FontAwesomeIcon icon={faSpinner} />
+                    </div>
+                  ) : (
+                    'Login'
+                  )}
                 </Button>
-              </div>
+              </form>
             </div>
           </>
         );

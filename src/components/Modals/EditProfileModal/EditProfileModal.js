@@ -8,17 +8,18 @@ import Avatar from '~/components/Avatar';
 import Button from '~/components/Button';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { useAuth } from '~/hooks/AuthContext';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { updateProfile } from '~/services/authServices';
-
+import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 const cx = classNames.bind(style);
 
 function EditProfileModal({ modalIsOpen, handleCloseModal }) {
   const { isLoggedIn, authUser } = useAuth();
   const [avatarInput, setAvatarInput] = useState(authUser.image);
   const [username, setUserName] = useState(authUser.username);
-
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -33,13 +34,14 @@ function EditProfileModal({ modalIsOpen, handleCloseModal }) {
       avatar: authUser.image,
     },
   });
+
   const onSubmit = async (data) => {
     if (isDirty) {
       const result = await updateProfile(authUser.id, { lastName: data.fullname });
-      console.log(result);
+      // localStorage.setItem('updateProfile', 'success');
+      navigate(0);
     }
   };
-  console.log(errors);
   return (
     <Modal
       isOpen={modalIsOpen}

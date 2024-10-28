@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { getAuthUser } from './authServices';
+import { toast } from 'react-toastify';
 const { default: request } = require('~/utils/httpRequest');
 
 export const getCommentByPost = async (
@@ -32,6 +33,7 @@ export const postComment = async (postId, comment) => {
         headers: { 'Content-Type': 'application/json' },
       },
     );
+    toast.success('Comment posted!', { position: 'top-center', autoClose: 1500 });
     return result;
   } catch (error) {
     console.error(error);

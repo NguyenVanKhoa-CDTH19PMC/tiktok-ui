@@ -10,7 +10,7 @@ export const login = async (body) => {
     });
     localStorage.setItem('accessToken', result.data.accessToken);
     localStorage.setItem('refreshToken', result.data.refreshToken);
-
+    localStorage.setItem('login', 'success');
     return result.data;
   } catch (error) {
     console.error(error);
@@ -38,6 +38,7 @@ export const getReFreshToken = async (refreshToken) => {
         credentials: 'include',
       },
     );
+
     return result.data;
   } catch (error) {
     console.error(error);
@@ -51,6 +52,7 @@ export const updateProfile = async (id, body) => {
       },
       credentials: 'include',
     });
+    localStorage.setItem('updateProfile', 'success');
     return result.data;
   } catch (error) {
     console.error(error);

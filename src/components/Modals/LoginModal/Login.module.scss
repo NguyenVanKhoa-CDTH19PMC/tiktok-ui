@@ -99,6 +99,9 @@
   width: 100%;
   margin-bottom: 9px;
 }
+.input-container.last {
+  margin: 0;
+}
 .email-or-username-input,
 .password-input {
   padding: 0 12px;
@@ -133,6 +136,7 @@
   cursor: pointer;
 }
 .forget-password-link {
+  margin-top: 8px;
   font-weight: 600;
   font-size: 12px;
   color: #161823bf;
@@ -143,4 +147,22 @@
 }
 .submit-login {
   margin-top: 21px;
+}
+
+.loading {
+  color: rgba(22, 24, 35, 0.34);
+  font-size: 16px;
+  margin: 0 12px;
+  // display: none;
+}
+.loading {
+  animation: spinner 0.8s linear infinite;
+}
+@keyframes spinner {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

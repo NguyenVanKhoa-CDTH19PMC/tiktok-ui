@@ -22,7 +22,7 @@ function ReviewProfile({ children, data }) {
         <PopperWrapper>
           <div className={cx('wrapper')}>
             <div className={cx('header')}>
-              <Avatar size={44} src={data?.image} class={cx('avatar')} />
+              <Avatar size={44} src={data?.image} className={cx('avatar')} />
               <Button className={cx('follow-btn')} outline>
                 Follow
               </Button>

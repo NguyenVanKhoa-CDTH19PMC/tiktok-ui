@@ -6,6 +6,9 @@ import GlobalStyles from './components/GlobalStyles';
 import { AuthProvider } from './hooks/AuthContext';
 import { ModalsProvider } from './hooks/ModalsContext';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Notification from './components/Notification';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -18,6 +21,7 @@ root.render(
           <App />
         </AuthProvider>
       </ModalsProvider>
+      <Notification />
     </GlobalStyles>
   </Router>,
   // </React.StrictMode>

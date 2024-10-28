@@ -71,8 +71,8 @@
 }
 .username-input {
 }
-input,
-textarea {
+.wrapper input:not(input[type='range']),
+.wrapper textarea {
   height: 38px;
   width: 100%;
   background-color: #1618230f;
