@@ -68,6 +68,7 @@ Button.prototype = {
   primary: PropTypes.bool,
   secondary: PropTypes.bool,
   outline: PropTypes.bool,
+  disabled: PropTypes.bool,
   rounded: PropTypes.bool,
   icon: PropTypes.bool,
   small: PropTypes.bool,

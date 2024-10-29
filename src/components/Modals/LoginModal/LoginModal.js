@@ -64,7 +64,6 @@ function LoginModal({ modalIsOpen, handleCloseModal }) {
       toast.error('Log in fail!', { position: 'top-center', autoClose: 1500 });
     }
   };
-  console.log(errors);
 
   const renderView = () => {
     switch (viewId[viewId.length - 1]) {
@@ -86,7 +85,7 @@ function LoginModal({ modalIsOpen, handleCloseModal }) {
                 </div>
                 <div className={cx('input-container', 'last')}>
                   <input
-                    className={cx('password-input')}
+                    className={cx('password-input', { 'error-input': errors.password })}
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Password"
                     {...register('password', { required: true })}

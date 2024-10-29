@@ -14,14 +14,6 @@ function MenuItem({ title, icon, activeIcon, to }) {
         </>
       )}
     </NavLink>
-    /* <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : '')}>
-          {({ isActive }) => (
-            <>
-              {isActive ? <UserArowActiveIcon /> : <a />}
-              <span style={{ marginLeft: '8px' }}>Trang chủ</span>
-            </>
-          )}
-        </NavLink> */
   );
 }
 MenuItem.prototype = {

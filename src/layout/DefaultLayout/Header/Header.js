@@ -80,7 +80,7 @@ function Header() {
         <div className={cx('actions')}>
           {isLoggedIn ? (
             <>
-              <Button className={cx('upload-btn')} leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+              <Button to={routes.upload} className={cx('upload-btn')} leftIcon={<FontAwesomeIcon icon={faPlus} />}>
                 Upload
               </Button>
 

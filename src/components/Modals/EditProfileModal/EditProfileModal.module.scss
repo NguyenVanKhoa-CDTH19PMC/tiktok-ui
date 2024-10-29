@@ -71,7 +71,7 @@
 }
 .username-input {
 }
-.wrapper input:not(input[type='range']),
+.wrapper input,
 .wrapper textarea {
   height: 38px;
   width: 100%;
@@ -88,12 +88,12 @@
   outline: transparent solid 1.5px;
 
   &:focus {
-    outline: rgba(22, 24, 35, 0.2) solid 1.5px;
+    outline-color: rgba(22, 24, 35, 0.2);
   }
 }
-input.error-input,
-textarea.error-input {
-  outline: #ff4c3a solid 1.5px;
+.wrapper input.error-input,
+.wrapper textarea.error-input {
+  outline-color: #ff4c3a;
 }
 .error-noti {
   font-size: 12px;

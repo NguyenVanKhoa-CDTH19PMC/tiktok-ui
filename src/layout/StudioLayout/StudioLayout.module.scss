@@ -1,0 +1,142 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-height: 100vh;
+}
+.header {
+  height: 60px;
+  display: flex;
+  padding: 0 40px 0 20px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #0000001f;
+}
+.logo {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.low-logo-container {
+  margin-top: 4px;
+  display: flex;
+  border-radius: 3px;
+  background: linear-gradient(
+    0.25turn,
+    rgb(37, 244, 238) 0px,
+    rgb(37, 244, 238) 50%,
+    rgb(254, 44, 85) 50%,
+    rgb(254, 44, 85) 100%
+  );
+  padding: 0 2px;
+  height: 100%;
+}
+.low-logo {
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+  height: 100%;
+  padding: 0 9px;
+  background-color: #121212;
+  color: white;
+}
+.avatar {
+}
+.main {
+  flex: 1;
+  display: flex;
+}
+.sidebar {
+  border-right: 1px solid #0000001f;
+  width: 240px;
+  padding: 18px 12px 22px 12px;
+}
+.upload-button {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #0000001f;
+}
+.nav-item-container {
+  text-decoration: none;
+}
+.nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  color: var(--primary-color-2);
+
+  margin: 5px -5px;
+  border-radius: 4px;
+  padding: 0 5px;
+  height: 45px;
+  cursor: pointer;
+  &::before {
+    display: none;
+    position: absolute;
+    content: '';
+    height: 22px;
+    width: 3px;
+    background-color: var(--primary-color);
+    left: 0;
+  }
+}
+.nav-item.active {
+  background-color: #fff2f5;
+  color: var(--primary-color);
+  &::before {
+    display: block;
+  }
+}
+
+.nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  margin-right: 3px;
+  font-size: 1.8rem;
+}
+.home-nav {
+  .nav-icon {
+    font-size: 24px;
+  }
+}
+.nav-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+.fooder {
+}
+.back-to-tiktok-container {
+  border-bottom: 1px solid #0000001f;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.back-to-tiktok-link {
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-color-2);
+  cursor: pointer;
+}
+.fooder-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.fooder-item {
+  font-size: 12px;
+  font-weight: 600;
+  color: #16182380;
+  line-height: 18px;
+  cursor: pointer;
+}
+.content {
+  flex: 1;
+}

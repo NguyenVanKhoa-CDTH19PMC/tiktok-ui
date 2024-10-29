@@ -13,5 +13,6 @@ const routes = {
   post: (postId) => {
     return `/video/${postId}`;
   },
+  upload: '/tiktokstudio/upload',
 };
 export default routes;
