@@ -4,7 +4,7 @@ import { Wrapper as PopperWrapper } from '~/components/Popper';
 
 import style from './ReviewProfile.module.scss';
 import classNames from 'classnames/bind';
-import Button from '../Button';
+import { Button } from '../FormControls';
 import { Link } from 'react-router-dom';
 import Avatar from '../Avatar';
 import { numberDisplay } from '~/utils/numberDisplay';

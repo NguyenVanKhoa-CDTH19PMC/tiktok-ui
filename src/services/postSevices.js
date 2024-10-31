@@ -17,7 +17,7 @@ export const getPosts = async (
   },
 ) => {
   try {
-    const result = await request.get('https://dummyjson.com/posts', {
+    const result = await request.get('posts', {
       params: p,
     });
     return result.data;
@@ -33,7 +33,23 @@ export const getPostsByUserId = async (
   },
 ) => {
   try {
-    const result = await request.get(`https://dummyjson.com/posts/user/${userId}`, { params: p });
+    const result = await request.get(`posts/user/${userId}`, { params: p });
+    return result.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const postFile = async (file, onUploadProgress) => {
+  try {
+    const result = await request.post('https://dummyjson.com/c/fe02-d3c1-4632-9e60', file, onUploadProgress);
+    return result.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const postPost = async (data, onUploadProgress) => {
+  try {
+    const result = await request.post('posts/add', { ...data, userId: 1 }, onUploadProgress);
     return result.data;
   } catch (error) {
     console.log(error);
@@ -49,4 +65,8 @@ getPosts.prototype = {
 getPostsByUserId.prototype = {
   userId: PropTypes.string.isRequired,
   p: PropTypes.object.isRequired,
+};
+
+postPost.prototype = {
+  data: PropTypes.string.isRequired,
 };

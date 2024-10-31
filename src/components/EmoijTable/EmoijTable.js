@@ -9,7 +9,6 @@ const cx = classNames.bind(style);
 
 const EmoijTable = ({ children, pushEmoijSelected }) => {
   const [emoijs, setEmoijs] = useState();
-  const [emoijSelected, setEmoijSelected] = useState();
   useEffect(() => {
     const fecthApi = async () => {
       const result = await axios.get(
@@ -20,40 +19,34 @@ const EmoijTable = ({ children, pushEmoijSelected }) => {
     fecthApi();
   }, []);
   return (
-    <HeadlessTippy
-      // show top view
-      appendTo={document.body}
-      interactive
-      trigger="click"
-      // offset={offset}
-      // placement={placement}
-      // delay={delay}
-      // hideOnClick={hideOnClick}
-      // //back to lever 1 menu after menu hide
-      // onHide={handleReset}
-      render={() => (
-        <Wrapper>
-          <div className={cx('wrapper')}>
-            <div className={cx('emoij-list')}>
-              {emoijs?.map((emoij) => (
-                <div
-                  key={emoij.codePoint}
-                  onClick={() => {
-                    pushEmoijSelected(emoij);
-                    setEmoijSelected(emoij);
-                  }}
-                  className={cx('emoij-item')}
-                >
-                  {emoij.character}
-                </div>
-              ))}
+    <div>
+      <HeadlessTippy
+        // show top view
+        interactive
+        trigger="click"
+        render={() => (
+          <Wrapper>
+            <div className={cx('wrapper')}>
+              <div className={cx('emoij-list')}>
+                {emoijs?.map((emoij) => (
+                  <div
+                    key={emoij.codePoint}
+                    onClick={() => {
+                      pushEmoijSelected(emoij);
+                    }}
+                    className={cx('emoij-item')}
+                  >
+                    {emoij.character}
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        </Wrapper>
-      )}
-    >
-      {children}
-    </HeadlessTippy>
+          </Wrapper>
+        )}
+      >
+        {children}
+      </HeadlessTippy>
+    </div>
   );
 };
 

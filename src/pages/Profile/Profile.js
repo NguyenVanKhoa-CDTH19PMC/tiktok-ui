@@ -1,4 +1,4 @@
-import Button from '~/components/Button';
+import { Button } from '~/components/FormControls';
 import style from './Profile.module.scss';
 import classNames from 'classnames/bind';
 import { useLocation, useParams } from 'react-router-dom';

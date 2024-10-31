@@ -3,7 +3,7 @@ import images from '~/assets/images';
 import style from './StudioLayout.module.scss';
 import classNames from 'classnames/bind';
 import Avatar from '~/components/Avatar';
-import Button from '~/components/Button';
+import { Button } from '~/components/FormControls';
 import { Link, NavLink } from 'react-router-dom';
 import routes from '~/config/routes';
 import { HomeActiveIcon, HomeIcon } from '~/components/Icons';
@@ -37,25 +37,28 @@ function StudioLayout({ children }) {
       </header>
       <main className={cx('main')}>
         <aside className={cx('sidebar')}>
-          <NavLink to={routes.upload}>
-            {({ isActive }) => (
-              <Button primary disabled={isActive} large className={cx('upload-button')}>
-                Upload
-              </Button>
-            )}
-          </NavLink>
-          <nav className={cx('nav-list')}>
-            {NAV_MENU.map((nav, index) => (
-              <NavLink className={cx('nav-item-container')} key={index} to={nav.route}>
-                {({ isActive }) => (
-                  <div className={cx('nav-item', { 'home-nav': nav.title === 'Home', active: isActive })}>
-                    <div className={cx('nav-icon')}>{nav.icon}</div>
-                    <span className={cx('nav-title')}>{nav.title}</span>
-                  </div>
-                )}
-              </NavLink>
-            ))}
-          </nav>
+          <div className={cx('sidebar-content')}>
+            <NavLink>
+              {({ isActive }) => (
+                <Button primary disabled={isActive} large className={cx('upload-button')}>
+                  Upload
+                </Button>
+              )}
+            </NavLink>
+            <nav className={cx('nav-list')}>
+              {NAV_MENU.map((nav, index) => (
+                <NavLink className={cx('nav-item-container')} key={index} to={nav.route}>
+                  {({ isActive }) => (
+                    <div className={cx('nav-item', { 'home-nav': nav.title === 'Home', active: isActive })}>
+                      <div className={cx('nav-icon')}>{nav.icon}</div>
+                      <span className={cx('nav-title')}>{nav.title}</span>
+                    </div>
+                  )}
+                </NavLink>
+              ))}
+            </nav>
+          </div>
+
           <footer className={cx('fooder')}>
             <div className={cx('back-to-tiktok-container')}>
               <Link to={routes.home} className={cx('back-to-tiktok-link')}>
@@ -69,8 +72,7 @@ function StudioLayout({ children }) {
             </div>
           </footer>
         </aside>
-        <div className={cx('content')}></div>
-        {children}
+        <div className={cx('content')}>{children}</div>
       </main>
     </div>
   );

@@ -30,7 +30,7 @@ import RangeInput from '~/components/RangeInput';
 import Avatar from '~/components/Avatar';
 import { getPost } from '~/services/postSevices';
 import { getUser } from '~/services/userService';
-import Button from '~/components/Button';
+import { Button } from '~/components/FormControls';
 import { numberDisplay } from '~/utils/numberDisplay';
 import Menu from '~/components/Popper/Menu';
 import CommentsTab from './Tab/CommentsTab';

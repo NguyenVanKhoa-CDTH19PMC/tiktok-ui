@@ -5,7 +5,7 @@ import IconButton from '~/components/IconButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import Avatar from '~/components/Avatar';
-import Button from '~/components/Button';
+import { Button } from '~/components/FormControls';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { useAuth } from '~/hooks/AuthContext';
 import { useEffect, useRef, useState } from 'react';

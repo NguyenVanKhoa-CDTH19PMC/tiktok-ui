@@ -10,7 +10,7 @@
   font-weight: 600;
   color: var(--primary-color-2);
   line-height: 21px;
-
+  padding: 0 16px;
   min-width: 100px;
   min-height: 36px;
   text-decoration: none;
@@ -27,7 +27,6 @@
   color: var(--white);
   background-color: var(--primary-color);
   border: none;
-  cursor: pointer;
 
   &:hover {
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), rgb(254, 44, 85);
@@ -69,6 +68,9 @@
     border-color: rgba(22, 24, 35, 0.2);
   }
 }
+.more-radius {
+  border-radius: 8px;
+}
 .small {
   font-size: 1.6rem;
   padding: 0 8px;
@@ -88,7 +90,7 @@
   font-weight: 600;
   padding: 6px 8px;
   line-height: 25px;
-  min-width: 168px;
+  min-width: 124px;
   min-height: 48px;
 }
 .left-icon {
@@ -102,4 +104,5 @@
   color: rgba(22, 24, 35, 0.34);
   background-color: rgba(22, 24, 35, 0.06);
   pointer-events: none;
+  cursor: not-allowed;
 }

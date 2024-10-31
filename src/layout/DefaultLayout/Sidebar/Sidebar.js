@@ -16,7 +16,7 @@ import style from './Sidebar.module.scss';
 import classNames from 'classnames/bind';
 import Menu, { MenuItem } from './Menu';
 import routes from '~/config/routes';
-import Button from '~/components/Button';
+import { Button } from '~/components/FormControls';
 import Fooder from './Fooder';
 import FollowingAccounts from './FollowingAccounts';
 import { useLayoutEffect, useRef, useState } from 'react';

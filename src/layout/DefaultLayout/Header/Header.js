@@ -7,7 +7,7 @@ import 'tippy.js/dist/tippy.css';
 import { Link } from 'react-router-dom';
 import style from './Header.module.scss';
 import images from '~/assets/images';
-import Button from '~/components/Button';
+import { Button } from '~/components/FormControls';
 import Menu from '~/components/Popper/Menu';
 import { InboxIcon } from '~/components/Icons';
 import Search from '../../../components/SearchForm';

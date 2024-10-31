@@ -1,0 +1,23 @@
+.navigation-result-modal {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  width: 540px;
+}
+.navigation-result-title {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 130%;
+}
+.navigation-result-hint {
+  font-size: 16px;
+  color: #0000007a;
+  line-height: 130%;
+  margin-top: 10px;
+}
+.navigation-result-buttons {
+  margin-top: 24px;
+  display: flex;
+  justify-content: end;
+  gap: 8px;
+}

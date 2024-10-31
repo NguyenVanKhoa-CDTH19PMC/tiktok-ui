@@ -1,7 +1,7 @@
 import Modal from 'react-modal';
 import style from './LogoutModal.module.scss';
 import classNames from 'classnames/bind';
-import Button from '~/components/Button';
+import { Button } from '~/components/FormControls';
 
 const cx = classNames.bind(style);
 Modal.setAppElement('#root');

@@ -7,7 +7,7 @@ import Modal from 'react-modal';
 import { useEffect, useRef, useState } from 'react';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { login } from '~/services/authServices';
-import Button from '~/components/Button';
+import { Button } from '~/components/FormControls';
 import style from './Login.module.scss';
 import IconButton from '~/components/IconButton';
 import { useForm } from 'react-hook-form';

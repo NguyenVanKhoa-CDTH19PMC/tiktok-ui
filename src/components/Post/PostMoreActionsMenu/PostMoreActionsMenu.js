@@ -1,9 +1,9 @@
 import { faAnglesUp, faFlag, faHeartBroken } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Menu from '~/components/Popper/Menu';
-import ToggleSwitch from '~/components/ToggleSwitch';
 import classNames from 'classnames/bind';
 import style from './PostMoreActionsMenu.module.scss';
+import { ToggleSwitch } from '~/components/FormControls';
 const cx = classNames.bind(style);
 
 function PostMoreActionsMenu({ children, dark }) {
