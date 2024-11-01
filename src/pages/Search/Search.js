@@ -37,10 +37,8 @@ function Search() {
               <div className={cx('seaction-tab-title')}>Videos</div>
               <div className={cx('list-video-result')}>
                 {posts?.map((post) => (
-                  <div className={cx('video-result-item')}>
-                    <div className={cx('video-thumbnail')}>
-                      <PostThumbnail post={post} />
-                    </div>
+                  <div key={post.id} className={cx('video-result-item')}>
+                    <PostThumbnail extendAuthor post={post} />
                   </div>
                 ))}
               </div>
@@ -49,7 +47,9 @@ function Search() {
               <div className={cx('seaction-tab-title')}>Users</div>
               <div className={cx('list-user-result')}>
                 {users?.map((user) => (
-                  <AccountItem data={user} />
+                  <div key={user.id} className={cx('user-result-item')}>
+                    <AccountItem data={user} />
+                  </div>
                 ))}
               </div>
             </section>
@@ -62,7 +62,10 @@ function Search() {
               <div className={cx('seaction-tab-title')}>Users</div>
               <div className={cx('list-user-result')}>
                 {users.map((user) => (
-                  <AccountItem data={user} />
+                  <div key={user.id} className={cx('user-result-item')}>
+                    {' '}
+                    <AccountItem data={user} />
+                  </div>
                 ))}
               </div>
             </section>
@@ -75,10 +78,8 @@ function Search() {
               <div className={cx('seaction-tab-title')}>Videos</div>
               <div className={cx('list-video-result')}>
                 {posts?.map((post) => (
-                  <div className={cx('video-result-item')}>
-                    <div className={cx('video-thumbnail')}>
-                      <PostThumbnail post={post} />
-                    </div>
+                  <div key={post.id} className={cx('video-result-item')}>
+                    <PostThumbnail extendAuthor post={post} />
                   </div>
                 ))}
               </div>

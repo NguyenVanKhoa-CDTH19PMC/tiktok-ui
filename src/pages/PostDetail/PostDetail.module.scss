@@ -355,25 +355,7 @@
     display: flex;
     width: 100%;
   }
-  .comment-input-container {
-    display: flex;
-    align-items: center;
-    background-color: #1618230f;
-    flex: 1;
-    border-radius: 8px;
-    padding: 0 9px;
-    border: 1px solid transparent;
-    &:focus-within {
-      border-color: rgba(22, 24, 35, 0.2);
-    }
-  }
-  .comment-input {
-    flex: 1;
-    height: 100%;
-    background-color: transparent;
-    border: none;
-    outline: none;
-  }
+
   .mention-button,
   .emoji-button {
     display: flex;

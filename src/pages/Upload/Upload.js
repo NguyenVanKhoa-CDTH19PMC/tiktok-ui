@@ -156,7 +156,7 @@ function Upload() {
                           <span className={cx('title-action')}>Hashtags</span>
                         </div>
                       </div>
-                      <div className={cx('word-count')}>0/4000</div>
+                      <div className={cx('word-count')}>{description.length}/4000</div>
                     </div>
                   </div>
                 </div>
@@ -193,11 +193,12 @@ function Upload() {
                   <p className={cx('title')}>When to post</p>
                   <div className={cx('radio-input')}>
                     {[
-                      { id: 1, title: 'Now' },
+                      { id: 1, title: 'Now', selected: true },
                       { id: 2, title: 'Schedule' },
                     ].map((item) => (
                       <div key={item.id} className={cx('radio-input-item')}>
                         <RadioButton
+                          selected={item.selected}
                           disabled={false}
                           name="time-post"
                           value={item.id}

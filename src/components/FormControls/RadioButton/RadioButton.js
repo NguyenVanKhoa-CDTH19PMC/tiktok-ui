@@ -1,10 +1,11 @@
 import style from './RadioButton.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(style);
-function RadioButton({ value, name, onSelect, disabled, children, className }) {
+function RadioButton({ selected, value, name, onSelect, disabled, children, className }) {
   return (
     <label className={cx('radio-button', { disabled: disabled }, className)}>
       <input
+        checked={selected}
         disabled={disabled}
         value={value}
         name={name}

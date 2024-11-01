@@ -11,12 +11,12 @@ function AccountItem({ data }) {
       </div>
       <div className={cx('account-information')}>
         <p className={cx('username')}>{data?.username}</p>
-        <p className={cx('fullname')}>
+        <div className={cx('fullname')}>
           {data?.lastName}
           {` · `}
           <p className={cx('follow-count')}>{data?.age}</p>
           {` Followers`}
-        </p>
+        </div>
         <p className={cx('discription')}>{data?.email}</p>
       </div>
     </div>

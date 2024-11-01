@@ -12,7 +12,7 @@ import Avatar from '~/components/Avatar';
 import { getUser } from '~/services/userService';
 
 const cx = classNames.bind(style);
-function PostThumbnail({ post }) {
+function PostThumbnail({ post, extendAuthor }) {
   const [author, setAuthor] = useState();
   const videoDemo = useRef(videosDemo[Math.floor(Math.random() * 4)]);
   const isImage = false;
@@ -61,18 +61,20 @@ function PostThumbnail({ post }) {
           </div>
         </div>
       </div>
-      <div className={cx('post-information')}>
-        <p className={cx('description')}>{post.title}</p>
-        <div className={cx('fooder-video-result-item')}>
-          <div className={cx('author-information')}>
-            <div className={cx('avatar')}>
-              <Avatar size={24} src={author?.image} />
+      {extendAuthor && (
+        <div className={cx('post-information')}>
+          <p className={cx('description')}>{post.title}</p>
+          <div className={cx('fooder-video-result-item')}>
+            <div className={cx('author-information')}>
+              <div className={cx('avatar')}>
+                <Avatar size={24} src={author?.image} />
+              </div>
+              <p className={cx('username')}>{author?.username}</p>
             </div>
-            <p className={cx('username')}>{author?.username}</p>
+            <div className={cx('post-time')}>1d ago</div>
           </div>
-          <div className={cx('post-time')}>1d ago</div>
         </div>
-      </div>
+      )}
     </Link>
   );
 }

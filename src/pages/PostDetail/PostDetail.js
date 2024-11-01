@@ -38,6 +38,7 @@ import { createPortal } from 'react-dom';
 import ReviewProfile from '~/components/ReviewProfile';
 import EmoijTable from '~/components/EmoijTable';
 import { postComment } from '~/services/commentServices';
+import Input from '~/components/FormControls/Input';
 
 const cx = classNames.bind(style);
 function PostDetail() {
@@ -365,26 +366,51 @@ function PostDetail() {
 
         <div className={cx('footer-container')}>
           <div className={cx('comment-form')}>
-            <div className={cx('comment-input-container')}>
-              <input ref={searchInputRef} placeholder="Add comment..." className={cx('comment-input')} />
-              <Tippy content={`“@” a user to tag them in your comments`}>
-                <button
-                  onClick={() => {
-                    addTag();
-                  }}
-                  className={cx('mention-button')}
-                >
-                  <FontAwesomeIcon icon={faAt} />
-                </button>
-              </Tippy>
-              <EmoijTable pushEmoijSelected={(emoij) => addEmoij(emoij)}>
-                <Tippy content="Click to add emojis">
-                  <button className={cx('emoji-button')}>
-                    <FontAwesomeIcon icon={faFaceSmile} />
-                  </button>
-                </Tippy>
-              </EmoijTable>
-            </div>
+            <Input
+              placeholder="Add comment..."
+              ref={searchInputRef}
+              rightInput={
+                <>
+                  <Tippy content={`“@” a user to tag them in your comments`}>
+                    <button
+                      onClick={() => {
+                        addTag();
+                      }}
+                      className={cx('mention-button')}
+                    >
+                      <FontAwesomeIcon icon={faAt} />
+                    </button>
+                  </Tippy>
+                  <EmoijTable pushEmoijSelected={(emoij) => addEmoij(emoij)}>
+                    <Tippy content="Click to add emojis">
+                      <button className={cx('emoji-button')}>
+                        <FontAwesomeIcon icon={faFaceSmile} />
+                      </button>
+                    </Tippy>
+                  </EmoijTable>
+                </>
+              }
+            />
+            {/* <div className={cx('comment-input-container')}>
+                  <input ref={searchInputRef} placeholder="Add comment..." className={cx('comment-input')} />
+                  <Tippy content={`“@” a user to tag them in your comments`}>
+                    <button
+                      onClick={() => {
+                        addTag();
+                      }}
+                      className={cx('mention-button')}
+                    >
+                      <FontAwesomeIcon icon={faAt} />
+                    </button>
+                  </Tippy>
+                  <EmoijTable pushEmoijSelected={(emoij) => addEmoij(emoij)}>
+                    <Tippy content="Click to add emojis">
+                      <button className={cx('emoji-button')}>
+                        <FontAwesomeIcon icon={faFaceSmile} />
+                      </button>
+                    </Tippy>
+                  </EmoijTable>
+                </div> */}
             <button onClick={() => submitComment()} className={cx('submit-comment-button')}>
               Post
             </button>
