@@ -1,9 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
 import Modal from 'react-modal';
 import classNames from 'classnames/bind';
 import style from './NavigationResultModal.module.scss';
 import { Button } from '~/components/FormControls';
-import routes from '~/config/routes';
 const cx = classNames.bind(style);
 
 function NavigationResultModal({ progressPost = 0, modalIsOpen, handleCloseModal }) {

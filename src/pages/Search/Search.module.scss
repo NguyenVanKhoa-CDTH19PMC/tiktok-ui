@@ -1,0 +1,84 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.content {
+  // position: relative;
+  width: 800px;
+  padding: 0 16px 67px;
+}
+.tab-navigater {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  width: 100%;
+  z-index: 9;
+  border-bottom: 1px solid #0000001f;
+}
+.tab-content {
+  margin-top: 16px;
+}
+.top-tab-content {
+  max-width: 100%;
+}
+
+////////////////////
+///
+.section-tab-content {
+  margin-bottom: 30px;
+}
+.seaction-tab-title {
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.list-video-result {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px 16px;
+  width: 100%;
+}
+.video-result-item {
+}
+.video-thumbnail {
+}
+
+///acounnt-item
+.list-user-result {
+}
+.search-account-item {
+  width: 100%;
+  display: flex;
+  margin-left: -10px;
+  padding-left: 10px;
+  border-radius: 4px;
+  &:hover {
+    background-color: #f8f8f8;
+  }
+}
+.avatar {
+  margin: 16px 16px 16px 0;
+}
+.account-information {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.username {
+  font-size: 18px;
+  font-weight: 700;
+}
+.fullname {
+  display: flex;
+  color: #161823bf;
+  font-size: 14px;
+}
+.follow-count {
+  color: var(--primary-color-2);
+  font-weight: 600;
+}
+.discription {
+  font-size: 14px;
+}

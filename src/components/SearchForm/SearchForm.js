@@ -67,7 +67,7 @@ function Search({ transparent, dark, placeholder = 'Search' }) {
                   </li>
                 ))}
                 <li className={cx('more-results', 'search-item')}>
-                  <Link to={config.routes.search}>
+                  <Link to={config.routes.search} onClick={() => setShowResult(false)}>
                     <button className={cx('more-btn')}>View all results for "{searchValue}"</button>
                   </Link>
                 </li>

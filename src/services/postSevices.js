@@ -55,7 +55,22 @@ export const postPost = async (data, onUploadProgress) => {
     console.log(error);
   }
 };
-
+export const searchPosts = async (
+  p = {
+    limit: 10,
+    skip: 0,
+    q: '',
+  },
+) => {
+  try {
+    const result = await request.get('posts/search', {
+      params: p,
+    });
+    return result.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 getPost.prototype = {
   id: PropTypes.string.isRequired,
 };
@@ -69,4 +84,7 @@ getPostsByUserId.prototype = {
 
 postPost.prototype = {
   data: PropTypes.string.isRequired,
+};
+searchPosts.prototype = {
+  p: PropTypes.object.isRequired,
 };

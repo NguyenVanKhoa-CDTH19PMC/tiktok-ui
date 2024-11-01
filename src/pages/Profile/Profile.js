@@ -14,13 +14,12 @@ import FavoritesTab from './Tabs/FavoritesTab/FavoritesTab';
 import { useAuth } from '~/hooks/AuthContext';
 import { useModals } from '~/hooks/ModalsContext';
 import EditProfileModal from '~/components/Modals/EditProfileModal/EditProfileModal';
+import TabNavigator from '~/components/TabNavigator/TabNavigator';
 const cx = classNames.bind(style);
 function Profile() {
   const { isLoggedIn, authUser } = useAuth();
   const { userId } = useParams();
   const [user, setUser] = useState({});
-  const tabRef = useRef([]);
-  const tagTabRef = useRef();
   const [tabActive, setTabActive] = useState(0);
   const [selectedFillter, setSelectedFillter] = useState(0);
   const [editProfileModalIsOpen, setEditProfileModalIsOpen] = useState(false);
@@ -60,36 +59,6 @@ function Profile() {
     fecthAPI();
   }, []);
 
-  useEffect(() => {
-    const updateTagTab = (tab) => {
-      tagTabRef.current.style.width = tab.getBoundingClientRect().width + 'px';
-      tagTabRef.current.style.left =
-        tab.getBoundingClientRect().left - tab.parentElement.getBoundingClientRect().left + 'px';
-    };
-    updateTagTab(tabRef.current[tabActive]);
-    tabRef.current.forEach((tab) => {
-      tab.addEventListener('mouseenter', () => {
-        updateTagTab(tab);
-      });
-    });
-    tabRef.current.forEach((tab) => {
-      tab.addEventListener('mouseleave', () => {
-        updateTagTab(tabRef.current[tabActive]);
-      });
-    });
-    return () => {
-      tabRef.current.forEach((tab) => {
-        tab?.removeEventListener('mouseenter', () => {
-          updateTagTab(tab);
-        });
-      });
-      tabRef.current.forEach((tab) => {
-        tab?.removeEventListener('mouseleave', () => {
-          updateTagTab(tabRef.current[tabActive]);
-        });
-      });
-    };
-  }, [tabActive]);
   const renderTabContent = () => {
     switch (tabActive) {
       case 0:
@@ -168,32 +137,8 @@ function Profile() {
       </div>
       <div className={cx('wall-page-container')}>
         <div className={cx('tabs-container')}>
-          <div className={cx('tab-list')}>
-            {authUser?.id == userId
-              ? AUTH_TABS.map((tab) => (
-                  <div
-                    key={tab.id}
-                    ref={(el) => (tabRef.current[tab.id] = el)}
-                    onClick={() => setTabActive(tab.id)}
-                    className={cx('tab-item', { active: tabActive == tab.id })}
-                  >
-                    <i className={cx('tab-icon')}>{tab.icon}</i>
-                    <span className={cx('tab-title')}>{tab.title}</span>
-                  </div>
-                ))
-              : TABS.map((tab) => (
-                  <div
-                    key={tab.id}
-                    ref={(el) => (tabRef.current[tab.id] = el)}
-                    onClick={() => setTabActive(tab.id)}
-                    className={cx('tab-item', { active: tabActive == tab.id })}
-                  >
-                    <i className={cx('tab-icon')}>{tab.icon}</i>
-                    <span className={cx('tab-title')}>{tab.title}</span>
-                  </div>
-                ))}
-            <div ref={tagTabRef} className={cx('tab-active-tag')}></div>
-          </div>
+          <TabNavigator data={TABS} onSelectTab={(tabSelected) => setTabActive(tabSelected)} />
+
           {tabActive == 0 && (
             <div className={cx('filter-container')}>
               <div className={cx('select')}>

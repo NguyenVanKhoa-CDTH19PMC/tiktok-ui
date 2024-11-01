@@ -14,7 +14,7 @@ const publicRoutes = [
   { path: config.routes.friends, component: Home },
   { path: config.routes.live, component: Home },
   { path: config.routes.profile(':userId'), component: Profile },
-  { path: config.routes.search, component: Search, layout: null },
+  { path: config.routes.search, component: Search },
   { path: config.routes.post(':postId'), component: PostDetail, layout: null },
   { path: config.routes.upload, component: Upload, layout: StudioLayout },
 ];

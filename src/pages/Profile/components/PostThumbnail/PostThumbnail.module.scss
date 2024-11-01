@@ -1,4 +1,9 @@
+.link-container {
+  text-decoration: none;
+  color: var(--primary-color-2);
+}
 .wrapper {
+  display: block;
   aspect-ratio: 3/4;
   background-color: rgb(182, 182, 182);
   border-radius: 4px;
@@ -59,4 +64,37 @@
   color: white;
 }
 .view-icon {
+}
+
+.post-information {
+  padding: 4px 8px 0;
+}
+.description {
+  font-size: 16px;
+  line-height: 130%;
+  display: -webkit-box; /* Sử dụng Flexbox với webkit cho trình duyệt hỗ trợ */
+  -webkit-line-clamp: 2; /* Giới hạn 2 dòng */
+  -webkit-box-orient: vertical; /* Định hướng box theo chiều dọc */
+  overflow: hidden; /* Ẩn phần văn bản thừa */
+  text-overflow: ellipsis; /* Thêm dấu ba chấm */
+}
+.fooder-video-result-item {
+  margin-top: 4px;
+  display: flex;
+  justify-content: space-between;
+}
+.author-information {
+  display: flex;
+}
+.avatar {
+  width: 24px;
+  height: 24px;
+}
+.username {
+  margin: 0 4px;
+  font-size: 16px;
+  line-height: 130%;
+}
+.post-time {
+  color: #161823bf;
 }
