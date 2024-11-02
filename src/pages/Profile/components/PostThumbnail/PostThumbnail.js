@@ -63,7 +63,7 @@ function PostThumbnail({ post, extendAuthor }) {
       </div>
       {extendAuthor && (
         <div className={cx('post-information')}>
-          <p className={cx('description')}>{post.title}</p>
+          <p className={cx('description')}>{post.body}</p>
           <div className={cx('fooder-video-result-item')}>
             <div className={cx('author-information')}>
               <div className={cx('avatar')}>

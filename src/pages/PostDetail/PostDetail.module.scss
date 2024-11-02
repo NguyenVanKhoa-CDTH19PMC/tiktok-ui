@@ -356,24 +356,6 @@
     width: 100%;
   }
 
-  .mention-button,
-  .emoji-button {
-    display: flex;
-    margin: 3px;
-    padding: 6px;
-    justify-content: center;
-    align-items: center;
-    color: var(--primary-color-2);
-    font-size: 20px;
-    background-color: transparent;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #0000001f;
-    }
-  }
   .submit-comment-button {
     border: none;
     background-color: transparent;

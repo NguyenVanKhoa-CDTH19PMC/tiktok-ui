@@ -21,7 +21,6 @@ const EmoijTable = ({ children, pushEmoijSelected }) => {
   return (
     <div>
       <HeadlessTippy
-        // show top view
         interactive
         trigger="click"
         render={() => (

@@ -13,11 +13,12 @@ const cx = classNames.bind(style);
 function Menu({
   children,
   data,
-  hideOnClick = false,
+  hideOnClick = true,
   offset = [12, 12],
   delay = [0, 700],
   placement = 'bottom-end',
   dark,
+  trigger,
   ...prop
 }) {
   const [history, setHistory] = useState([{ data: data }]);
@@ -37,7 +38,7 @@ function Menu({
             if (isParent) {
               setHistory((pre) => [item.children, ...pre]);
             } else {
-              item.onclick() && item.onclick();
+              item.onClick() && item.onClick();
             }
           }}
         ></MenuItem>
@@ -68,20 +69,21 @@ function Menu({
     setHistory((pre) => [...pre.slice(1)]);
   };
   return (
-    <Tippy
-      // show top view
-      appendTo={document.body}
-      interactive
-      offset={offset}
-      placement={placement}
-      delay={delay}
-      hideOnClick={hideOnClick}
-      render={renderResult}
-      //back to lever 1 menu after menu hide
-      onHide={handleReset}
-    >
-      {children}
-    </Tippy>
+    <div>
+      <Tippy
+        trigger={trigger}
+        interactive
+        offset={offset}
+        placement={placement}
+        delay={delay}
+        hideOnClick={hideOnClick}
+        render={renderResult}
+        //back to lever 1 menu after menu hide
+        onHide={handleReset}
+      >
+        {children}
+      </Tippy>
+    </div>
   );
 }
 Menu.prototype = {

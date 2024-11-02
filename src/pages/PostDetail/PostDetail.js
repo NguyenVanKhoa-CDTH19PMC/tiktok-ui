@@ -39,6 +39,7 @@ import ReviewProfile from '~/components/ReviewProfile';
 import EmoijTable from '~/components/EmoijTable';
 import { postComment } from '~/services/commentServices';
 import Input from '~/components/FormControls/Input';
+import { toast } from 'react-toastify';
 
 const cx = classNames.bind(style);
 function PostDetail() {
@@ -111,32 +112,7 @@ function PostDetail() {
         return <div>None</div>;
     }
   };
-  const addTag = () => {
-    //identify mouse position
-    const start = searchInputRef.current.selectionStart;
-    const end = searchInputRef.current.selectionEnd;
 
-    // insert "@" in mouse position
-    const before = searchInputRef.current.value.substring(0, start);
-    const after = searchInputRef.current.value.substring(end);
-    searchInputRef.current.value = before + ` @ ` + after;
-    // tranlate present mouse
-    searchInputRef.current.setSelectionRange(start + 2, start + 2);
-    searchInputRef.current.focus();
-  };
-  const addEmoij = (emoij) => {
-    //identify mouse position
-    const start = searchInputRef.current.selectionStart;
-    const end = searchInputRef.current.selectionEnd;
-
-    // insert emoij in mouse position
-    const before = searchInputRef.current.value.substring(0, start);
-    const after = searchInputRef.current.value.substring(end);
-    searchInputRef.current.value = before + emoij.character + after;
-    // tranlate present mouse
-    searchInputRef.current.setSelectionRange(start + emoij.character.length, start + emoij.character.length);
-    searchInputRef.current.focus();
-  };
   const submitComment = async () => {
     if (searchInputRef.current.value) {
       const result = await postComment(postId, searchInputRef.current.value);
@@ -337,7 +313,15 @@ function PostDetail() {
               </div>
               <div className={cx('coppy-link-container')}>
                 <p className={cx('link')}>{`https://www.hosting.com${location.pathname}`}</p>
-                <button className={cx('copy-link-button')}>Copy link</button>
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(`https://www.hosting.com${location.pathname}`);
+                    toast.success('Coppyed');
+                  }}
+                  className={cx('copy-link-button')}
+                >
+                  Copy link
+                </button>
               </div>
             </div>
           </div>
@@ -366,51 +350,8 @@ function PostDetail() {
 
         <div className={cx('footer-container')}>
           <div className={cx('comment-form')}>
-            <Input
-              placeholder="Add comment..."
-              ref={searchInputRef}
-              rightInput={
-                <>
-                  <Tippy content={`“@” a user to tag them in your comments`}>
-                    <button
-                      onClick={() => {
-                        addTag();
-                      }}
-                      className={cx('mention-button')}
-                    >
-                      <FontAwesomeIcon icon={faAt} />
-                    </button>
-                  </Tippy>
-                  <EmoijTable pushEmoijSelected={(emoij) => addEmoij(emoij)}>
-                    <Tippy content="Click to add emojis">
-                      <button className={cx('emoji-button')}>
-                        <FontAwesomeIcon icon={faFaceSmile} />
-                      </button>
-                    </Tippy>
-                  </EmoijTable>
-                </>
-              }
-            />
-            {/* <div className={cx('comment-input-container')}>
-                  <input ref={searchInputRef} placeholder="Add comment..." className={cx('comment-input')} />
-                  <Tippy content={`“@” a user to tag them in your comments`}>
-                    <button
-                      onClick={() => {
-                        addTag();
-                      }}
-                      className={cx('mention-button')}
-                    >
-                      <FontAwesomeIcon icon={faAt} />
-                    </button>
-                  </Tippy>
-                  <EmoijTable pushEmoijSelected={(emoij) => addEmoij(emoij)}>
-                    <Tippy content="Click to add emojis">
-                      <button className={cx('emoji-button')}>
-                        <FontAwesomeIcon icon={faFaceSmile} />
-                      </button>
-                    </Tippy>
-                  </EmoijTable>
-                </div> */}
+            <Input placeholder="Add comment..." ref={searchInputRef} tag emoij />
+
             <button onClick={() => submitComment()} className={cx('submit-comment-button')}>
               Post
             </button>

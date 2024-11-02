@@ -6,7 +6,13 @@
   justify-content: center;
   gap: 16px;
 }
+.back-button {
+  position: absolute;
+  top: 8px;
+  left: -56px;
+}
 .message-list-container {
+  position: relative;
   width: 356px;
   height: 100%;
   flex-shrink: 0;
@@ -50,6 +56,9 @@
       display: block;
     }
   }
+}
+.message-item.active {
+  background-color: #f1f1f1;
 }
 .message-avatar {
 }
@@ -105,26 +114,46 @@
   flex: 1;
   display: flex;
 
-  flex-direction: column;
+  flex-direction: column-reverse;
 }
 .chat-item-container {
   display: flex;
+  flex-direction: column;
+}
+.chat-liked {
+  height: 18px;
+  gap: 5px;
+  margin-bottom: 10px;
+  align-items: center;
+  color: var(--primary-color);
+  display: none;
+}
+.chat-liked.show {
+  display: flex;
 }
 .push {
-  justify-content: end;
+  align-items: end;
+  .chat-liked {
+    margin-right: 64px;
+  }
 
   .chat-item {
+    width: fit-content;
     flex-direction: row-reverse;
   }
+
   .chat-content {
     background-color: #1618230f;
   }
 }
 .pull {
-  flex-direction: row;
+  .chat-liked {
+    margin-left: 64px;
+  }
 }
 .chat-item {
   display: flex;
+
   max-width: 100%;
   gap: 8px;
 
@@ -132,6 +161,7 @@
   &:hover {
     .chat-action-button {
       display: block;
+      cursor: pointer;
     }
   }
 }
@@ -144,10 +174,14 @@
   font-size: 16px;
   line-height: 130%;
 }
+
 .chat-action-button {
   margin: 7px;
   font-size: 20px;
   display: none;
+}
+.chat-loading {
+  margin: 30px;
 }
 .chat-box-fooder {
   border-top: 0.5px solid #1618231f;

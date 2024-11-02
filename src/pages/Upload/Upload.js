@@ -156,7 +156,7 @@ function Upload() {
                           <span className={cx('title-action')}>Hashtags</span>
                         </div>
                       </div>
-                      <div className={cx('word-count')}>{description.length}/4000</div>
+                      <div className={cx('word-count')}>{description?.length || 0}/4000</div>
                     </div>
                   </div>
                 </div>
