@@ -7,7 +7,6 @@ const routes = {
   profile: (userId) => {
     return `/user/${userId}`;
   },
-  upload: '/upload',
   search: '/search',
   messages: '/messages',
   post: (postId) => {

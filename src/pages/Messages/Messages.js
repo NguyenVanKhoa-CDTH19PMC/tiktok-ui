@@ -18,9 +18,17 @@ import IconButton from '~/components/IconButton';
 import Menu from '~/components/Popper/Menu';
 import { faBellSlash, faFlag, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(style);
 function Messages() {
+  document.title = 'Messages | TikTok';
+
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
   const chatInputRef = useRef();
   const [chatInput, setChatInput] = useState();
   const [messageActive, setMessageActive] = useState();
@@ -97,7 +105,6 @@ function Messages() {
                             temp
                               .find((i) => i.id === messageActive.id)
                               .chats.find((i) => i.id === chat.id).liked = true;
-
                             return temp;
                           });
                         },
@@ -183,7 +190,7 @@ function Messages() {
     <div className={cx('wrapper')}>
       <div className={cx('message-list-container')}>
         <div className={cx('back-button')}>
-          <IconButton icon={<FontAwesomeIcon icon={faAngleLeft} />} />
+          <IconButton onClick={() => handleGoBack()} icon={<FontAwesomeIcon icon={faAngleLeft} />} />
         </div>
         <Wrapper className={cx('message-list-wrapper')}>
           <div className={cx('message-list-header')}>

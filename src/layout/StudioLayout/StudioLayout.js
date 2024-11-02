@@ -13,6 +13,8 @@ import { faCircleQuestion, faCommentDots, faLightbulb } from '@fortawesome/free-
 const cx = classNames.bind(style);
 
 function StudioLayout({ children }) {
+  document.title = 'TikTok Studios';
+
   const NAV_MENU = [
     { icon: <HomeIcon />, title: 'Home', route: routes.upload },
     { icon: <FontAwesomeIcon icon={faList} />, title: 'Posts', route: routes.home },

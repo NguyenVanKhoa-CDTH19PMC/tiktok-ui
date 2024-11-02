@@ -7,6 +7,8 @@ import Loading from '~/components/Loading';
 
 const cx = classNames.bind(style);
 function Home() {
+  document.title = 'Tiktok - Make your day';
+
   const limit = 10;
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
@@ -58,9 +60,7 @@ function Home() {
       if (observerRef.current) observer.unobserve(observerRef.current); // Dọn dẹp
     };
   }, [loading]);
-  useEffect(() => {
-    document.title = 'Tiktok - Make your day';
-  }, []);
+
   return (
     <div className={cx('wrapper')}>
       <div className={cx('post-list')}>

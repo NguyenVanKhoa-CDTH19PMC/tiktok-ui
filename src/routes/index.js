@@ -8,9 +8,10 @@ import PostDetail from '~/pages/PostDetail';
 import Profile from '~/pages/Profile';
 import StudioLayout from '~/layout/StudioLayout';
 import Messages from '~/pages/Messages';
+import Explore from '~/pages/Explore';
 const publicRoutes = [
   { path: config.routes.home, component: Home },
-  { path: config.routes.explore, component: Home },
+  { path: config.routes.explore, component: Explore },
   { path: config.routes.following, component: Following },
   { path: config.routes.friends, component: Home },
   { path: config.routes.live, component: Home },

@@ -9,6 +9,8 @@ import AccountItem from './AccountItem';
 const cx = classNames.bind(style);
 
 function Search() {
+  document.title = `Find 's' on TikTok | TikTok Search`;
+
   const [tabActive, setTabActive] = useState(0);
   const [posts, setPosts] = useState();
   const [users, setUsers] = useState();

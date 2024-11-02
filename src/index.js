@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -6,7 +6,6 @@ import GlobalStyles from './components/GlobalStyles';
 import { AuthProvider } from './hooks/AuthContext';
 import { ModalsProvider } from './hooks/ModalsContext';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Notification from './components/Notification';
 

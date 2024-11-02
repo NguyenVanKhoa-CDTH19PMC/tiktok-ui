@@ -54,6 +54,7 @@ function Profile() {
   const fecthAPI = async () => {
     const result = await getUser(userId);
     setUser(result);
+    document.title = `${result.lastName} (@${result.username}) | TikTok`;
   };
   useEffect(() => {
     fecthAPI();

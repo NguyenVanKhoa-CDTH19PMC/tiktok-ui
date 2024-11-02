@@ -1,0 +1,32 @@
+.wrapper {
+  height: 100%;
+}
+.post-list {
+  height: 100%;
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+}
+.post-item {
+  scroll-snap-align: start;
+  min-height: 100%; /* Mỗi bài viết chiếm toàn bộ chiều cao màn hình */
+  overflow: hidden;
+}
+.no-more-noti {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 300;
+  color: #16182380;
+  height: 70px;
+}
+.loading-container,
+.observer {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.observer {
+  background-color: red;
+}
