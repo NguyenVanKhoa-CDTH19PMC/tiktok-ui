@@ -11,8 +11,9 @@
   color: var(--primary-color-2);
   line-height: 21px;
   padding: 0 16px;
-  min-width: 100px;
+  // min-width: 100px;
   min-height: 36px;
+  white-space: nowrap;
   text-decoration: none;
   cursor: pointer;
   &:hover {
@@ -40,6 +41,10 @@
   border: none;
   &:hover {
     background-color: #0000001f;
+  }
+  &.active {
+    background-color: #1b1b1b;
+    color: white;
   }
 }
 .icon {

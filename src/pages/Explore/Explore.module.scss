@@ -1,3 +1,75 @@
 .wrapper {
   height: 100%;
+  padding: 96px 0 32px;
+  margin: 0 48px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.category-list-container {
+  position: absolute;
+  top: 0;
+  max-width: 656px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 28px 0px 16px;
+  // overflow: hidden;
+  background-color: white;
+}
+.category-content {
+  position: relative;
+  width: 100%;
+}
+.category-list {
+  height: 42px;
+
+  width: 100%;
+  overflow: auto;
+  display: flex;
+
+  align-items: center;
+  gap: 12px;
+  flex-wrap: nowrap;
+  scrollbar-width: none;
+}
+.arrow-container {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  width: 80px;
+  top: 0;
+  bottom: 0;
+}
+.arrow-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 50px;
+  width: 32px;
+  height: 32px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 2.66667px 16px;
+  cursor: pointer;
+}
+.arrow-container.left {
+  background: linear-gradient(-270.11deg, rgb(255, 255, 255) 0.09%, rgba(255, 255, 255, 0) 100.83%) content-box;
+  left: 0;
+}
+.arrow-container.left.show {
+  display: flex;
+}
+.arrow-container.right {
+  background: linear-gradient(270.11deg, rgb(255, 255, 255) 0.09%, rgba(255, 255, 255, 0) 100.83%) content-box;
+  right: 0;
+  justify-content: end;
+}
+.category-item {
+}
+.content {
+}
+.list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 16px;
 }
