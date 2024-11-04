@@ -5,7 +5,7 @@ import { faMoon, faSquarePlus, faCircleQuestion, faUser, faCircleDot } from '@fo
 import Tippy from '@tippyjs/react';
 import TippyHeadless from '@tippyjs/react/headless';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import style from './Header.module.scss';
 import images from '~/assets/images';
 import { Button } from '~/components/FormControls';
@@ -21,10 +21,11 @@ import routes from '~/config/routes';
 import Avatar from '~/components/Avatar';
 import { Wrapper } from '~/components/Popper';
 import { Image } from '~/components/Images';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 const cx = classNames.bind(style);
 
 function Header() {
+  const navigate = useNavigate();
   const { isLoggedIn, authUser } = useAuth();
   const { handleOpenLoginModal, handleOpenLogoutModal } = useModals();
   const [inboxBarActive, setInboxBarActive] = useState('All activity');
@@ -52,11 +53,17 @@ function Header() {
       title: 'Dark mode',
     },
   ];
-  const LOGIN_MENU_ITEMS = [
+  let LOGIN_MENU_ITEMS = [
     {
       icon: <FontAwesomeIcon icon={faUser} />,
       title: 'View profile',
-      to: routes.profile(authUser?.id),
+      onClick: () => {
+        if (authUser?.id) {
+          navigate(routes.profile(authUser.id));
+        } else {
+          console.log('authUser.id is undefined');
+        }
+      },
     },
     {
       icon: <FontAwesomeIcon icon={faCircleDot} />,
@@ -72,9 +79,10 @@ function Header() {
       icon: <FontAwesomeIcon icon={faArrowRightFromBracket} />,
       title: 'Log out',
       separate: true,
-      onclick: handleOpenLogoutModal,
+      onClick: handleOpenLogoutModal,
     },
   ];
+
   return (
     <div className={cx('wrapper')}>
       <div className={cx('inner')}>
@@ -88,65 +96,71 @@ function Header() {
               <Button to={routes.upload} className={cx('upload-btn')} leftIcon={<FontAwesomeIcon icon={faPlus} />}>
                 Upload
               </Button>
-              <TippyHeadless
-                interactive
-                visible={showNotifications}
-                onClickOutside={() => setShowNotifications(false)}
-                render={() => (
-                  <Wrapper className={cx('notifications-contianer')}>
-                    <div className={cx('notif-header')}>
-                      <h2 className={cx('notif-title')}>Notifications</h2>
-                      <div className={cx('inbox-bar')}>
-                        {['All activity', 'Likes', 'Comments', 'Mentions and tags', 'Followers'].map((item) => (
-                          <div
-                            onClick={() => {
-                              setInboxBarActive(item);
-                            }}
-                            className={cx('inbox-bar-item', { active: inboxBarActive === item })}
-                          >
-                            {item}
+              <div>
+                <TippyHeadless
+                  interactive
+                  visible={showNotifications}
+                  onClickOutside={() => setShowNotifications(false)}
+                  render={() => (
+                    <Wrapper className={cx('notifications-contianer')}>
+                      <div className={cx('notif-header')}>
+                        <h2 className={cx('notif-title')}>Notifications</h2>
+                        <div className={cx('inbox-bar')}>
+                          {['All activity', 'Likes', 'Comments', 'Mentions and tags', 'Followers'].map((item) => (
+                            <div
+                              key={item}
+                              onClick={() => {
+                                setInboxBarActive(item);
+                              }}
+                              className={cx('inbox-bar-item', { active: inboxBarActive === item })}
+                            >
+                              {item}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div className={cx('inbox-list')}>
+                        <p className={cx('inbox-title')}>Previous</p>
+                        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
+                          <div key={item} className={cx('notif-item')}>
+                            <div className={cx('notif-avatar')}>
+                              <Avatar size={48} />
+                            </div>
+                            <div className={cx('notif-content')}>
+                              <div className={cx('fullname')}>Name</div>
+                              <p className={cx('action')}>
+                                action
+                                <span className={cx('notif-time')}>1day ago</span>
+                              </p>
+                              <div className={cx('notif-desc')}> Name: comment</div>
+                            </div>
+                            <div className={cx('preview')}>
+                              <Image src={''} alt="avatar" width={42} height={56} />
+                            </div>
                           </div>
                         ))}
                       </div>
-                    </div>
-                    <div className={cx('inbox-list')}>
-                      <p className={cx('inbox-title')}>Previous</p>
-                      {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(() => (
-                        <div className={cx('notif-item')}>
-                          <div className={cx('notif-avatar')}>
-                            <Avatar size={48} />
-                          </div>
-                          <div className={cx('notif-content')}>
-                            <div className={cx('fullname')}>Name</div>
-                            <p className={cx('action')}>
-                              action
-                              <span className={cx('notif-time')}>1day ago</span>
-                            </p>
-                            <div className={cx('notif-desc')}> Name: comment</div>
-                          </div>
-                          <div className={cx('preview')}>
-                            <Image src={''} width={42} height={56} />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </Wrapper>
-                )}
-              >
-                <Tippy
-                  disabled={showNotifications}
-                  appendTo={document.body}
-                  placement="bottom"
-                  interactive
-                  offset={[0, 10]}
-                  content="Inbox"
+                    </Wrapper>
+                  )}
                 >
-                  <button onClick={() => setShowNotifications((pre) => !pre)} className={cx('inbox-bnt', 'action-btn')}>
-                    <span className={cx('badge')}>2</span>
-                    {showNotifications === false ? <InboxIcon /> : <InboxIconActive />}
-                  </button>
-                </Tippy>
-              </TippyHeadless>
+                  <Tippy
+                    disabled={showNotifications}
+                    appendTo={document.body}
+                    placement="bottom"
+                    interactive
+                    offset={[0, 10]}
+                    content="Inbox"
+                  >
+                    <button
+                      onClick={() => setShowNotifications((pre) => !pre)}
+                      className={cx('inbox-bnt', 'action-btn')}
+                    >
+                      <span className={cx('badge')}>2</span>
+                      {showNotifications === false ? <InboxIcon /> : <InboxIconActive />}
+                    </button>
+                  </Tippy>
+                </TippyHeadless>
+              </div>
             </>
           ) : (
             <>
@@ -157,11 +171,15 @@ function Header() {
           )}
 
           {isLoggedIn && (
-            <Menu className={cx('actions-menu')} data={LOGIN_MENU_ITEMS}>
-              <div className={cx('current-account')}>
-                <Avatar size={32} alt="avatar" src={authUser?.image} />
-              </div>
-            </Menu>
+            <>
+              {authUser && (
+                <Menu className={cx('actions-menu')} data={LOGIN_MENU_ITEMS}>
+                  <div className={cx('current-account')}>
+                    <Avatar size={32} alt="avatar" src={authUser?.image} />
+                  </div>
+                </Menu>
+              )}
+            </>
           )}
           {!isLoggedIn && (
             <Menu className={cx('actions-menu')} data={MENU_ITEMS}>

@@ -83,7 +83,7 @@ function Sidebar() {
       title: 'Profile',
       icon: <Avatar size={32} src={authUser?.image} alt="" />,
       activeIcon: <Avatar size={32} src={authUser?.image} alt="" />,
-      to: routes.profile,
+      to: routes.profile(authUser?.id),
     },
   ];
   const menuItem = isLoggedIn ? LOGIN_MENU_ITEMS : MENU_ITEMS;

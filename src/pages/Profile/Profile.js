@@ -15,6 +15,7 @@ import { useAuth } from '~/hooks/AuthContext';
 import { useModals } from '~/hooks/ModalsContext';
 import EditProfileModal from '~/components/Modals/EditProfileModal/EditProfileModal';
 import TabNavigator from '~/components/TabNavigator/TabNavigator';
+import { post } from '~/utils/httpRequest';
 const cx = classNames.bind(style);
 function Profile() {
   const { isLoggedIn, authUser } = useAuth();
@@ -23,6 +24,8 @@ function Profile() {
   const [tabActive, setTabActive] = useState(0);
   const [selectedFillter, setSelectedFillter] = useState(0);
   const [editProfileModalIsOpen, setEditProfileModalIsOpen] = useState(false);
+  const [sortByVideoTab, setSortByVideoTab] = useState('id');
+  const [orderVideoTab, setOrderVideoTab] = useState('desc');
 
   const TABS = [
     {
@@ -58,12 +61,15 @@ function Profile() {
   };
   useEffect(() => {
     fecthAPI();
-  }, []);
-
+  }, [userId]);
   const renderTabContent = () => {
     switch (tabActive) {
       case 0:
-        return <VideosTab userId={userId} />;
+        return (
+          <div key={sortByVideoTab + orderVideoTab}>
+            <VideosTab userId={userId} sortBy={sortByVideoTab} order={orderVideoTab} />
+          </div>
+        );
       case 2:
         return <LikedTab user={user} />;
       case 3:
@@ -73,7 +79,7 @@ function Profile() {
     }
   };
   return (
-    <div className={cx('wrapper')}>
+    <div key={userId} className={cx('wrapper')}>
       <div className={cx('header')}>
         <div className={cx('avatar')}>
           <Avatar alt="avatar" src={user.image} size={212} />
@@ -124,13 +130,13 @@ function Profile() {
           </div>
           <div className={cx('count-infor')}>
             <div className={cx('count-infor-item')}>
-              <strong>{user.age}</strong> Following{' '}
+              <strong>{user.age}</strong> Following
             </div>
             <div className={cx('count-infor-item')}>
-              <strong>{user.age}</strong> Followers{' '}
+              <strong>{user.age}</strong> Followers
             </div>
             <div className={cx('count-infor-item')}>
-              <strong>{user.age}</strong> Likes{' '}
+              <strong>{user.age}</strong> Likes
             </div>
           </div>
           <div className={cx('bio')}> {'Email: ' + user.email}</div>
@@ -143,13 +149,34 @@ function Profile() {
           {tabActive == 0 && (
             <div className={cx('filter-container')}>
               <div className={cx('select')}>
-                <div onClick={() => setSelectedFillter(0)} className={cx('option', { selected: selectedFillter == 0 })}>
+                <div
+                  onClick={() => {
+                    setOrderVideoTab('desc');
+                    setSortByVideoTab('id');
+                    setSelectedFillter(0);
+                  }}
+                  className={cx('option', { selected: selectedFillter == 0 })}
+                >
                   Latest
                 </div>
-                <div onClick={() => setSelectedFillter(1)} className={cx('option', { selected: selectedFillter == 1 })}>
+                <div
+                  onClick={() => {
+                    setOrderVideoTab('desc');
+                    setSortByVideoTab('views');
+                    setSelectedFillter(1);
+                  }}
+                  className={cx('option', { selected: selectedFillter == 1 })}
+                >
                   Popular
                 </div>
-                <div onClick={() => setSelectedFillter(2)} className={cx('option', { selected: selectedFillter == 2 })}>
+                <div
+                  onClick={() => {
+                    setOrderVideoTab('asc');
+                    setSortByVideoTab('id');
+                    setSelectedFillter(2);
+                  }}
+                  className={cx('option', { selected: selectedFillter == 2 })}
+                >
                   Oldest
                 </div>
               </div>

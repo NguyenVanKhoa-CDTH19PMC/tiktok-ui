@@ -39,13 +39,14 @@
 }
 .count-infor {
   display: flex;
-  gap: 12px;
+  width: fit-content;
+  gap: 32px;
 }
 .count-infor-item {
   font-size: 16px;
   font-weight: 400;
   line-height: 20px;
-  margin-right: 20px;
+
   color: #161823bf;
   strong {
     font-size: 18px;
@@ -71,4 +72,36 @@
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #0000001f;
+}
+
+@media (max-width: 770px) {
+  .header {
+    flex-direction: column;
+  }
+  .information {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+//
+.select {
+  display: flex;
+  padding: 2px;
+  background-color: #0000000d;
+  border-radius: 6px;
+}
+.option {
+  font-size: 13px;
+  line-height: 19.5px;
+  font-weight: 600;
+  padding: 6px 10px;
+  color: #0000007a;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.option.selected {
+  background-color: white;
+  color: var(--primary-color-2);
 }

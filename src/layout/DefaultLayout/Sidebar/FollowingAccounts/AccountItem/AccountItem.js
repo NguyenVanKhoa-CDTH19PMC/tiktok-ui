@@ -10,7 +10,7 @@ const cx = classNames.bind(style);
 function AccountItem({ data }) {
   return (
     <div className={cx('wrapper')}>
-      <Link to={`/${data.username}`} className={cx('account-item')}>
+      <Link to={`/user/${data.id}`} className={cx('account-item')}>
         <div className={cx('avt')}>
           <Avatar size={32} src={data.image} alt="" />
         </div>

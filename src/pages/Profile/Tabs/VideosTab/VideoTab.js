@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import { getPostsByUserId } from '~/services/postSevices';
 import Loading from '~/components/Loading';
 const cx = classNames.bind(style);
-function VideosTab({ userId }) {
+function VideosTab({ userId, sortBy, order }) {
   const [posts, setPosts] = useState([]);
 
   const limit = 10;
@@ -20,7 +20,12 @@ function VideosTab({ userId }) {
     if (isOver) return;
     setLoading(true);
 
-    const postResult = await getPostsByUserId(userId, { limit: 10, skip: (page - 1) * limit });
+    const postResult = await getPostsByUserId(userId, {
+      limit: 10,
+      skip: (page - 1) * limit,
+      sortBy: sortBy,
+      order: order,
+    });
     if ((page - 1) * limit + limit >= postResult.total) {
       setIsOver(true);
     }
@@ -30,7 +35,7 @@ function VideosTab({ userId }) {
 
   useEffect(() => {
     if (page > 0) fecthApi();
-  }, [page]);
+  }, [page, userId, sortBy, order]);
   // use IntersectionObserver để tải thêm khi phần tử vào viewport
   useEffect(() => {
     const observer = new IntersectionObserver(
