@@ -10,7 +10,7 @@ import style from './Header.module.scss';
 import images from '~/assets/images';
 import { Button } from '~/components/FormControls';
 import Menu from '~/components/Popper/Menu';
-import { InboxIcon } from '~/components/Icons';
+import { InboxIcon, InboxIconActive } from '~/components/Icons';
 import Search from '../../../components/SearchForm';
 import { languages } from '~/assets/langugesJson';
 import { config } from '~/config';
@@ -28,6 +28,7 @@ function Header() {
   const { isLoggedIn, authUser } = useAuth();
   const { handleOpenLoginModal, handleOpenLogoutModal } = useModals();
   const [inboxBarActive, setInboxBarActive] = useState('All activity');
+  const [showNotifications, setShowNotifications] = useState(false);
   const MENU_ITEMS = [
     {
       icon: <FontAwesomeIcon icon={faSquarePlus} />,
@@ -89,6 +90,8 @@ function Header() {
               </Button>
               <TippyHeadless
                 interactive
+                visible={showNotifications}
+                onClickOutside={() => setShowNotifications(false)}
                 render={() => (
                   <Wrapper className={cx('notifications-contianer')}>
                     <div className={cx('notif-header')}>
@@ -129,12 +132,18 @@ function Header() {
                     </div>
                   </Wrapper>
                 )}
-                visible
               >
-                <Tippy appendTo={document.body} placement="bottom" interactive offset={[0, 10]} content="Inbox">
-                  <button className={cx('inbox-bnt', 'action-btn')}>
+                <Tippy
+                  disabled={showNotifications}
+                  appendTo={document.body}
+                  placement="bottom"
+                  interactive
+                  offset={[0, 10]}
+                  content="Inbox"
+                >
+                  <button onClick={() => setShowNotifications((pre) => !pre)} className={cx('inbox-bnt', 'action-btn')}>
                     <span className={cx('badge')}>2</span>
-                    <InboxIcon />
+                    {showNotifications === false ? <InboxIcon /> : <InboxIconActive />}
                   </button>
                 </Tippy>
               </TippyHeadless>
