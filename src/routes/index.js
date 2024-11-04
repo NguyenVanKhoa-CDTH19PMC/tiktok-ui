@@ -9,11 +9,12 @@ import Profile from '~/pages/Profile';
 import StudioLayout from '~/layout/StudioLayout';
 import Messages from '~/pages/Messages';
 import Explore from '~/pages/Explore';
+import Friends from '~/pages/Friends';
 const publicRoutes = [
   { path: config.routes.home, component: Home },
   { path: config.routes.explore, component: Explore },
   { path: config.routes.following, component: Following },
-  { path: config.routes.friends, component: Home },
+  { path: config.routes.friends, component: Friends },
   { path: config.routes.live, component: Home },
   { path: config.routes.messages, component: Messages, layout: HeaderOnly },
   { path: config.routes.profile(':userId'), component: Profile },
