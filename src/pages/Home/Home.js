@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import { useEffect, useRef, useState } from 'react';
 import { getPosts } from '~/services/postSevices';
 import Loading from '~/components/Loading';
+import { Button } from '~/components/FormControls';
 
 const cx = classNames.bind(style);
 function Home() {
@@ -80,6 +81,10 @@ function Home() {
         {!loading && !isOver && <div ref={observerRef} className={cx('observer')}></div>}
         {isOver && <div className={cx('no-more-noti')}>No more comments</div>}
       </div>
+      <div className={cx('get-app-button')}>
+        <Button rounded>Get app</Button>
+      </div>
+      ?
     </div>
   );
 }

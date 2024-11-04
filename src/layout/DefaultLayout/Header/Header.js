@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faA, faArrowRightFromBracket, faEllipsisV, faGear, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faMoon, faSquarePlus, faCircleQuestion, faUser, faCircleDot } from '@fortawesome/free-regular-svg-icons';
 import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
+import TippyHeadless from '@tippyjs/react/headless';
+
 import { Link } from 'react-router-dom';
 import style from './Header.module.scss';
 import images from '~/assets/images';
@@ -18,11 +19,15 @@ import { useAuth } from '~/hooks/AuthContext';
 import { useModals } from '~/hooks/ModalsContext';
 import routes from '~/config/routes';
 import Avatar from '~/components/Avatar';
+import { Wrapper } from '~/components/Popper';
+import { Image } from '~/components/Images';
+import { useState } from 'react';
 const cx = classNames.bind(style);
 
 function Header() {
   const { isLoggedIn, authUser } = useAuth();
   const { handleOpenLoginModal, handleOpenLogoutModal } = useModals();
+  const [inboxBarActive, setInboxBarActive] = useState('All activity');
   const MENU_ITEMS = [
     {
       icon: <FontAwesomeIcon icon={faSquarePlus} />,
@@ -69,7 +74,6 @@ function Header() {
       onclick: handleOpenLogoutModal,
     },
   ];
-
   return (
     <div className={cx('wrapper')}>
       <div className={cx('inner')}>
@@ -83,13 +87,57 @@ function Header() {
               <Button to={routes.upload} className={cx('upload-btn')} leftIcon={<FontAwesomeIcon icon={faPlus} />}>
                 Upload
               </Button>
-
-              <Tippy appendTo={document.body} placement="bottom" interactive offset={[0, 10]} content="Inbox">
-                <button className={cx('inbox-bnt', 'action-btn')}>
-                  <span className={cx('badge')}>2</span>
-                  <InboxIcon />
-                </button>
-              </Tippy>
+              <TippyHeadless
+                interactive
+                render={() => (
+                  <Wrapper className={cx('notifications-contianer')}>
+                    <div className={cx('notif-header')}>
+                      <h2 className={cx('notif-title')}>Notifications</h2>
+                      <div className={cx('inbox-bar')}>
+                        {['All activity', 'Likes', 'Comments', 'Mentions and tags', 'Followers'].map((item) => (
+                          <div
+                            onClick={() => {
+                              setInboxBarActive(item);
+                            }}
+                            className={cx('inbox-bar-item', { active: inboxBarActive === item })}
+                          >
+                            {item}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className={cx('inbox-list')}>
+                      <p className={cx('inbox-title')}>Previous</p>
+                      {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(() => (
+                        <div className={cx('notif-item')}>
+                          <div className={cx('notif-avatar')}>
+                            <Avatar size={48} />
+                          </div>
+                          <div className={cx('notif-content')}>
+                            <div className={cx('fullname')}>Name</div>
+                            <p className={cx('action')}>
+                              action
+                              <span className={cx('notif-time')}>1day ago</span>
+                            </p>
+                            <div className={cx('notif-desc')}> Name: comment</div>
+                          </div>
+                          <div className={cx('preview')}>
+                            <Image src={''} width={42} height={56} />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </Wrapper>
+                )}
+                visible
+              >
+                <Tippy appendTo={document.body} placement="bottom" interactive offset={[0, 10]} content="Inbox">
+                  <button className={cx('inbox-bnt', 'action-btn')}>
+                    <span className={cx('badge')}>2</span>
+                    <InboxIcon />
+                  </button>
+                </Tippy>
+              </TippyHeadless>
             </>
           ) : (
             <>

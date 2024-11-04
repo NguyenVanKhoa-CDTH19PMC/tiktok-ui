@@ -8,6 +8,7 @@ import { ModalsProvider } from './hooks/ModalsContext';
 import { BrowserRouter as Router } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import Notification from './components/Notification';
+import 'tippy.js/dist/tippy.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
