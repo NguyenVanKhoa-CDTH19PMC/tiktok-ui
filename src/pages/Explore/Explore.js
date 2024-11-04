@@ -10,6 +10,7 @@ import { searchPosts } from '~/services/postSevices';
 const cx = classNames.bind(style);
 function Explore() {
   document.title = 'Explore - Find your favourite videos on TikTok';
+  const categoryListContainerRef = useRef();
   const listRef = useRef();
   const leftArrowRef = useRef();
   const rightArrowRef = useRef();
@@ -20,19 +21,23 @@ function Explore() {
     setPosts(postsResult.posts);
   };
   function updateArrows() {
-    // Ẩn nút mũi tên trái khi ở đầu
+    // hide arrow left button when scroll in left
     leftArrowRef.current.style.display = listRef.current.scrollLeft === 0 ? 'none' : 'flex';
 
-    rightArrowRef.current.style.display = listRef.current.scrollRight === 0 ? 'none' : 'flex';
+    // hide arrow left button when scroll in right
 
-    // Ẩn nút mũi tên phải khi cuộn đến cuối
-    const maxScrollLeft = listRef.current.scrollWidth - listRef.current.scrollLeft;
-    rightArrowRef.current.style.display = listRef.current.scrollLeft >= maxScrollLeft ? 'none' : 'flex';
+    const maxScrollLeft = listRef.current.scrollWidth - listRef.current.clientWidth;
+    rightArrowRef.current.style.display = listRef.current.scrollLeft >= maxScrollLeft - 1 ? 'none' : 'flex';
   }
+  let lastScroll = 0;
   useEffect(() => {
     fetchApi();
     updateArrows();
-    listRef.current.addEventListener('scroll', updateArrows);
+
+    window.addEventListener('resize', updateArrows);
+    return () => {
+      window.removeEventListener('resize', updateArrows);
+    };
   }, []);
   function scrollLeft() {
     listRef.current.scrollBy({ left: -listRef.current.offsetWidth / 2, behavior: 'smooth' });
@@ -44,49 +49,69 @@ function Explore() {
 
   return (
     <div className={cx('wrapper')}>
-      <div className={cx('category-list-container')}>
-        <div className={cx('category-content')}>
-          <div ref={listRef} className={cx('category-list')}>
-            {[
-              'All',
-              'Sinhing & Dancing',
-              'Commedy',
-              'Sports',
-              'Anime & Comics',
-              'Relationship',
-              'Shows',
-              'Lipsync',
-              'Daily lift',
-              'Beauty Care',
-              'Game',
-            ].map((category, index) => (
-              <div key={index} className={cx('category-item')}>
-                <Button
-                  onClick={() => {
-                    setCategoryActive(category);
-                  }}
-                  moreRadius
-                  active={category === categoryActive}
-                  secondary
-                >
-                  {category}
-                </Button>
-              </div>
-            ))}
-          </div>
-          <div ref={leftArrowRef} className={cx('arrow-container', 'left')}>
-            <div onClick={() => scrollLeft()} className={cx('arrow-button')}>
-              <FontAwesomeIcon icon={faArrowLeft} />
+      <div
+        onScroll={(e) => {
+          const currentScroll = e.target.scrollTop;
+          console.log(currentScroll);
+          if (currentScroll > lastScroll) {
+            console.log(currentScroll);
+            categoryListContainerRef.current.style.top = '-100%';
+          } else {
+            categoryListContainerRef.current.style.top = '0';
+          }
+
+          lastScroll = currentScroll;
+        }}
+        className={cx('content')}
+      >
+        <div ref={categoryListContainerRef} className={cx('category-list-container')}>
+          <div className={cx('category-content')}>
+            <div
+              ref={listRef}
+              onScroll={() => {
+                updateArrows();
+              }}
+              className={cx('category-list')}
+            >
+              {[
+                'All',
+                'Sinhing & Dancing',
+                'Commedy',
+                'Sports',
+                'Anime & Comics',
+                'Relationship',
+                'Shows',
+                'Lipsync',
+                'Daily lift',
+                'Beauty Care',
+                'Game',
+              ].map((category, index) => (
+                <div key={index} className={cx('category-item')}>
+                  <Button
+                    onClick={() => {
+                      setCategoryActive(category);
+                    }}
+                    moreRadius
+                    active={category === categoryActive}
+                    secondary
+                  >
+                    {category}
+                  </Button>
+                </div>
+              ))}
             </div>
-          </div>
-          <div ref={rightArrowRef} className={cx('arrow-container', 'right')}>
-            <div onClick={() => scrollRight()} className={cx('arrow-button')}>
-              <FontAwesomeIcon icon={faArrowRight} />
+            <div ref={leftArrowRef} className={cx('arrow-container', 'left')}>
+              <div onClick={() => scrollLeft()} className={cx('arrow-button')}>
+                <FontAwesomeIcon icon={faArrowLeft} />
+              </div>
+            </div>
+            <div ref={rightArrowRef} className={cx('arrow-container', 'right')}>
+              <div onClick={() => scrollRight()} className={cx('arrow-button')}>
+                <FontAwesomeIcon icon={faArrowRight} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className={cx('content')}>
         <div className={cx('list')}>
           {posts?.map((post) => (
             <div key={post.id}>
